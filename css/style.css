@@ -1,0 +1,237 @@
+.pointer{
+    cursor: pointer;
+}
+.header_bg{
+    height: 80px;
+    background-color: #34a9a2;
+}
+html{
+    padding: none;
+    min-width: 320px;
+}
+.body{
+    margin: 0;
+}
+.header_bg img{
+    margin-left: 100px;
+    margin-top: 29px;
+}
+.headerLinks{
+    margin-top: 32px;
+    float: right;
+    font-family: Roboto;
+    font-size: 12px;
+    color: #ffffff;
+    text-align: left;
+    /*text-align: center;*/
+    margin-right: 98px;
+}
+#btnHeader{
+    outline: none;
+    border: none;
+    background-color: #008b8b;
+    color: #ffffff;
+    border-radius: 15px;
+    margin-left: 15px;
+    /*box-shadow: inset 0px 1px 1px 0px #000000, 0px 1px 1px 0px #ffffff;*/
+}
+.content{
+    margin-top: 42px;
+    text-align: center;
+}
+.welcome{
+    font-family: Roboto;
+    font-size: 30pt;
+    font-weight: 300;
+    color: rgba(98, 103, 103, 1);
+    text-align: center;
+}
+.subText{
+    font-family: Roboto;
+    font-size: 20pt;
+    font-weight: 100;
+    color: #a9adad;
+    text-align: center;
+}
+.form-input{
+    outline: none;
+    margin-bottom: 20px;
+    border: none;
+    background-color: #f6f6f6;
+    border-radius: 20px;
+    height: 40px;
+    width: 340px;
+    font-family: Roboto;
+    color: #3c3e44;
+    font-size: 15pt;
+    font-weight: 100;
+    text-align:center;
+}
+.form-input:focus{
+    /*border-color: #34a9a2;*/
+    border: none;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #34a9a2;
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #5e616c;
+}
+.btn{
+    outline: none;
+    border: none;
+}
+.btn-primary{
+    background-color: #f7c04d;
+    border-radius: 20px;
+}
+.btn-primary:hover{
+    background-color: #edaf2f;
+}
+.btn-primary:focus{
+    background-color: #a87406;
+}
+.btn-guest{
+    background-color: #484848;
+    border-radius: 20px;
+}
+.btn-guest:hover{
+    background-color: #666464;
+}
+.btn-guest:focus{
+    background-color: #8e8d8d;
+}
+#btnGuest{
+    height: 40px;
+    width: 340px;
+    margin-top: 25px;
+}
+.loginBtn{
+    height: 40px;
+    width: 340px;
+    margin-bottom: 15px;
+}
+.loginBtn span{
+    color: #ffffff;
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 18pt;
+}
+.actions{
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    color: #626767;
+    text-align: left;
+    text-decoration: none;
+    
+}
+.actions a{
+    color: #0098ff;
+    text-decoration: none;
+}
+
+.line{
+    margin-top: 36px;
+    /*margin-left: 200px;*/
+    margin-left: 16%;
+    height: 1px;
+    /*width: 800px;*/
+    width: 67%;
+    background-color: #b5baba;
+}
+.register{
+    text-align: center;
+    margin-top: 15px;
+}
+.guest{
+    margin-top: 41px;
+    height: 200px;
+    background-color: #f7f6f0;
+    font-family: Roboto;
+    font-size: 28px;
+    font-weight: 300;
+    color: #626767;
+    text-align:center;
+}
+.subText2{
+    font-size: 18px;
+}
+.footer{
+    height: 60px;
+    background-image: linear-gradient(#2e3341 0%, #202431 100%);
+    font-family: Roboto;
+    font-size: 12px;
+    color: #9ba0a0;
+    text-align: center;
+    padding-top: 22px;
+}
+.footer a{
+    color: #0098ff;
+    text-decoration: none;
+}
+.header_bg #hamberg{
+    display: none;
+}
+/*for 768px screen and below*/
+@media screen and (max-width:768px){
+    .header_bg #logo{
+        margin-left: 100px;
+    }
+    .line{
+        margin-top: 26px;
+        /*margin-left: 45px;*/
+        margin-left: 5.861%;
+        /*width: 678px;*/
+        width: 88.278%;
+    }
+    .register{
+        margin-top: 25px;
+    }
+    .guest{
+        margin-top: 265px;
+    }
+    .headerLinks{
+        display: none;
+    }
+    .header_bg #hamberg{
+        margin-right: 50px;
+        display: inline;
+    }
+}
+/*for 320px screen and below*/
+@media screen and (max-width:320px){
+    .header_bg #logo{
+        margin-left: 15px;
+    }
+    .content{
+        margin-top: 48px;
+    }
+    .welcome{
+        font-size: 24pt;
+    }
+    .subText{
+        font-size: 15px;
+    }
+    .form-input{
+        width: 290px;
+    }
+    .loginBtn{
+        width: 290px;
+    }
+    #btnGuest{
+        width: 290px;
+    }
+    .guest{
+        margin-top: 41px;
+        font-size: 22px;
+    }
+    .subText2{
+        font-size: 15px;
+    }
+    .footer .text{
+        display: none;
+    }
+    .header_bg #hamberg{
+        margin-right: 15px;
+        display: inline;
+    }
+}
