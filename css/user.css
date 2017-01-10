@@ -1,8 +1,11 @@
+html{
+    font-family: Roboto ;
+}
 .headerLinks a{
     margin: 10px;
-    /*margin-right: 80px;*/
+    margin-right: 15px;
     font-family: Roboto ;
-    font-size: 12pt;
+    font-size: 12px;
     color: #f5f2eb;
     text-align: left;
 }
@@ -38,7 +41,7 @@
 .col-12 {width: 100%;}
 
 .searchResult{
-    margin-left: 100px;
+    /*margin-left: 100px;*/
     margin-top: 18PX;
     font-family: Roboto;
     font-size: 24px;
@@ -50,35 +53,161 @@
 }
 .resultCount{
     float: right;
-    margin-right: 100px;
+    /*margin-right: 100px;*/
     margin-top: 4px;
     font-family: Roboto;
     font-size: 14px;
     color: #626767;
     text-align: left;
 }
-/*for 768px screen and below*/
+.divider{
+    margin-top: 18px;
+    height: 1px;
+    /*width: 83.36%;
+    margin-left: 8.32%;*/
+    background-color: #b5baba;
+}
+.container{
+    width:83.36%; 
+    margin-left: 8.32%;
+    /*border-color: red;
+    border-style: solid;
+    border-width: 1px;*/
+}
+.clearfix:after {
+   content: " "; /* Older browser do not support empty content */
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}
+#divSearch{
+    margin-top: 20px;
+}
+#ipSearch{
+    height: 40px;
+    width: 600px;
+    /*width: 163.6%;*/
+    background-color: #f6f6f6;
+    /*background-color: black;*/
+    border-width: 0px;
+    border-radius: 20px 0px 0px 20px;
+    padding-left: 21px;
+    font-family: Roboto;
+    color: #626767;
+    font-size: 14pt;
+    font-weight: 100;
+    text-align:left;
+    transition: box-shadow 0.33s ease-in-out;
+}
+#ipSearch:focus{
+    border: none;
+    box-shadow:  inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #34a9a2;
+}
+/*#divSearch button{
+    margin-top: -50px;
+}*/
+#btnSearch{
+    height: 43px;
+    width: 120px;    
+    margin-left: -4px;
+    font-size: 16px;
+    font-weight: 100;
+    color: #ffffff;
+    background-color: #626767;
+    border-radius: 0px 20px 20px 0px;
+}
+#divSortBy{
+    float: right; 
+    margin-top: 3px;
+    color: #626767;
+}
+#ddlSortBy{
+    border: none;
+    outline: none;
+    background-color: #f0f1f2;
+    margin-left: 5px;
+    border-radius: 20px;
+    height: 40px;
+    width: 170px;
+    color: #626767;
+    font-size: 15px;
+    font-weight: 100;
+    text-indent: 21px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /*background: transparent url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") no-repeat right center;*/
+}
+#ddlSortBy {
+  background-image:
+    linear-gradient(45deg, transparent 50%, #626767 50%),
+    linear-gradient(135deg, #626767 50%, transparent 50%),
+    linear-gradient(to right, #f0f1f2, #f0f1f2);
+  background-position:
+    calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px),
+    100% 0;
+  background-size:
+    5px 5px,
+    5px 5px,
+    2.5em 2.5em;
+  background-repeat: no-repeat;
+}
+#ddlSortBy::-ms-expand {
+    display: none;
+}
+.filterIcons img{
+    display: none;
+    padding-left: 20px;
+}
+/*for 1160px screen and below*/
 @media screen and (max-width:1160px){
     .headerLinks{
         display: none;
     }
     .header_bg #hamberg{
-        margin-right: 15px;
+        margin-right: 50px;
         display: inline;
     }
+    /*.resultCount{
+        margin-right: 50px;
+    }*/
 }
 /*for 768px screen and below*/
 @media screen and (max-width:768px){
-    .searchResult{
-        margin-left: 50px;
+    .container{
+        width: 87.36%; 
+        margin-left: 6.32%;
+    }
+    .filterIcons img{
+        display: inline;        
+    }
+    #divSortBy{
+        display: none;
+    }
+    #btnSearch{
+        width: 100px;
+    }
+    #ipSearch{
+        height: 40px;
+        width: 420px;
     }
 }
 /*for 320px screen and below*/
 @media screen and (max-width:320px){
     .searchResult{
-        margin-left: 60px;
+        margin-left: 45px;
     }
     .resultCount{
-        margin-right: 120px;
+        margin-right: 91px;
+    }
+    .container{
+        width: 87.36%; 
+        margin-left: 6.32%;
+    }
+    .header_bg #hamberg{
+        margin-right: 15px;
+        display: inline;
     }
 }

@@ -9,6 +9,7 @@
         <!--<link rel="stylesheet" type="css" href="css/normalize.css">-->
         <link href="css/style.css" rel="stylesheet">        
         <link href="/css/user.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500" rel="stylesheet">
     </head>
     <body class="body">
     <div class="header_bg">
@@ -27,9 +28,37 @@
         </span>
         <img id="hamberg" style="float: right;" src="/images/icons/menu.svg" alt="">
     </div>
-    <div class="searchResult">
-        <span>Physicians Nearby</span>
-        <span class="resultCount"><b>13</b> Results Found</span>        
+    <div class="container">
+        <div class="searchResult">
+            <span>Physicians Nearby</span>
+            <span class="resultCount"><b>13</b> Results Found</span>        
+        </div>
+        <!--<br>-->
+        <div class="clearfix"></div>
+        <div class="divider"></div>
+        <div id="divSearch">
+            <form style="float: left">
+                <span>
+                    <input type="text" name="search" value="" id="ipSearch" class="form-input" style="float: left" placeholder="Find Dentists/Clinic">
+                    <button class="btn  pointer" type="submit" id="btnSearch" style="float: right"><span>Search</span> </button>
+                </span>
+            </form>
+            <div id="divSortBy">
+                Sort by:
+                <select id="ddlSortBy">
+                    <option value="volvo">Popularity</option>
+                    <option value="saab">Availability</option>
+                    <option value="mercedes">Cost</option>
+                    <option value="audi">Recomendations</option>
+                </select>
+            </div>
+            <div class="filterIcons">
+                <img src="/images/icons/sort.svg" id="imgSort" alt="">
+                <img src="/images/icons/filter.svg" id="imgFilter" alt="">
+            </div>
+           
+        </div>
     </div>
+    
     </body>
 </html>
