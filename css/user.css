@@ -1,0 +1,84 @@
+.headerLinks a{
+    margin: 10px;
+    /*margin-right: 80px;*/
+    font-family: Roboto ;
+    font-size: 12pt;
+    color: #f5f2eb;
+    text-align: left;
+}
+.active{
+    background-color: #008b8b;
+    height: 28px;
+    width: 90px;
+    padding: 5px;
+    border-radius: 14px;
+    /*box-shadow: inset 0px 1px 1px 0px #000000, 0px 1px 1px 0px #ffffff;*/
+}
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+    border: 1px solid red;
+}
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+.searchResult{
+    margin-left: 100px;
+    margin-top: 18PX;
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: 500;
+    color: #626767;
+    text-align: left;
+    line-height: 24px;
+    text-align: left;
+}
+.resultCount{
+    float: right;
+    margin-right: 100px;
+    margin-top: 4px;
+    font-family: Roboto;
+    font-size: 14px;
+    color: #626767;
+    text-align: left;
+}
+/*for 768px screen and below*/
+@media screen and (max-width:1160px){
+    .headerLinks{
+        display: none;
+    }
+    .header_bg #hamberg{
+        margin-right: 15px;
+        display: inline;
+    }
+}
+/*for 768px screen and below*/
+@media screen and (max-width:768px){
+    .searchResult{
+        margin-left: 50px;
+    }
+}
+/*for 320px screen and below*/
+@media screen and (max-width:320px){
+    .searchResult{
+        margin-left: 60px;
+    }
+    .resultCount{
+        margin-right: 120px;
+    }
+}
