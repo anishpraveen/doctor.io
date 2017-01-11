@@ -4,7 +4,6 @@ html{
 .headerLinks a{
     margin: 10px;
     margin-right: 15px;
-    font-family: Roboto ;
     font-size: 12px;
     color: #f5f2eb;
     text-align: left;
@@ -15,7 +14,6 @@ html{
     width: 90px;
     padding: 5px;
     border-radius: 14px;
-    /*box-shadow: inset 0px 1px 1px 0px #000000, 0px 1px 1px 0px #ffffff;*/
 }
 .row::after {
     content: "";
@@ -41,9 +39,7 @@ html{
 .col-12 {width: 100%;}
 
 .searchResult{
-    /*margin-left: 100px;*/
-    margin-top: 18PX;
-    font-family: Roboto;
+    margin-top: 18px;
     font-size: 24px;
     font-weight: 500;
     color: #626767;
@@ -53,26 +49,19 @@ html{
 }
 .resultCount{
     float: right;
-    /*margin-right: 100px;*/
     margin-top: 4px;
-    font-family: Roboto;
     font-size: 14px;
     color: #626767;
     text-align: left;
 }
 .divider{
     margin-top: 18px;
-    height: 1px;
-    /*width: 83.36%;
-    margin-left: 8.32%;*/
     background-color: #b5baba;
+    border: 1px solid #b5baba;
 }
 .container{
     width:83.36%; 
     margin-left: 8.32%;
-    /*border-color: red;
-    border-style: solid;
-    border-width: 1px;*/
 }
 .clearfix:after {
    content: " "; /* Older browser do not support empty content */
@@ -84,32 +73,35 @@ html{
 #divSearch{
     margin-top: 20px;
 }
+#formSearch{
+    /*width: 740px;*/
+    width: 65%;
+    float: left;
+}
 #ipSearch{
+    /*float: left;*/
     height: 40px;
-    width: 600px;
-    /*width: 163.6%;*/
+    /*width: 600px;*/
+    width: 80.99%;
     background-color: #f6f6f6;
     /*background-color: black;*/
-    border-width: 0px;
     border-radius: 20px 0px 0px 20px;
     padding-left: 21px;
-    font-family: Roboto;
     color: #626767;
-    font-size: 14pt;
+    font-size: 14px;
     font-weight: 100;
     text-align:left;
     transition: box-shadow 0.33s ease-in-out;
 }
 #ipSearch:focus{
     border: none;
-    box-shadow:  inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #34a9a2;
+    box-shadow:  inset 0 1px 1px #fff, 0 0 8px #34a9a2;
 }
-/*#divSearch button{
-    margin-top: -50px;
-}*/
 #btnSearch{
+    float: right;
     height: 43px;
-    width: 120px;    
+    /*width: 120px;    */
+    width: 16.2%;    
     margin-left: -4px;
     font-size: 16px;
     font-weight: 100;
@@ -137,7 +129,6 @@ html{
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    /*background: transparent url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") no-repeat right center;*/
 }
 #ddlSortBy {
   background-image:
@@ -159,7 +150,6 @@ html{
 }
 .filterIcons img{
     display: none;
-    padding-left: 20px;
 }
 /*for 1160px screen and below*/
 @media screen and (max-width:1160px){
@@ -181,6 +171,7 @@ html{
         margin-left: 6.32%;
     }
     .filterIcons img{
+        padding-left: 20px;
         display: inline;        
     }
     #divSortBy{
@@ -192,6 +183,9 @@ html{
     #ipSearch{
         height: 40px;
         width: 420px;
+    }
+    #imgSearch{
+        display: none;
     }
 }
 /*for 320px screen and below*/
@@ -209,5 +203,19 @@ html{
     .header_bg #hamberg{
         margin-right: 15px;
         display: inline;
+    }
+    .filterIcons img{
+        padding-left: 0px;
+        padding-right: 60px;
+    }
+    #imgSearch{
+        padding-left: 20px;
+        display: inline;
+    }
+    #imgFilter{
+        padding-right: 0px;
+    }
+    #formSearch{
+        display: none;
     }
 }

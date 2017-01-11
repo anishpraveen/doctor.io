@@ -6,14 +6,13 @@
         <title>Dental.io</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!--<link rel="stylesheet" type="css" href="css/normalize.css">-->
         <link href="css/style.css" rel="stylesheet">        
         <link href="/css/user.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500" rel="stylesheet">
     </head>
     <body class="body">
     <div class="header_bg">
-        <img id="logo" src="images/icons/logo.svg" alt="">
+        <img id="logo" src="images/icons/logo.svg" alt="Dental.io Logo">
         <span class="headerLinks" >
             <a href="/">HOME</a>
             <a href="#">ABOUT</a>
@@ -26,24 +25,23 @@
             <a href="#">PROFILE</a>
             
         </span>
-        <img id="hamberg" style="float: right;" src="/images/icons/menu.svg" alt="">
+        <img id="hamberg"  src="/images/icons/menu.svg" alt="Open Menu">
     </div>
     <div class="container">
         <div class="searchResult">
             <span>Physicians Nearby</span>
             <span class="resultCount"><b>13</b> Results Found</span>        
         </div>
-        <!--<br>-->
         <div class="clearfix"></div>
-        <div class="divider"></div>
+        <hr class="divider"></hr>
         <div id="divSearch">
-            <form style="float: left">
+            <form id="formSearch" >
                 <span>
-                    <input type="text" name="search" value="" id="ipSearch" class="form-input" style="float: left" placeholder="Find Dentists/Clinic">
-                    <button class="btn  pointer" type="submit" id="btnSearch" style="float: right"><span>Search</span> </button>
+                    <input type="text" name="search" value="" id="ipSearch" class="form-input"  placeholder="Find Dentists/Clinic">
+                    <button class="btn  pointer" type="submit" id="btnSearch" >Search </button>
                 </span>
             </form>
-            <div id="divSortBy">
+            <div id="divSortBy" action="search.html" method="get">
                 Sort by:
                 <select id="ddlSortBy">
                     <option value="volvo">Popularity</option>
@@ -53,8 +51,9 @@
                 </select>
             </div>
             <div class="filterIcons">
-                <img src="/images/icons/sort.svg" id="imgSort" alt="">
-                <img src="/images/icons/filter.svg" id="imgFilter" alt="">
+                <img src="/images/icons/search.svg" id="imgSearch" alt="Search">
+                <img src="/images/icons/sort.svg" id="imgSort" alt="Sort">
+                <img src="/images/icons/filter.svg" id="imgFilter" alt="Filter">
             </div>
            
         </div>
