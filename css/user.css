@@ -54,10 +54,12 @@ html{
     color: #626767;
     text-align: left;
 }
-.divider{
-    margin-top: 18px;
+hr{
     background-color: #b5baba;
     border: 1px solid #b5baba;
+}
+.divider{
+    margin-top: 18px;
 }
 .container{
     width:83.36%; 
@@ -74,34 +76,32 @@ html{
     margin-top: 20px;
 }
 #formSearch{
-    /*width: 740px;*/
     max-width: 800px;
     width: 65%;
     float: left;
 }
+input[type=text]{
+    transition: box-shadow 0.33s ease-in-out;
+}
 #ipSearch{
-    /*float: left;*/
     height: 40px;
-    /*width: 600px;*/
     width: 80.99%;
     background-color: #f6f6f6;
-    /*background-color: black;*/
     border-radius: 20px 0px 0px 20px;
     padding-left: 21px;
     color: #626767;
     font-size: 14px;
     font-weight: 100;
     text-align:left;
-    transition: box-shadow 0.33s ease-in-out;
+    
 }
-#ipSearch:focus{
+input[type=text]:focus{
     border: none;
     box-shadow:  inset 0 1px 1px #fff, 0 0 8px #34a9a2;
 }
 #btnSearch{
     float: right;
     height: 43px;
-    /*width: 120px;    */
     width: 16.2%;    
     margin-left: -4px;
     font-size: 16px;
@@ -109,6 +109,8 @@ html{
     color: #ffffff;
     background-color: #626767;
     border-radius: 0px 20px 20px 0px;
+    z-index: 99999;
+    position: relative;
 }
 #divSortBy{
     float: right; 
@@ -152,6 +154,102 @@ html{
 .filterIcons img{
     display: none;
 }
+.sideMenu{
+    background-color: #f0f1f2;
+    padding-top: 20px;
+    color: #626767;
+    font-size: 14px;
+    font-weight: 500;
+    width: 240px;
+    height: 282px;
+    float: left;
+    position: relative;
+    z-index: -0;
+}
+.sideMenu input.button{
+    border:0;
+    padding:0;
+    margin-top: -27px;
+    margin-right: 16px;
+    width:24px;
+    height:24px;
+    background:transparent url('/images/icons/lens.svg') center center  no-repeat;
+    float:right;
+    position: relative;
+    z-index: 9999;
+}
+#ipServices{
+    background-color: transparent;
+    background-image:url('/images/icons/lens.svg'); 
+    background-repeat: no-repeat; 
+    background-position: 195px 8px;
+}
+.checkboxGroup{
+    height: 190px;
+    width: 230px;
+    overflow-y: auto;
+}
+
+.checkboxGroup::-webkit-scrollbar-track
+{
+	border-radius: 10px;
+	background-color: transparent;
+}
+
+.checkboxGroup::-webkit-scrollbar
+{
+	width: 4px;
+}
+
+.checkboxGroup::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	background-color: #626767;
+}
+
+.sideMenu p{
+    margin: 0;
+    margin-left: 20px;
+}
+#ipServices{
+    padding-left: 10px;
+    width: 210px;
+    height: 28px;
+    margin-top: 10px;
+    margin-left: 10px;
+    background-color: #ffffff;
+    border-radius: 14px;
+}
+.sideHr{
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+input[type=checkbox] {
+    display:none;
+}
+ 
+input[type=checkbox] + label 
+{
+    background: url('/images/icons/check_off.svg') no-repeat;
+    height: 16px;
+    width: 16px;
+    display:inline-block;
+    padding: 0 0 0 0px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+input[type=checkbox]:checked + label
+{
+    background: url('/images/icons/check_on.svg') no-repeat;
+    height: 16px;
+    width: 16px;
+    display:inline-block;
+    padding: 0 0 0 0px;
+}
+.ipCheckbox  + label{
+    margin-left: 20px;
+}
 /*for 1160px screen and below*/
 @media screen and (max-width:1160px){
     .headerLinks{
@@ -175,7 +273,6 @@ html{
         margin-left: 6.32%;
     }
     .filterIcons img{
-        /*padding-left: 20px;*/
         padding-left: 2%;
         display: inline;        
     }
@@ -188,15 +285,16 @@ html{
     #ipSearch{
         float: left;
         height: 40px;
-        /*width: 425px;*/
         width: 78%;
     }
     #btnSearch{
         float: left;
-        /*width: 100px;*/
         width: 15%;
     }
     #imgSearch{
+        display: none;
+    }
+    .sideMenu{
         display: none;
     }
 }

@@ -1,6 +1,10 @@
 html{
     font-family: Roboto ;
 }
+input{
+    outline: none;
+    border: none;
+}
 .pointer{
     cursor: pointer;
 }
