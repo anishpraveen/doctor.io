@@ -156,7 +156,6 @@ input[type=text]:focus{
 }
 .sideMenu{
     background-color: #f0f1f2;
-    padding-top: 20px;
     color: #626767;
     font-size: 14px;
     font-weight: 500;
@@ -165,6 +164,9 @@ input[type=text]:focus{
     float: left;
     position: relative;
     z-index: -0;
+}
+.sideMenu p{
+    padding-top: 20px;
 }
 .sideMenu input.button{
     border:0;
@@ -186,22 +188,38 @@ input[type=text]:focus{
 }
 .checkboxGroup{
     height: 190px;
-    width: 230px;
+    width: 200px;
     overflow-y: auto;
 }
 
-.checkboxGroup::-webkit-scrollbar-track
+div::-webkit-scrollbar-track
 {
 	border-radius: 10px;
 	background-color: transparent;
 }
 
-.checkboxGroup::-webkit-scrollbar
+div::-webkit-scrollbar
 {
 	width: 4px;
 }
 
-.checkboxGroup::-webkit-scrollbar-thumb
+div::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	background-color: #626767;
+}
+div::-moz-scrollbar-track
+{
+	border-radius: 10px;
+	background-color: transparent;
+}
+
+div::-moz-scrollbar
+{
+	width: 4px;
+}
+
+div::-moz-scrollbar-thumb
 {
 	border-radius: 10px;
 	background-color: #626767;
@@ -225,6 +243,15 @@ input[type=text]:focus{
     margin-right: 10px;
     margin-top: 10px;
 }
+.checkboxGroup > span > label, .text{
+    margin-top: 0px;
+    margin-top: 20px;
+}
+.first{
+    
+    margin-top: 0px;
+
+}
 input[type=checkbox] {
     display:none;
 }
@@ -236,7 +263,7 @@ input[type=checkbox] + label
     width: 16px;
     display:inline-block;
     padding: 0 0 0 0px;
-    margin-top: 20px;
+    /*margin-top: 20px;*/
     cursor: pointer;
 }
 input[type=checkbox]:checked + label
@@ -249,6 +276,42 @@ input[type=checkbox]:checked + label
 }
 .ipCheckbox  + label{
     margin-left: 20px;
+}
+#divWeekday, #divFees{
+    margin-top: 20px;
+    height: 360px;
+}
+.sideMenuGroup{
+    float: left;
+    height: 1500px;
+}
+#divWeekday .checkboxGroup,#divFees .checkboxGroup{
+    height: 290px;
+}
+.panel{
+    margin-left: 20px;
+    margin-bottom: 20px;
+    background-color: black;
+    float: left;
+    height: 282px;
+    /*width: 740px;*/
+    width: 94.8%;
+    border: 1px solid #b5baba;
+    border-radius: 2px;
+    /*float: right;*/
+}
+.panel-group{
+    height: 1490px;
+    overflow-y: auto;
+}
+.contentContainer{
+    width: 102%;
+}
+.container{
+    margin-bottom: 40px;
+}
+.footer{
+    text-align: center;
 }
 /*for 1160px screen and below*/
 @media screen and (max-width:1160px){
@@ -296,6 +359,16 @@ input[type=checkbox]:checked + label
     }
     .sideMenu{
         display: none;
+    }
+    .panel{
+        margin-left: 0px;
+        width: 95%;
+    }
+    .panel-group{
+        width: 100%;
+    }
+    .panel-group::-webkit-scrollbar { 
+        display: none; 
     }
 }
 @media screen and (max-width:610px){

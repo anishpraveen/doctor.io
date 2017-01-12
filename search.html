@@ -57,61 +57,191 @@
             </div>
            
         </div>
-        <div class="clearfix"></div>        
-        <div class="sideMenu" id="divServices">
-            <p>Services</p>
-            
-            <input type="text" name="Services" id="ipServices">
-            <input type="submit" class="button pointer" value="" />
-            <hr class="sideHr">
-            <div class="checkboxGroup">
-                <span class="spanCheckbox">
-                    <input type='checkbox' name='service' value='service1' id="service1" class="ipCheckbox"/><label for="service1"></label> 
-                    <span >Services One</span>
-                </span>
-                <br>
-                <span class="spanCheckbox">
-                    <input type='checkbox' name='service' value='service2' id="service2" class="ipCheckbox"/><label for="service2"></label> 
-                    <span >Services Two</span>
-                </span>
-                <br>
-                <span class="spanCheckbox">
-                    <input type='checkbox' name='service' value='service2' id="service3" class="ipCheckbox"/><label for="service3"></label> 
-                    <span >Services Two</span>
-                </span>
-                <br>
-                <span class="spanCheckbox">
-                    <input type='checkbox' name='service' value='service2' id="service4" class="ipCheckbox"/><label for="service4"></label> 
-                    <span >Services Two</span>
-                </span>
-                <br>
-                <span class="spanCheckbox">
-                    <input type='checkbox' name='service' value='service2' id="service5" class="ipCheckbox"/><label for="service5"></label> 
-                    <span >Services Two</span>
-                </span>
-                <br>
-                <span class="spanCheckbox">
-                    <input type='checkbox' name='service' value='service2' id="service6" class="ipCheckbox"/><label for="service6"></label> 
-                    <span >Services Two</span>
-                </span>
-                <br>
-                <span class="spanCheckbox">
-                    <input type='checkbox' name='service' value='service2' id="service7" class="ipCheckbox"/><label for="service7"></label> 
-                    <span >Services Two</span>
-                </span>
-                <br>
-                <span class="spanCheckbox">
-                    <input type='checkbox' name='service' value='service2' id="service8" class="ipCheckbox"/><label for="service8"></label> 
-                    <span >Services Two</span>
-                </span>
-                <br>
-                <span class="spanCheckbox">
-                    <input type='checkbox' name='service' value='service2' id="service9" class="ipCheckbox"/><label for="service9"></label> 
-                    <span >Services Two</span>
-                </span>
-            </div>
-        </div>
+        <div class="clearfix"></div>   
+        <div class="contentContainer">
+            <div class="sideMenuGroup">
+                <div class="sideMenu" id="divServices">
+                    <p>Services</p>
+                    
+                    <input type="text" name="Services" id="ipServices">
+                    <input type="submit" class="button pointer" value="" />
+                    <hr class="sideHr">
+                    <div class="checkboxGroup">
+                        <span class="spanCheckbox ">
+                            <input type='checkbox' name='service' value='service1' id="service1" class="ipCheckbox"/>
+                            <label for="service1" class="first" style="margin-top: 0px;"></label> 
+                            <span>Services One</span>
+                        </span>
+                        <br>
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='service' value='service2' id="service2" class="ipCheckbox"/><label for="service2"></label> 
+                            <span >Services Two</span>
+                        </span>
+                        <br>
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='service' value='service2' id="service3" class="ipCheckbox"/><label for="service3"></label> 
+                            <span >Services Two</span>
+                        </span>
+                        <br>
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='service' value='service2' id="service4" class="ipCheckbox"/><label for="service4"></label> 
+                            <span >Services Two</span>
+                        </span>
+                        <br>
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='service' value='service2' id="service5" class="ipCheckbox"/><label for="service5"></label> 
+                            <span >Services Two</span>
+                        </span>
+                        <br>
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='service' value='service2' id="service6" class="ipCheckbox"/><label for="service6"></label> 
+                            <span >Services Two</span>
+                        </span>
+                        <br>
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='service' value='service2' id="service7" class="ipCheckbox"/><label for="service7"></label> 
+                            <span >Services Two</span>
+                        </span>
+                        <br>
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='service' value='service2' id="service8" class="ipCheckbox"/><label for="service8"></label> 
+                            <span >Services Two</span>
+                        </span>
+                        <br>
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='service' value='service2' id="service9" class="ipCheckbox"/><label for="service9"></label> 
+                            <span >Services Two</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="clearfix"></div>      
+                <div class="sideMenu" id="divWeekday">
+                    <p>Availability</p>
+
+                    <hr class="sideHr">
+                    <div class="checkboxGroup">
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='days' value='Monday' id="Monday" class="ipCheckbox"/><label for="Monday"></label> 
+                            <span >Monday</span>
+                        </span>
+                        <br>
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='days' value='Tuesday' id="Tuesday" class="ipCheckbox"/><label for="Tuesday"></label> 
+                            <span >Tuesday</span>
+                        </span>
+                        <br>
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='days' value='Wednesday' id="Wednesday" class="ipCheckbox"/><label for="Wednesday"></label> 
+                            <span >Wednesday</span>
+                        </span>
+                        <br>
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='days' value='Thursday' id="Thursday" class="ipCheckbox"/><label for="Thursday"></label> 
+                            <span >Thursday</span>
+                        </span>
+                        <br>
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='days' value='Friday' id="Friday" class="ipCheckbox"/><label for="Friday"></label> 
+                            <span >Friday</span>
+                        </span>
+                        <br>
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='days' value='Saturday' id="Saturday" class="ipCheckbox"/><label for="Saturday"></label> 
+                            <span >Saturday</span>
+                        </span>
+                        <br>
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='days' value='Sunday' id="Sunday" class="ipCheckbox"/><label for="Sunday"></label> 
+                            <span >Sunday</span>
+                        </span>
+                        <br>
+                        
+                    </div>
+                </div>
+                <div class="clearfix"></div>      
+                <div class="sideMenu" id="divFees">
+                    <p>Fees</p>
+
+                    <hr class="sideHr">
+                    <div class="checkboxGroup">
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='slabs' value='slab1' id='slab1'  class="ipCheckbox"/><label for="slab1"></label> 
+                            <span >Free - 100</span>
+                        </span>
+                        <br>
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='slabs' value='slab2' id='slab2'  class="ipCheckbox"/><label for="slab2"></label> 
+                            <span >100 - 250</span>
+                        </span>
+                        <br>
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='slabs' value='slab3' id='slab3'  class="ipCheckbox"/><label for="slab3"></label> 
+                            <span >250 - 500</span>
+                        </span>
+                        <br>
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='slabs' value='slab4' id='slab4'  class="ipCheckbox"/><label for="slab4"></label> 
+                            <span >500 - 1000</span>
+                        </span>
+                        <br>
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='slabs' value='slab5' id='slab5'  class="ipCheckbox"/><label for="slab5"></label> 
+                            <span >1000 - 1500</span>
+                        </span>
+                        <br>
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='slabs' value='slab6' id='slab6'  class="ipCheckbox"/><label for="slab6"></label> 
+                            <span >1500 - 2000</span>
+                        </span>
+                        <br>
+                        <span class="spanCheckbox">
+                            <input type='checkbox' name='slabs' value='slab7' id='slab7'  class="ipCheckbox"/><label for="slab7"></label> 
+                            <span >2000 - 2500</span>
+                        </span>
+                        <br>
+                        
+                    </div>
+                </div>
+            </div> 
+            <div class="panel-group">
+                <div class="panel" id="doc1">                    
+                </div>
+                <div class="panel" id="doc2">                    
+                </div>
+                <div class="panel" id="doc3">                    
+                </div>
+                <div class="panel" id="doc4">                    
+                </div>
+                <div class="panel" id="doc5">                    
+                </div>
+                <div class="panel" id="doc6">                    
+                </div>
+                <div class="panel" id="doc7">                    
+                </div>
+                <div class="panel" id="doc8">                    
+                </div>
+                <div class="panel" id="doc9">                    
+                </div>
+                <div class="panel" id="doc10">                    
+                </div>
+                <div class="panel" id="doc11">                    
+                </div>
+                <div class="panel" id="doc12">                    
+                </div>
+                
+            </div>  
+        </div>  
     </div>
-    
+    <div class="footer">
+        DENTAL.io &copy; 2015 All Rights Reserved
+        <span class="text">
+            
+            <a href="#">TERMS OF USE</a>
+            and
+            <a href="#">PRIVACY POLICY</a>
+            | Designed by
+            <a href="#">PIXELSPOTSTUDIO.COM</a>
+        </span>
+    </div>
     </body>
 </html>
