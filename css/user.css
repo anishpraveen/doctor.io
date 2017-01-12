@@ -291,7 +291,7 @@ input[type=checkbox]:checked + label
 .panel{
     margin-left: 20px;
     margin-bottom: 20px;
-    background-color: black;
+    /*background-color: black;*/
     float: left;
     height: 282px;
     /*width: 740px;*/
@@ -301,7 +301,7 @@ input[type=checkbox]:checked + label
     /*float: right;*/
 }
 .panel-group{
-    height: 1490px;
+    height: 1500px;
     overflow-y: auto;
 }
 .contentContainer{
@@ -312,6 +312,102 @@ input[type=checkbox]:checked + label
 }
 .footer{
     text-align: center;
+}
+.panel-body{
+    margin: 21px;
+}
+.docterDetails{
+    width: 367px;
+}
+.doctor{
+    text-align: left;
+}
+.doctor img{
+    float: left;
+}
+.doctor span{
+    margin-top: -2px;
+    float: left;
+    padding-left: 21px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #9ba0a0;
+    text-align: left;
+    line-height: 22px;
+}
+.doctor .name{
+    font-size: 18px;
+    color: #626767;
+}
+.appoinment{
+    float: right;
+}
+.btn-primary{
+    height: 34px;
+    width: 180px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    text-shadow: 0px 1px 1px  rgba(0, 0, 0, 0.2);
+}
+.panel-body hr{
+    background-color: #f0f1f2;
+    border-color: #f0f1f2;
+}
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+.locations{
+    margin-top: 14px;
+}
+.locations > .left{
+    width: 234px;
+}
+.name{
+    font-size: 15px;
+    font-weight: 500;
+    color: #626767;
+    text-align: left;
+    line-height: 22px;
+}
+.addr{
+    font-size: 14px;
+    font-weight: 500;
+    color: #9ba0a0;
+}
+.timings{
+    font-size: 13px;
+    text-align: left;
+    line-height: 22px;
+    margin-top: 7px;
+
+}
+.timings .left{
+    color: #626767;
+}
+.timings .right{
+    color: #898f8f;
+}
+
+.costs{
+    margin-top: 11px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #626767;
+}
+.loc2{
+    float: left;
+    margin-left: 51px;
+}
+.vertical-line{
+    float: left;
+    margin-left: 116px;
+    height: 119px;
+    width: 1px;
+    background-color: #f0f1f2;
 }
 /*for 1160px screen and below*/
 @media screen and (max-width:1160px){
