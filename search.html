@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="css/style.css" rel="stylesheet">        
         <link href="/css/user.css" rel="stylesheet">
+        <link href="/css/slider.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500" rel="stylesheet">
     </head>
     <body class="body">
@@ -64,7 +65,7 @@
                     <p>Services</p>
                     
                     <input type="text" name="Services" id="ipServices">
-                    <input type="submit" class="button pointer" value="" />
+                    <input type="submit" class="button pointer" value="" />                    
                     <hr class="sideHr">
                     <div class="checkboxGroup">
                         <span class="spanCheckbox ">
@@ -117,7 +118,18 @@
                 <div class="clearfix"></div>      
                 <div class="sideMenu" id="divWeekday">
                     <p>Availability</p>
-
+                    <div class="slider">
+                        <img src="/images/icons/slider_bg2.svg" id="outerSlide" alt="">
+                        <img src="/images/icons/slider_bg.svg" id="innerSlide" alt="">
+                        <img src="/images/icons/start.svg" id="start" class="activeSlider pointer" alt="">
+                        <img src="/images/icons/active_area.svg" id="activeRegion" class="activeSlider" alt="">
+                        <img src="/images/icons/end.svg" id="end" class="activeSlider pointer" alt="">
+                        <div>
+                            <p class="startText">9 AM</p>
+                            <p class="endText">5 PM</p>
+                        </div>
+                    </div>
+                        <!--<div class="clearfix"></div>                    -->
                     <hr class="sideHr">
                     <div class="checkboxGroup">
                         <span class="spanCheckbox">
@@ -210,7 +222,7 @@
                             <div class="doctor">
                                 <img src="/images/icons/profile_pic4.png" alt="">
                                 <span class="name">Dr. Michael Faradai</span><br>
-                                <span>Dental Implant Surgeon<br>
+                                <span class="post">Dental Implant Surgeon<br>
                                 BDS, DDS, DMD, MS<br>
                                 45 Years EXP</span>   
                             </div>                            
@@ -221,36 +233,39 @@
                         <div class="clearfix"></div>
                         <hr>
                         <div class="locations">
-                            <div class="left">
+                            <div class="left loc1">
                                 <span class="name">Parkway Dental Care</span><br>
                                 <span class="addr">5250 Taylor Street, San Diego</span>
                                 <div class="timings">
                                     <div class="weekday">
-                                        <span class="left">Monday - Friday:</span>
+                                        <span class="left">Monday - Friday: </span>
                                         <span class="right">09:00 AM - 08:00 PM</span>
                                     </div>
                                     <div class="weekend">
-                                        <span class="left">Saturday - Sunday:</span>
-                                        <span class="right">09:00 AM - 08:00 PM</span>
+                                        <span class="left">Saturday - Sunday: </span>
+                                        <span class="right">&nbsp09:00 AM - 08:00 PM</span>
                                     </div>
+                                    <div class="clearfix"></div>
                                     <p class="costs">
                                         1800 INR/hours
                                     </p>
                                 </div>
                             </div>
                             <div class="vertical-line"></div>
+                            <hr class="locHr">
                             <div class="loc2">
                                 <span class="name">Parkway Dental Care</span><br>
                                 <span class="addr">5250 Taylor Street, San Diego</span>
                                 <div class="timings">
                                     <div class="weekday">
-                                        <span class="left">Monday - Friday:</span>
+                                        <span class="left">Monday - Friday: </span>
                                         <span class="right">09:00 AM - 08:00 PM</span>
                                     </div>
                                     <div class="weekend">
-                                        <span class="left">Saturday - Sunday:</span>
-                                        <span class="right">09:00 AM - 08:00 PM</span>
+                                        <span class="left">Saturday - Sunday: </span>
+                                        <span class="right">&nbsp09:00 AM - 08:00 PM</span>
                                     </div>
+                                    <div class="clearfix"></div>
                                     <p class="costs">
                                         1800 INR/hours
                                     </p>
@@ -266,7 +281,7 @@
                             <div class="doctor">
                                 <img src="/images/icons/profile_pic4.png" alt="">
                                 <span class="name">Dr. Michael Faradai</span><br>
-                                <span>Dental Implant Surgeon<br>
+                                <span class="post">Dental Implant Surgeon<br>
                                 BDS, DDS, DMD, MS<br>
                                 45 Years EXP</span>   
                             </div>                            
@@ -277,36 +292,39 @@
                         <div class="clearfix"></div>
                         <hr>
                         <div class="locations">
-                            <div class="left">
+                            <div class="left loc1">
                                 <span class="name">Parkway Dental Care</span><br>
                                 <span class="addr">5250 Taylor Street, San Diego</span>
                                 <div class="timings">
                                     <div class="weekday">
-                                        <span class="left">Monday - Friday:</span>
+                                        <span class="left">Monday - Friday: </span>
                                         <span class="right">09:00 AM - 08:00 PM</span>
                                     </div>
                                     <div class="weekend">
-                                        <span class="left">Saturday - Sunday:</span>
-                                        <span class="right">09:00 AM - 08:00 PM</span>
+                                        <span class="left">Saturday - Sunday: </span>
+                                        <span class="right">&nbsp09:00 AM - 08:00 PM</span>
                                     </div>
+                                    <div class="clearfix"></div>
                                     <p class="costs">
                                         1800 INR/hours
                                     </p>
                                 </div>
                             </div>
                             <div class="vertical-line"></div>
+                            <hr class="locHr">
                             <div class="loc2">
                                 <span class="name">Parkway Dental Care</span><br>
                                 <span class="addr">5250 Taylor Street, San Diego</span>
                                 <div class="timings">
                                     <div class="weekday">
-                                        <span class="left">Monday - Friday:</span>
+                                        <span class="left">Monday - Friday: </span>
                                         <span class="right">09:00 AM - 08:00 PM</span>
                                     </div>
                                     <div class="weekend">
-                                        <span class="left">Saturday - Sunday:</span>
-                                        <span class="right">09:00 AM - 08:00 PM</span>
+                                        <span class="left">Saturday - Sunday: </span>
+                                        <span class="right">&nbsp09:00 AM - 08:00 PM</span>
                                     </div>
+                                    <div class="clearfix"></div>
                                     <p class="costs">
                                         1800 INR/hours
                                     </p>
@@ -322,7 +340,7 @@
                             <div class="doctor">
                                 <img src="/images/icons/profile_pic4.png" alt="">
                                 <span class="name">Dr. Michael Faradai</span><br>
-                                <span>Dental Implant Surgeon<br>
+                                <span class="post">Dental Implant Surgeon<br>
                                 BDS, DDS, DMD, MS<br>
                                 45 Years EXP</span>   
                             </div>                            
@@ -333,36 +351,39 @@
                         <div class="clearfix"></div>
                         <hr>
                         <div class="locations">
-                            <div class="left">
+                            <div class="left loc1">
                                 <span class="name">Parkway Dental Care</span><br>
                                 <span class="addr">5250 Taylor Street, San Diego</span>
                                 <div class="timings">
                                     <div class="weekday">
-                                        <span class="left">Monday - Friday:</span>
+                                        <span class="left">Monday - Friday: </span>
                                         <span class="right">09:00 AM - 08:00 PM</span>
                                     </div>
                                     <div class="weekend">
-                                        <span class="left">Saturday - Sunday:</span>
-                                        <span class="right">09:00 AM - 08:00 PM</span>
+                                        <span class="left">Saturday - Sunday: </span>
+                                        <span class="right">&nbsp09:00 AM - 08:00 PM</span>
                                     </div>
+                                    <div class="clearfix"></div>
                                     <p class="costs">
                                         1800 INR/hours
                                     </p>
                                 </div>
                             </div>
                             <div class="vertical-line"></div>
+                            <hr class="locHr">
                             <div class="loc2">
                                 <span class="name">Parkway Dental Care</span><br>
                                 <span class="addr">5250 Taylor Street, San Diego</span>
                                 <div class="timings">
                                     <div class="weekday">
-                                        <span class="left">Monday - Friday:</span>
+                                        <span class="left">Monday - Friday: </span>
                                         <span class="right">09:00 AM - 08:00 PM</span>
                                     </div>
                                     <div class="weekend">
-                                        <span class="left">Saturday - Sunday:</span>
-                                        <span class="right">09:00 AM - 08:00 PM</span>
+                                        <span class="left">Saturday - Sunday: </span>
+                                        <span class="right">&nbsp09:00 AM - 08:00 PM</span>
                                     </div>
+                                    <div class="clearfix"></div>
                                     <p class="costs">
                                         1800 INR/hours
                                     </p>
@@ -378,7 +399,7 @@
                             <div class="doctor">
                                 <img src="/images/icons/profile_pic4.png" alt="">
                                 <span class="name">Dr. Michael Faradai</span><br>
-                                <span>Dental Implant Surgeon<br>
+                                <span class="post">Dental Implant Surgeon<br>
                                 BDS, DDS, DMD, MS<br>
                                 45 Years EXP</span>   
                             </div>                            
@@ -389,36 +410,39 @@
                         <div class="clearfix"></div>
                         <hr>
                         <div class="locations">
-                            <div class="left">
+                            <div class="left loc1">
                                 <span class="name">Parkway Dental Care</span><br>
                                 <span class="addr">5250 Taylor Street, San Diego</span>
                                 <div class="timings">
                                     <div class="weekday">
-                                        <span class="left">Monday - Friday:</span>
+                                        <span class="left">Monday - Friday: </span>
                                         <span class="right">09:00 AM - 08:00 PM</span>
                                     </div>
                                     <div class="weekend">
-                                        <span class="left">Saturday - Sunday:</span>
-                                        <span class="right">09:00 AM - 08:00 PM</span>
+                                        <span class="left">Saturday - Sunday: </span>
+                                        <span class="right">&nbsp09:00 AM - 08:00 PM</span>
                                     </div>
+                                    <div class="clearfix"></div>
                                     <p class="costs">
                                         1800 INR/hours
                                     </p>
                                 </div>
                             </div>
                             <div class="vertical-line"></div>
+                            <hr class="locHr">
                             <div class="loc2">
                                 <span class="name">Parkway Dental Care</span><br>
                                 <span class="addr">5250 Taylor Street, San Diego</span>
                                 <div class="timings">
                                     <div class="weekday">
-                                        <span class="left">Monday - Friday:</span>
+                                        <span class="left">Monday - Friday: </span>
                                         <span class="right">09:00 AM - 08:00 PM</span>
                                     </div>
                                     <div class="weekend">
-                                        <span class="left">Saturday - Sunday:</span>
-                                        <span class="right">09:00 AM - 08:00 PM</span>
+                                        <span class="left">Saturday - Sunday: </span>
+                                        <span class="right">&nbsp09:00 AM - 08:00 PM</span>
                                     </div>
+                                    <div class="clearfix"></div>
                                     <p class="costs">
                                         1800 INR/hours
                                     </p>
@@ -428,63 +452,8 @@
                         
                     </div>
                 </div>
-                <div class="panel" id="doc5">   
-                    <div class="panel-body">
-                        <div class="docterDetails">
-                            <div class="doctor">
-                                <img src="/images/icons/profile_pic4.png" alt="">
-                                <span class="name">Dr. Michael Faradai</span><br>
-                                <span>Dental Implant Surgeon<br>
-                                BDS, DDS, DMD, MS<br>
-                                45 Years EXP</span>   
-                            </div>                            
-                        </div>                        
-                        <div class="appoinment">
-                            <button class="btn btn-primary pointer" type="submit">Make Appointment</button>
-                        </div>
-                        <div class="clearfix"></div>
-                        <hr>
-                        <div class="locations">
-                            <div class="left">
-                                <span class="name">Parkway Dental Care</span><br>
-                                <span class="addr">5250 Taylor Street, San Diego</span>
-                                <div class="timings">
-                                    <div class="weekday">
-                                        <span class="left">Monday - Friday:</span>
-                                        <span class="right">09:00 AM - 08:00 PM</span>
-                                    </div>
-                                    <div class="weekend">
-                                        <span class="left">Saturday - Sunday:</span>
-                                        <span class="right">09:00 AM - 08:00 PM</span>
-                                    </div>
-                                    <p class="costs">
-                                        1800 INR/hours
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="vertical-line"></div>
-                            <div class="loc2">
-                                <span class="name">Parkway Dental Care</span><br>
-                                <span class="addr">5250 Taylor Street, San Diego</span>
-                                <div class="timings">
-                                    <div class="weekday">
-                                        <span class="left">Monday - Friday:</span>
-                                        <span class="right">09:00 AM - 08:00 PM</span>
-                                    </div>
-                                    <div class="weekend">
-                                        <span class="left">Saturday - Sunday:</span>
-                                        <span class="right">09:00 AM - 08:00 PM</span>
-                                    </div>
-                                    <p class="costs">
-                                        1800 INR/hours
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="panel" id="doc6">                    
+                
+                <!--<div class="panel" id="doc6">                    
                 </div>
                 <div class="panel" id="doc7">                    
                 </div>
@@ -497,7 +466,7 @@
                 <div class="panel" id="doc11">                    
                 </div>
                 <div class="panel" id="doc12">                    
-                </div>
+                </div>-->
                 
             </div>  
         </div>  

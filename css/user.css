@@ -187,7 +187,7 @@ input[type=text]:focus{
     background-position: 195px 8px;
 }
 .checkboxGroup{
-    height: 190px;
+    height: 184px;
     width: 200px;
     overflow-y: auto;
 }
@@ -263,7 +263,6 @@ input[type=checkbox] + label
     width: 16px;
     display:inline-block;
     padding: 0 0 0 0px;
-    /*margin-top: 20px;*/
     cursor: pointer;
 }
 input[type=checkbox]:checked + label
@@ -291,14 +290,12 @@ input[type=checkbox]:checked + label
 .panel{
     margin-left: 20px;
     margin-bottom: 20px;
-    /*background-color: black;*/
     float: left;
-    height: 282px;
+    /*height: 282px;*/
     /*width: 740px;*/
     width: 94.8%;
     border: 1px solid #b5baba;
     border-radius: 2px;
-    /*float: right;*/
 }
 .panel-group{
     height: 1500px;
@@ -363,9 +360,7 @@ input[type=checkbox]:checked + label
 .locations{
     margin-top: 14px;
 }
-.locations > .left{
-    width: 234px;
-}
+
 .name{
     font-size: 15px;
     font-weight: 500;
@@ -386,10 +381,10 @@ input[type=checkbox]:checked + label
 
 }
 .timings .left{
-    color: #626767;
+    color: #898f8f;    
 }
 .timings .right{
-    color: #898f8f;
+    color: #626767;
 }
 
 .costs{
@@ -399,15 +394,20 @@ input[type=checkbox]:checked + label
     color: #626767;
 }
 .loc2{
-    float: left;
-    margin-left: 51px;
+    float: right;
+}
+.loc2 {
+    margin-bottom: 10px;
 }
 .vertical-line{
     float: left;
-    margin-left: 116px;
+    margin-left: 8%;
     height: 119px;
     width: 1px;
     background-color: #f0f1f2;
+}
+.locHr{
+    display: none;
 }
 /*for 1160px screen and below*/
 @media screen and (max-width:1160px){
@@ -425,6 +425,25 @@ input[type=checkbox]:checked + label
         width: 80%;
     }
 }
+@media screen and (max-width:1049px){
+    .vertical-line{
+        display: none;
+    }
+    .loc2{
+        float: left;
+    }
+    .locHr{
+        clear: both;
+        display: block;
+    }
+    
+}
+@media screen and (max-width:870px){
+    .appoinment , .appoinment button{
+        width: 100%;
+    }
+}
+
 /*for 768px screen and below*/
 @media screen and (max-width:768px){
     .container{
@@ -458,13 +477,48 @@ input[type=checkbox]:checked + label
     }
     .panel{
         margin-left: 0px;
-        width: 95%;
+        width: 98%;
+    }
+    .vertical-line{
+        display: inline;
+        margin-left: 10%;
+    }
+    .loc2{
+        margin-left: 5%;
     }
     .panel-group{
         width: 100%;
+        height: auto;
     }
     .panel-group::-webkit-scrollbar { 
         display: none; 
+    }   
+    .locHr{
+        display: none;
+    }
+    .appoinment button{
+        width: 168px;
+    }
+    .appoinment{
+        width: initial;
+    } 
+}
+@media screen and (max-width:767px){
+    .loc1, .loc2{
+        clear: both;
+        width: auto;
+        margin-left: 0px;
+    }
+    .locHr{
+        clear: both;
+        display: block;
+    }
+    
+    .vertical-line{
+        display: none;
+    }
+    .costs{
+        clear: both;
     }
 }
 @media screen and (max-width:610px){
@@ -477,6 +531,11 @@ input[type=checkbox]:checked + label
     #btnSearch{
         float: left;
         width: 62px;
+    }
+}
+@media screen and (max-width:540px){
+    .appoinment , .appoinment button{
+        width: 100%;
     }
 }
 /*for 320px screen and below*/
@@ -508,5 +567,43 @@ input[type=checkbox]:checked + label
     }
     #formSearch{
         display: none;
+    }
+    .timings{
+        font-size: 12px;
+    }
+    .panel-group{
+        width: 300px;
+        height: auto;
+    }
+    .panel{
+        width: 290px;
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+    .doctor span{
+        clear: both;
+    }
+    .doctor img{
+        margin-left: 25%;
+        margin-bottom: 16px;
+    }
+    .doctor .post{
+        margin-left: 10%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .doctor .name{
+        margin-left: 9%;
+    }
+    .appoinment{
+       float: left;
+       margin-left: 17%;
+       margin-bottom: 31px;
+    }
+    .appoinment button{
+        width: 168px;
+    }
+    #divSearch{
+        margin-bottom: 25px;
     }
 }
