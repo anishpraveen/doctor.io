@@ -188,7 +188,7 @@ input[type=text]:focus{
 }
 .checkboxGroup{
     height: 184px;
-    width: 200px;
+    width: 228px;
     overflow-y: auto;
 }
 
@@ -606,5 +606,8 @@ input[type=checkbox]:checked + label
     }
     #divSearch{
         margin-bottom: 25px;
+    }
+    .loc1, .costs, .loc2{
+        text-align: center;
     }
 }
