@@ -291,8 +291,6 @@ input[type=checkbox]:checked + label
     margin-left: 20px;
     margin-bottom: 20px;
     float: left;
-    /*height: 282px;*/
-    /*width: 740px;*/
     width: 94.8%;
     border: 1px solid #b5baba;
     border-radius: 2px;
@@ -408,6 +406,9 @@ input[type=checkbox]:checked + label
 }
 .locHr{
     display: none;
+}
+.doctor .azure-text, .locations .azure-text{
+    color: #0098ff;
 }
 /*for 1160px screen and below*/
 @media screen and (max-width:1160px){
