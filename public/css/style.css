@@ -1,0 +1,235 @@
+html{
+    font-family: Roboto ;
+}
+input{
+    outline: none;
+    border: none;
+}
+.pointer{
+    cursor: pointer;
+}
+a{
+    text-decoration: none;
+    color: #ffffff;
+}
+.header_bg{
+    height: 80px;
+    background-image: url('/images/icons/bg.png')
+}
+html{
+    padding: none;
+    min-width: 320px;
+}
+.body{
+    margin: 0;
+}
+.header_bg img{
+    margin-left: 100px;
+    margin-top: 29px;
+}
+.headerLinks{
+    margin-top: 32px;
+    float: right;
+    font-size: 12px;
+    color: #ffffff;
+    text-align: left;
+    margin-right: 98px;
+}
+#hamberg{
+    float: right;
+}
+#btnHeader{
+    outline: none;
+    border: none;
+    background-color: #008b8b;
+    color: #ffffff;
+    border-radius: 15px;
+    margin-left: 15px;
+}
+.content{
+    margin-top: 42px;
+    text-align: center;
+}
+.welcome{
+    font-size: 30px;
+    font-weight: 300;
+    color: #626767;
+    text-align: center;
+}
+.subText{
+    font-size: 20px;
+    font-weight: 100;
+    color: #a9adad;
+    text-align: center;
+}
+.form-input{
+    outline: none;
+    margin-bottom: 20px;
+    border: none;
+    background-color: #f6f6f6;
+    border-radius: 20px;
+    height: 40px;
+    width: 340px;
+    color: #3c3e44;
+    font-size: 15px;
+    font-weight: 100;
+    text-align:center;
+    transition: box-shadow 0.33s ease-in-out;
+}
+.form-input:focus{
+    border: none;
+    box-shadow: inset 0 1px 1px #34a9a2, 0 0 8px #34a9a2;
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #fffff;
+}
+.btn{
+    outline: none;
+    border: none;
+}
+.btn-primary{
+    background-color: #f7c04d;
+    border-radius: 20px;
+}
+.btn-primary:hover{
+    background-color: #edaf2f;
+}
+.btn-primary:focus{
+    background-color: #a87406;
+}
+.btn-guest{
+    background-color: #484848;
+    border-radius: 20px;
+}
+.btn-guest:hover{
+    background-color: #666464;
+}
+.btn-guest:focus{
+    background-color: #8e8d8d;
+}
+#btnGuest{
+    height: 40px;
+    width: 340px;
+    margin-top: 25px;
+}
+.loginBtn{
+    height: 40px;
+    width: 340px;
+    margin-bottom: 15px;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 18px;
+}
+.actions{
+    font-size: 15px;
+    font-weight: 300;
+    color: #626767;
+    text-align: left;
+    text-decoration: none;
+    
+}
+.actions a{
+    color: #0098ff;
+    text-decoration: none;
+}
+
+.line{
+    margin-top: 36px;
+    margin-left: 16%;
+    width: 67%;
+    background-color: #b5baba;
+    border: 1px solid #b5baba;
+}
+.register{
+    text-align: center;
+    margin-top: 15px;
+}
+.guest{
+    margin-top: 41px;
+    height: 200px;
+    background-color: #f7f6f0;
+    font-size: 28px;
+    font-weight: 300;
+    color: #626767;
+    text-align:center;
+}
+.subText2{
+    font-size: 18px;
+}
+.footer{
+    height: 32px;
+    background-image: linear-gradient(#2e3341 0%, #202431 100%);
+    font-size: 12px;
+    color: #9ba0a0;
+    text-align: center;
+    padding-top: 22px;
+}
+.footer a{
+    color: #0098ff;
+    text-decoration: none;
+}
+.header_bg #hamberg{
+    display: none;
+}
+/*for 768px screen and below*/
+@media screen and (max-width:768px){
+    .header_bg #logo{
+        margin-left: 50px;
+    }
+    .line{
+        margin-top: 26px;
+        margin-left: 5.861%;
+        width: 88.278%;
+    }
+    .register{
+        margin-top: 25px;
+    }
+    .guest{
+        margin-top: 265px;
+    }
+    .headerLinks{
+        display: none;
+    }
+    .header_bg #hamberg{
+        margin-right: 50px;
+        display: inline;
+    }
+}
+/*for 320px screen and below*/
+@media screen and (max-width:420px){
+    .header_bg #logo{
+        margin-left: 15px;
+    }
+    .content{
+        margin-top: 48px;
+    }
+    .welcome{
+        font-size: 24px;
+    }
+    .subText{
+        font-size: 15px;
+    }
+    .form-input{
+        width: 290px;
+    }
+    .loginBtn{
+        width: 290px;
+    }
+    #btnGuest{
+        width: 290px;
+    }
+    .guest{
+        margin-top: 41px;
+        font-size: 22px;
+    }
+    .subText2{
+        font-size: 15px;
+    }
+    .footer .text{
+        display: none;
+    }
+    .header_bg #hamberg{
+        margin-right: 15px;
+        display: inline;
+    }
+}

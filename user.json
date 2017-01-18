@@ -1,0 +1,3 @@
+{"_id":{"$oid":"587dca532bbd628058932326"},"username":"root","email":"root@root.com","password":"anish12"}
+{"_id":{"$oid":"587dca702bbd628058932327"},"username":"admin","email":"admin@root.com","password":"anish12"}
+{"_id":{"$oid":"587dcd779c2d83357a6dfebe"},"username":"user","email":"user@root.com","password":"anish12"}

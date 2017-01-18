@@ -1,0 +1,32 @@
+doctype html
+html(lang='en')
+  include includes/header.jade
+  body.body
+    .header_bg
+      img#logo(src='images/icons/logo.svg', alt='Dental.io Logo')
+      span.headerLinks
+        a(href='/') HOME
+        button#btnHeader.pointer LOGIN / REGISTER
+      img#hamberg(src='/images/icons/menu.svg', alt='Open Menu')
+    .content
+      p.welcome
+        | Welcome Back
+      p.subText Changing the way people feel about dentistry
+      form(action='verify', method='post')
+        input.form-input(type='text', name='username', value='', placeholder='Username')
+        br
+        input.form-input(type='password', name='password', value='', placeholder='Password')
+        br
+        button.btn.btn-primary.loginBtn.pointer(type='submit')  Login 
+      a.actions(href='#') Forgot Password ?
+      hr.line
+      .actions.register
+        | Don’t have an account yet? 
+        a(href='#') REGISTER
+    .guest
+      | Hi there! 
+      br
+      span.subText2 don’t need to signin? get connected as
+      br
+      button#btnGuest.btn.btn-guest.loginBtn.pointer  GUEST 
+    include includes/footer.jade

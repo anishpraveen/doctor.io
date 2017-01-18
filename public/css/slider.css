@@ -1,0 +1,52 @@
+
+.slider{
+    margin-left: 20px;
+    margin-top: 14px;
+    height: 40px;
+}
+.slider img#innerSlide{
+    position: relative;
+    top: -20px;
+    left: 2px;
+}
+.activeSlider{
+    position: relative;
+    top: -53px;
+}
+#end, #start{
+    top: -43px;
+    cursor: pointer;
+}
+#end{
+    right:10px;
+}
+#start{
+    left:10px;
+    z-index: 9999;
+}
+.slider div{
+    position: relative;
+    top: -63px;
+    left: -6px;
+    width: 190px;
+    padding: 0px;
+    margin: 0px;
+    color: #00bdee;
+}
+.endText{
+    float: right;
+}
+.startText{
+    float: left;
+}
+#divWeekday .checkboxGroup{
+    position: relative;
+    top: -50px;
+}
+#divWeekday .checkboxGroup  > span > label, .text{
+    margin-top: 0px;
+    margin-top: 20px;
+}
+#divWeekday{
+    height: 380px;
+}

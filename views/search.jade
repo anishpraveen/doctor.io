@@ -1,0 +1,558 @@
+doctype html
+html(lang='en')
+  include includes/header.jade
+  body.body
+    include includes/top-menu.jade
+    .container
+      .searchResult
+        span Physicians Nearby
+        span.resultCount
+          b 13
+          |  Results Found
+      .clearfix
+      hr.divider
+      #divSearch
+        form#formSearch
+          span
+            input#ipSearch.form-input(type='text', name='search', value='', placeholder='Find Dentists/Clinic')
+            button#btnSearch.btn.pointer(type='submit') Search 
+        #divSortBy(action='search.html', method='get')
+          | Sort by:
+          select#ddlSortBy
+            option(value='volvo') Popularity
+            option(value='saab') Availability
+            option(value='mercedes') Cost
+            option(value='audi') Recomendations
+        .filterIcons
+          img#imgSearch(src='/images/icons/search.svg', alt='Search')
+          img#imgSort(src='/images/icons/sort.svg', alt='Sort')
+          img#imgFilter(src='/images/icons/filter.svg', alt='Filter')
+      .clearfix
+      .contentContainer
+        .sideMenuGroup
+          #divServices.sideMenu
+            p Services
+            input#ipServices(type='text', name='Services')
+            input.button.pointer(type='submit', value='')
+            hr.sideHr
+            .checkboxGroup
+              span.spanCheckbox
+                input#service1.ipCheckbox(type='checkbox', name='service', value='service1')
+                label.first(for='service1', style='margin-top: 0px;')
+                span Services One
+              br
+              span.spanCheckbox
+                input#service2.ipCheckbox(type='checkbox', name='service', value='service2')
+                label(for='service2')
+                span Services Two
+              br
+              span.spanCheckbox
+                input#service3.ipCheckbox(type='checkbox', name='service', value='service2')
+                label(for='service3')
+                span Services Two
+              br
+              span.spanCheckbox
+                input#service4.ipCheckbox(type='checkbox', name='service', value='service2')
+                label(for='service4')
+                span Services Two
+              br
+              span.spanCheckbox
+                input#service5.ipCheckbox(type='checkbox', name='service', value='service2')
+                label(for='service5')
+                span Services Two
+              br
+              span.spanCheckbox
+                input#service6.ipCheckbox(type='checkbox', name='service', value='service2')
+                label(for='service6')
+                span Services Two
+              br
+              span.spanCheckbox
+                input#service7.ipCheckbox(type='checkbox', name='service', value='service2')
+                label(for='service7')
+                span Services Two
+              br
+              span.spanCheckbox
+                input#service8.ipCheckbox(type='checkbox', name='service', value='service2')
+                label(for='service8')
+                span Services Two
+              br
+              span.spanCheckbox
+                input#service9.ipCheckbox(type='checkbox', name='service', value='service2')
+                label(for='service9')
+                span Services Two
+          .clearfix
+          #divWeekday.sideMenu
+            p Availability
+            .slider
+              img#outerSlide(src='/images/icons/slider_bg2.svg', alt='')
+              img#innerSlide(src='/images/icons/slider_bg.svg', alt='')
+              img#start.activeSlider.pointer(src='/images/icons/start.svg', alt='')
+              img#activeRegion.activeSlider(src='/images/icons/active_area.svg', alt='')
+              img#end.activeSlider.pointer(src='/images/icons/end.svg', alt='')
+              div
+                p.startText 9 AM
+                p.endText 5 PM
+            hr.sideHr
+            .checkboxGroup
+              span.spanCheckbox
+                input#Monday.ipCheckbox(type='checkbox', name='days', value='Monday')
+                label(for='Monday')
+                span Monday
+              br
+              span.spanCheckbox
+                input#Tuesday.ipCheckbox(type='checkbox', name='days', value='Tuesday')
+                label(for='Tuesday')
+                span Tuesday
+              br
+              span.spanCheckbox
+                input#Wednesday.ipCheckbox(type='checkbox', name='days', value='Wednesday')
+                label(for='Wednesday')
+                span Wednesday
+              br
+              span.spanCheckbox
+                input#Thursday.ipCheckbox(type='checkbox', name='days', value='Thursday')
+                label(for='Thursday')
+                span Thursday
+              br
+              span.spanCheckbox
+                input#Friday.ipCheckbox(type='checkbox', name='days', value='Friday')
+                label(for='Friday')
+                span Friday
+              br
+              span.spanCheckbox
+                input#Saturday.ipCheckbox(type='checkbox', name='days', value='Saturday')
+                label(for='Saturday')
+                span Saturday
+              br
+              span.spanCheckbox
+                input#Sunday.ipCheckbox(type='checkbox', name='days', value='Sunday')
+                label(for='Sunday')
+                span Sunday
+              br
+          .clearfix
+          #divFees.sideMenu
+            p Fees
+            hr.sideHr
+            .checkboxGroup
+              span.spanCheckbox
+                input#slab1.ipCheckbox(type='checkbox', name='slabs', value='slab1')
+                label(for='slab1')
+                span Free - 100
+              br
+              span.spanCheckbox
+                input#slab2.ipCheckbox(type='checkbox', name='slabs', value='slab2')
+                label(for='slab2')
+                span 100 - 250
+              br
+              span.spanCheckbox
+                input#slab3.ipCheckbox(type='checkbox', name='slabs', value='slab3')
+                label(for='slab3')
+                span 250 - 500
+              br
+              span.spanCheckbox
+                input#slab4.ipCheckbox(type='checkbox', name='slabs', value='slab4')
+                label(for='slab4')
+                span 500 - 1000
+              br
+              span.spanCheckbox
+                input#slab5.ipCheckbox(type='checkbox', name='slabs', value='slab5')
+                label(for='slab5')
+                span 1000 - 1500
+              br
+              span.spanCheckbox
+                input#slab6.ipCheckbox(type='checkbox', name='slabs', value='slab6')
+                label(for='slab6')
+                span 1500 - 2000
+              br
+              span.spanCheckbox
+                input#slab7.ipCheckbox(type='checkbox', name='slabs', value='slab7')
+                label(for='slab7')
+                span 2000 - 2500
+              br
+        .panel-group
+          #doc1.panel
+            .panel-body
+              .docterDetails
+                .doctor
+                  img(src='/images/icons/profile_pic4.png', alt='')
+                  span.name Dr. Michael Faradai
+                  br
+                  span.post
+                    | Dental Implant Surgeon
+                    br
+                    |                                 BDS, DDS, DMD, MS
+                    br
+                    |                                 45 Years EXP
+              .appoinment
+                button.btn.btn-primary.pointer(type='submit') Make Appointment
+              .clearfix
+              hr
+              .locations
+                .left.loc1
+                  span.name Parkway Dental Care
+                  br
+                  span.addr 5250 Taylor Street, San Diego
+                  .timings
+                    .weekday
+                      span.left Monday - Friday: 
+                      span.right 09:00 AM - 08:00 PM
+                    .weekend
+                      span.left Saturday - Sunday: 
+                      span.right &nbsp09:00 AM - 08:00 PM
+                    .clearfix
+                    p.costs
+                      | 1800 INR/hours
+                .vertical-line
+                hr.locHr
+                .loc2
+                  span.name Parkway Dental Care
+                  br
+                  span.addr 5250 Taylor Street, San Diego
+                  .timings
+                    .weekday
+                      span.left Monday - Friday: 
+                      span.right 09:00 AM - 08:00 PM
+                    .weekend
+                      span.left Saturday - Sunday: 
+                      span.right &nbsp09:00 AM - 08:00 PM
+                    .clearfix
+                    p.costs
+                      | 1800 INR/hours
+          #doc2.panel
+            .panel-body
+              .docterDetails
+                .doctor
+                  img(src='/images/icons/profile_pic3.png', alt='')
+                  span.name.azure-text Dr. Caroline Barton
+                  br
+                  span.post
+                    | Dental Assistant
+                    br
+                    |                                 BDS, DDS, FICOI
+                    br
+                    |                                 29 Years EXP
+              .appoinment
+                button.btn.btn-primary.pointer(type='submit') Make Appointment
+              .clearfix
+              hr
+              .locations
+                .left.loc1
+                  span.name Aspenwood Dental Associates
+                  br
+                  span.addr 2900 S. Peoria Street, Aurora, CO 80014
+                  .timings
+                    .weekday
+                      span.left Monday - Friday: 
+                      span.right 09:00 AM - 08:00 PM
+                    .weekend
+                      span.left Saturday - Sunday: 
+                      span.right &nbsp09:00 AM - 08:00 PM
+                    .clearfix
+                    p.costs
+                      | 900 INR/hours
+                .vertical-line
+                hr.locHr
+                .loc2
+                  span.name Smile Brands Dental Inc
+                  br
+                  span.addr 201 E. Sandpointe, Santa Ana, CA 92707
+                  .timings
+                    .weekday
+                      span.left Monday - Friday: 
+                      span.right 09:00 AM - 08:00 PM
+                    .weekend
+                      span.left Saturday - Sunday: 
+                      span.right &nbsp09:00 AM - 08:00 PM
+                    .clearfix
+                    p.costs
+                      | 450 INR/hours
+          #doc3.panel
+            .panel-body
+              .docterDetails
+                .doctor
+                  img(src='/images/icons/profile_pic2.png', alt='')
+                  span.name Dr. Melissa Franklin
+                  br
+                  span.post
+                    | Restorative Dentistry
+                    br
+                    |                                 BDS, DDS, FICOI
+                    br
+                    |                                 30 Years EXP
+              .appoinment
+                button.btn.btn-primary.pointer(type='submit') Make Appointment
+              .clearfix
+              hr
+              .locations
+                .left.loc1
+                  span.name Colorado Dental Implant Center
+                  br
+                  span.addr 100 Florida Avenue, New Orleans, LA 70119
+                  .timings
+                    .weekday
+                      span.left Monday - Friday: 
+                      span.right 09:00 AM - 08:00 PM
+                    .weekend
+                      span.left Saturday - Sunday: 
+                      span.right &nbsp09:00 AM - 08:00 PM
+                    .clearfix
+                    p.costs
+                      | 800 INR/hours
+                .vertical-line
+                hr.locHr
+                .loc2
+                  span.name.azure-text Astoria Dental Group
+                  br
+                  span.addr 3633 Omega Road, Dallas, TX 75244
+                  .timings
+                    .weekday
+                      span.left Monday - Friday: 
+                      span.right 09:00 AM - 08:00 PM
+                    .weekend
+                      span.left Saturday - Sunday: 
+                      span.right &nbsp09:00 AM - 08:00 PM
+                    .clearfix
+                    p.costs
+                      | 600 INR/hours
+          #doc4.panel
+            .panel-body
+              .docterDetails
+                .doctor
+                  img(src='/images/icons/profile_pic1.png', alt='')
+                  span.name Dr. Richard Phillips
+                  br
+                  span.post
+                    | Cheif Consultant
+                    br
+                    |                                 BDS, DDS 
+                    br
+                    |                                 18 Years EXP
+              .appoinment
+                button.btn.btn-primary.pointer(type='submit') Make Appointment
+              .clearfix
+              hr
+              .locations
+                .left.loc1
+                  span.name.azure-text Sherman Oaks Dentistry
+                  br
+                  span.addr 4955 Van Nuys Blvd, Sherman Oaks, CA 91403
+                  .timings
+                    .weekday
+                      span.left Monday - Friday: 
+                      span.right 09:00 AM - 08:00 PM
+                    .weekend
+                      span.left Saturday - Sunday: 
+                      span.right &nbsp09:00 AM - 08:00 PM
+                    .clearfix
+                    p.costs
+                      | 200 INR/hours
+                .vertical-line
+                hr.locHr
+                .loc2
+                  span.name Roberts & De Marsche
+                  br
+                  span.addr 399 East 72nd Street, New York, NY 10021
+                  .timings
+                    .weekday
+                      span.left Monday - Friday: 
+                      span.right 09:00 AM - 08:00 PM
+                    .weekend
+                      span.left Saturday - Sunday: 
+                      span.right &nbsp09:00 AM - 08:00 PM
+                    .clearfix
+                    p.costs
+                      | 200 INR/hours
+          #doc5.panel
+            .panel-body
+              .docterDetails
+                .doctor
+                  img(src='/images/icons/profile_pic.png', alt='')
+                  span.name Dr. Johannes Kepler
+                  br
+                  span.post
+                    | Cheif Consultant
+                    br
+                    |                                 BDS, DDS 
+                    br
+                    |                                 18 Years EXP
+              .appoinment
+                button.btn.btn-primary.pointer(type='submit') Make Appointment
+              .clearfix
+              hr
+              .locations
+                .left.loc1
+                  span.name Sherman Oaks Dentistry
+                  br
+                  span.addr 4955 Van Nuys Blvd, Sherman Oaks, CA 91403
+                  .timings
+                    .weekday
+                      span.left Monday - Friday: 
+                      span.right 09:00 AM - 08:00 PM
+                    .weekend
+                      span.left Saturday - Sunday: 
+                      span.right &nbsp09:00 AM - 08:00 PM
+                    .clearfix
+                    p.costs
+                      | 200 INR/hours
+                .vertical-line
+                hr.locHr
+                .loc2
+                  span.name Roberts & De Marsche
+                  br
+                  span.addr 399 East 72nd Street, New York, NY 10021
+                  .timings
+                    .weekday
+                      span.left Monday - Friday: 
+                      span.right 09:00 AM - 08:00 PM
+                    .weekend
+                      span.left Saturday - Sunday: 
+                      span.right &nbsp09:00 AM - 08:00 PM
+                    .clearfix
+                    p.costs
+                      | 200 INR/hours
+          #doc6.panel
+            .panel-body
+              .docterDetails
+                .doctor
+                  img(src='/images/icons/profile_pic.png', alt='')
+                  span.name Dr. Johannes Kepler
+                  br
+                  span.post
+                    | Cheif Consultant
+                    br
+                    |                                 BDS, DDS 
+                    br
+                    |                                 18 Years EXP
+              .appoinment
+                button.btn.btn-primary.pointer(type='submit') Make Appointment
+              .clearfix
+              hr
+              .locations
+                .left.loc1
+                  span.name Sherman Oaks Dentistry
+                  br
+                  span.addr 4955 Van Nuys Blvd, Sherman Oaks, CA 91403
+                  .timings
+                    .weekday
+                      span.left Monday - Friday: 
+                      span.right 09:00 AM - 08:00 PM
+                    .weekend
+                      span.left Saturday - Sunday: 
+                      span.right &nbsp09:00 AM - 08:00 PM
+                    .clearfix
+                    p.costs
+                      | 200 INR/hours
+                .vertical-line
+                hr.locHr
+                .loc2
+                  span.name Roberts & De Marsche
+                  br
+                  span.addr 399 East 72nd Street, New York, NY 10021
+                  .timings
+                    .weekday
+                      span.left Monday - Friday: 
+                      span.right 09:00 AM - 08:00 PM
+                    .weekend
+                      span.left Saturday - Sunday: 
+                      span.right &nbsp09:00 AM - 08:00 PM
+                    .clearfix
+                    p.costs
+                      | 200 INR/hours
+          #doc7.panel
+            .panel-body
+              .docterDetails
+                .doctor
+                  img(src='/images/icons/profile_pic.png', alt='')
+                  span.name Dr. Johannes Kepler
+                  br
+                  span.post
+                    | Cheif Consultant
+                    br
+                    |                                 BDS, DDS 
+                    br
+                    |                                 18 Years EXP
+              .appoinment
+                button.btn.btn-primary.pointer(type='submit') Make Appointment
+              .clearfix
+              hr
+              .locations
+                .left.loc1
+                  span.name Sherman Oaks Dentistry
+                  br
+                  span.addr 4955 Van Nuys Blvd, Sherman Oaks, CA 91403
+                  .timings
+                    .weekday
+                      span.left Monday - Friday: 
+                      span.right 09:00 AM - 08:00 PM
+                    .weekend
+                      span.left Saturday - Sunday: 
+                      span.right &nbsp09:00 AM - 08:00 PM
+                    .clearfix
+                    p.costs
+                      | 200 INR/hours
+                .vertical-line
+                hr.locHr
+                .loc2
+                  span.name Roberts & De Marsche
+                  br
+                  span.addr 399 East 72nd Street, New York, NY 10021
+                  .timings
+                    .weekday
+                      span.left Monday - Friday: 
+                      span.right 09:00 AM - 08:00 PM
+                    .weekend
+                      span.left Saturday - Sunday: 
+                      span.right &nbsp09:00 AM - 08:00 PM
+                    .clearfix
+                    p.costs
+                      | 200 INR/hours
+          #doc8.panel
+            .panel-body
+              .docterDetails
+                .doctor
+                  img(src='/images/icons/profile_pic.png', alt='')
+                  span.name Dr. Johannes Kepler
+                  br
+                  span.post
+                    | Cheif Consultant
+                    br
+                    |                                 BDS, DDS 
+                    br
+                    |                                 18 Years EXP
+              .appoinment
+                button.btn.btn-primary.pointer(type='submit') Make Appointment
+              .clearfix
+              hr
+              .locations
+                .left.loc1
+                  span.name Sherman Oaks Dentistry
+                  br
+                  span.addr 4955 Van Nuys Blvd, Sherman Oaks, CA 91403
+                  .timings
+                    .weekday
+                      span.left Monday - Friday: 
+                      span.right 09:00 AM - 08:00 PM
+                    .weekend
+                      span.left Saturday - Sunday: 
+                      span.right &nbsp09:00 AM - 08:00 PM
+                    .clearfix
+                    p.costs
+                      | 200 INR/hours
+                .vertical-line
+                hr.locHr
+                .loc2
+                  span.name Roberts & De Marsche
+                  br
+                  span.addr 399 East 72nd Street, New York, NY 10021
+                  .timings
+                    .weekday
+                      span.left Monday - Friday: 
+                      span.right 09:00 AM - 08:00 PM
+                    .weekend
+                      span.left Saturday - Sunday: 
+                      span.right &nbsp09:00 AM - 08:00 PM
+                    .clearfix
+                    p.costs
+                      | 200 INR/hours          
+    include includes/footer.jade
+    

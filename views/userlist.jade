@@ -1,0 +1,30 @@
+doctype html
+html(lang='en')
+include includes/header.jade
+body.body
+    include includes/top-menu.jade
+    .container
+      block content
+        
+        h1.
+            User List
+        form(method="post" action="/create2")
+            label(for="comment") Add user
+            br
+            input(type="text", name="username", value=username, style="background-color: grey;")
+            br
+            input(type="text", name="email", value=email, style="background-color: grey;")
+            br
+            input(type="text", name="password", value=password, style="background-color: grey;")
+            br
+            input(type="submit", value="Save")
+        br
+        //- ul
+        //-     each user, i in Users
+        //-         li
+        //-             p.pointer #{user.email} = #{user.username}
+        //- #{users}
+        - for user in users
+            span  #{user.username}!!!  #{user.email} ///  #{user.password}
+            br
+    include includes/footer.jade
