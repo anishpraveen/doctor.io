@@ -1,12 +1,11 @@
 var express = require('express');
+var session =	require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-// Database
+
 // mongoose config
 require('./connection');
 require('./model/comments');
@@ -30,6 +29,11 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(require('express-session')({
+    secret: 'QWERTY123456789',
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/about', function (req, res) {
@@ -44,6 +48,8 @@ app.use('/login', login);
 app.use('/verify', login);
 app.use('/adduser', userlist);
 app.use('/create2', userlist);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
