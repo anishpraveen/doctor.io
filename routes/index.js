@@ -6,27 +6,20 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-/* GET login page. */
-// router.get('/login', function(req, res, next) {
-//   res.render('login', { title: 'Express' });
-// });
-
-/* GET search page. */
-router.get('/search', function(req, res, next) {
-  res.render('search', { title: 'Search' });
-});
-
-/* GET search page. */
+/* GET logout page. */
 router.get('/logout', function(req, res, next) {
   req.session.destroy(function(err) {
   if(err) {
     console.log(err);
   } else {
     res.redirect('/');
-    // res.send('search');
   }
   });
   
 });
+
+
+
+
 
 module.exports = router;

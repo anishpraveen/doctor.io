@@ -9,4 +9,3 @@ var CommentSchema = new Schema({
 var Comment = mongoose.model('comments', CommentSchema);
 
 module.exports = Comment;
-// mongoose.connect('mongodb://localhost/dental');

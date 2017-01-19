@@ -21,11 +21,6 @@ body.body
             br
             input(type="submit", value="Save")
         br
-        //- ul
-        //-     each user, i in Users
-        //-         li
-        //-             p.pointer #{user.email} = #{user.username}
-        //- #{users}
         - for user in users
             span  #{user.username}!!!  #{user.email} ///  #{user.password}
             br
