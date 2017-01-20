@@ -2,12 +2,16 @@ doctype html
 html(lang='en')
   include includes/header.jade
   body.body
+    //- #{doctors}
+    //- each item in doctors
+    //-   li=item.title +' '+ item.name
+    //-   span= item.clinic[0].name
     include includes/top-menu.jade
     .container
       .searchResult
         span Physicians Nearby
         span.resultCount
-          b 13
+          b= doctors.length
           |  Results Found
       .clearfix
       hr.divider
@@ -169,390 +173,54 @@ html(lang='en')
                 label(for='slab7')
                 span 2000 - 2500
               br
-        .panel-group
-          #doc1.panel
-            .panel-body
-              .docterDetails
-                .doctor
-                  img(src='/images/icons/profile_pic4.png', alt='')
-                  span.name Dr. Michael Faradai
-                  br
-                  span.post
-                    | Dental Implant Surgeon
+        .panel-group  
+          each item in doctors        
+            #doc1.panel
+              .panel-body
+                .docterDetails
+                  .doctor
+                    img(src='/'+item.image, alt='')
+                    span.name= item.title +' '+ item.name
                     br
-                    |                                 BDS, DDS, DMD, MS
+                    span.post
+                      |#{item.post}
+                      br
+                      |#{item.education}
+                      br
+                      |#{item.exp}  Years EXP
+                .appoinment
+                  button.btn.btn-primary.pointer(type='submit') Make Appointment
+                .clearfix
+                hr
+                .locations
+                  .left.loc1
+                    span.name= item.clinic[0].name
                     br
-                    |                                 45 Years EXP
-              .appoinment
-                button.btn.btn-primary.pointer(type='submit') Make Appointment
-              .clearfix
-              hr
-              .locations
-                .left.loc1
-                  span.name Parkway Dental Care
-                  br
-                  span.addr 5250 Taylor Street, San Diego
-                  .timings
-                    .weekday
-                      span.left Monday - Friday: 
-                      span.right 09:00 AM - 08:00 PM
-                    .weekend
-                      span.left Saturday - Sunday: 
-                      span.right &nbsp09:00 AM - 08:00 PM
-                    .clearfix
-                    p.costs
-                      | 1800 INR/hours
-                .vertical-line
-                hr.locHr
-                .loc2
-                  span.name Parkway Dental Care
-                  br
-                  span.addr 5250 Taylor Street, San Diego
-                  .timings
-                    .weekday
-                      span.left Monday - Friday: 
-                      span.right 09:00 AM - 08:00 PM
-                    .weekend
-                      span.left Saturday - Sunday: 
-                      span.right &nbsp09:00 AM - 08:00 PM
-                    .clearfix
-                    p.costs
-                      | 1800 INR/hours
-          #doc2.panel
-            .panel-body
-              .docterDetails
-                .doctor
-                  img(src='/images/icons/profile_pic3.png', alt='')
-                  span.name.azure-text Dr. Caroline Barton
-                  br
-                  span.post
-                    | Dental Assistant
+                    span.addr= item.clinic[0].address
+                    .timings
+                      .weekday
+                        span.left Monday - Friday: 
+                        span.right 09:00 AM - 08:00 PM
+                      .weekend
+                        span.left Saturday - Sunday: 
+                        span.right &nbsp09:00 AM - 08:00 PM
+                      .clearfix
+                      p.costs= item.clinic[0].cost + ' INR/hours'
+                  .vertical-line
+                  hr.locHr
+                  .loc2
+                    span.name= item.clinic[1].name
                     br
-                    |                                 BDS, DDS, FICOI
-                    br
-                    |                                 29 Years EXP
-              .appoinment
-                button.btn.btn-primary.pointer(type='submit') Make Appointment
-              .clearfix
-              hr
-              .locations
-                .left.loc1
-                  span.name Aspenwood Dental Associates
-                  br
-                  span.addr 2900 S. Peoria Street, Aurora, CO 80014
-                  .timings
-                    .weekday
-                      span.left Monday - Friday: 
-                      span.right 09:00 AM - 08:00 PM
-                    .weekend
-                      span.left Saturday - Sunday: 
-                      span.right &nbsp09:00 AM - 08:00 PM
-                    .clearfix
-                    p.costs
-                      | 900 INR/hours
-                .vertical-line
-                hr.locHr
-                .loc2
-                  span.name Smile Brands Dental Inc
-                  br
-                  span.addr 201 E. Sandpointe, Santa Ana, CA 92707
-                  .timings
-                    .weekday
-                      span.left Monday - Friday: 
-                      span.right 09:00 AM - 08:00 PM
-                    .weekend
-                      span.left Saturday - Sunday: 
-                      span.right &nbsp09:00 AM - 08:00 PM
-                    .clearfix
-                    p.costs
-                      | 450 INR/hours
-          #doc3.panel
-            .panel-body
-              .docterDetails
-                .doctor
-                  img(src='/images/icons/profile_pic2.png', alt='')
-                  span.name Dr. Melissa Franklin
-                  br
-                  span.post
-                    | Restorative Dentistry
-                    br
-                    |                                 BDS, DDS, FICOI
-                    br
-                    |                                 30 Years EXP
-              .appoinment
-                button.btn.btn-primary.pointer(type='submit') Make Appointment
-              .clearfix
-              hr
-              .locations
-                .left.loc1
-                  span.name Colorado Dental Implant Center
-                  br
-                  span.addr 100 Florida Avenue, New Orleans, LA 70119
-                  .timings
-                    .weekday
-                      span.left Monday - Friday: 
-                      span.right 09:00 AM - 08:00 PM
-                    .weekend
-                      span.left Saturday - Sunday: 
-                      span.right &nbsp09:00 AM - 08:00 PM
-                    .clearfix
-                    p.costs
-                      | 800 INR/hours
-                .vertical-line
-                hr.locHr
-                .loc2
-                  span.name.azure-text Astoria Dental Group
-                  br
-                  span.addr 3633 Omega Road, Dallas, TX 75244
-                  .timings
-                    .weekday
-                      span.left Monday - Friday: 
-                      span.right 09:00 AM - 08:00 PM
-                    .weekend
-                      span.left Saturday - Sunday: 
-                      span.right &nbsp09:00 AM - 08:00 PM
-                    .clearfix
-                    p.costs
-                      | 600 INR/hours
-          #doc4.panel
-            .panel-body
-              .docterDetails
-                .doctor
-                  img(src='/images/icons/profile_pic1.png', alt='')
-                  span.name Dr. Richard Phillips
-                  br
-                  span.post
-                    | Cheif Consultant
-                    br
-                    |                                 BDS, DDS 
-                    br
-                    |                                 18 Years EXP
-              .appoinment
-                button.btn.btn-primary.pointer(type='submit') Make Appointment
-              .clearfix
-              hr
-              .locations
-                .left.loc1
-                  span.name.azure-text Sherman Oaks Dentistry
-                  br
-                  span.addr 4955 Van Nuys Blvd, Sherman Oaks, CA 91403
-                  .timings
-                    .weekday
-                      span.left Monday - Friday: 
-                      span.right 09:00 AM - 08:00 PM
-                    .weekend
-                      span.left Saturday - Sunday: 
-                      span.right &nbsp09:00 AM - 08:00 PM
-                    .clearfix
-                    p.costs
-                      | 200 INR/hours
-                .vertical-line
-                hr.locHr
-                .loc2
-                  span.name Roberts & De Marsche
-                  br
-                  span.addr 399 East 72nd Street, New York, NY 10021
-                  .timings
-                    .weekday
-                      span.left Monday - Friday: 
-                      span.right 09:00 AM - 08:00 PM
-                    .weekend
-                      span.left Saturday - Sunday: 
-                      span.right &nbsp09:00 AM - 08:00 PM
-                    .clearfix
-                    p.costs
-                      | 200 INR/hours
-          #doc5.panel
-            .panel-body
-              .docterDetails
-                .doctor
-                  img(src='/images/icons/profile_pic.png', alt='')
-                  span.name Dr. Johannes Kepler
-                  br
-                  span.post
-                    | Cheif Consultant
-                    br
-                    |                                 BDS, DDS 
-                    br
-                    |                                 18 Years EXP
-              .appoinment
-                button.btn.btn-primary.pointer(type='submit') Make Appointment
-              .clearfix
-              hr
-              .locations
-                .left.loc1
-                  span.name Sherman Oaks Dentistry
-                  br
-                  span.addr 4955 Van Nuys Blvd, Sherman Oaks, CA 91403
-                  .timings
-                    .weekday
-                      span.left Monday - Friday: 
-                      span.right 09:00 AM - 08:00 PM
-                    .weekend
-                      span.left Saturday - Sunday: 
-                      span.right &nbsp09:00 AM - 08:00 PM
-                    .clearfix
-                    p.costs
-                      | 200 INR/hours
-                .vertical-line
-                hr.locHr
-                .loc2
-                  span.name Roberts & De Marsche
-                  br
-                  span.addr 399 East 72nd Street, New York, NY 10021
-                  .timings
-                    .weekday
-                      span.left Monday - Friday: 
-                      span.right 09:00 AM - 08:00 PM
-                    .weekend
-                      span.left Saturday - Sunday: 
-                      span.right &nbsp09:00 AM - 08:00 PM
-                    .clearfix
-                    p.costs
-                      | 200 INR/hours
-          #doc6.panel
-            .panel-body
-              .docterDetails
-                .doctor
-                  img(src='/images/icons/profile_pic.png', alt='')
-                  span.name Dr. Johannes Kepler
-                  br
-                  span.post
-                    | Cheif Consultant
-                    br
-                    |                                 BDS, DDS 
-                    br
-                    |                                 18 Years EXP
-              .appoinment
-                button.btn.btn-primary.pointer(type='submit') Make Appointment
-              .clearfix
-              hr
-              .locations
-                .left.loc1
-                  span.name Sherman Oaks Dentistry
-                  br
-                  span.addr 4955 Van Nuys Blvd, Sherman Oaks, CA 91403
-                  .timings
-                    .weekday
-                      span.left Monday - Friday: 
-                      span.right 09:00 AM - 08:00 PM
-                    .weekend
-                      span.left Saturday - Sunday: 
-                      span.right &nbsp09:00 AM - 08:00 PM
-                    .clearfix
-                    p.costs
-                      | 200 INR/hours
-                .vertical-line
-                hr.locHr
-                .loc2
-                  span.name Roberts & De Marsche
-                  br
-                  span.addr 399 East 72nd Street, New York, NY 10021
-                  .timings
-                    .weekday
-                      span.left Monday - Friday: 
-                      span.right 09:00 AM - 08:00 PM
-                    .weekend
-                      span.left Saturday - Sunday: 
-                      span.right &nbsp09:00 AM - 08:00 PM
-                    .clearfix
-                    p.costs
-                      | 200 INR/hours
-          #doc7.panel
-            .panel-body
-              .docterDetails
-                .doctor
-                  img(src='/images/icons/profile_pic.png', alt='')
-                  span.name Dr. Johannes Kepler
-                  br
-                  span.post
-                    | Cheif Consultant
-                    br
-                    |                                 BDS, DDS 
-                    br
-                    |                                 18 Years EXP
-              .appoinment
-                button.btn.btn-primary.pointer(type='submit') Make Appointment
-              .clearfix
-              hr
-              .locations
-                .left.loc1
-                  span.name Sherman Oaks Dentistry
-                  br
-                  span.addr 4955 Van Nuys Blvd, Sherman Oaks, CA 91403
-                  .timings
-                    .weekday
-                      span.left Monday - Friday: 
-                      span.right 09:00 AM - 08:00 PM
-                    .weekend
-                      span.left Saturday - Sunday: 
-                      span.right &nbsp09:00 AM - 08:00 PM
-                    .clearfix
-                    p.costs
-                      | 200 INR/hours
-                .vertical-line
-                hr.locHr
-                .loc2
-                  span.name Roberts & De Marsche
-                  br
-                  span.addr 399 East 72nd Street, New York, NY 10021
-                  .timings
-                    .weekday
-                      span.left Monday - Friday: 
-                      span.right 09:00 AM - 08:00 PM
-                    .weekend
-                      span.left Saturday - Sunday: 
-                      span.right &nbsp09:00 AM - 08:00 PM
-                    .clearfix
-                    p.costs
-                      | 200 INR/hours
-          #doc8.panel
-            .panel-body
-              .docterDetails
-                .doctor
-                  img(src='/images/icons/profile_pic.png', alt='')
-                  span.name Dr. Johannes Kepler
-                  br
-                  span.post
-                    | Cheif Consultant
-                    br
-                    |                                 BDS, DDS 
-                    br
-                    |                                 18 Years EXP
-              .appoinment
-                button.btn.btn-primary.pointer(type='submit') Make Appointment
-              .clearfix
-              hr
-              .locations
-                .left.loc1
-                  span.name Sherman Oaks Dentistry
-                  br
-                  span.addr 4955 Van Nuys Blvd, Sherman Oaks, CA 91403
-                  .timings
-                    .weekday
-                      span.left Monday - Friday: 
-                      span.right 09:00 AM - 08:00 PM
-                    .weekend
-                      span.left Saturday - Sunday: 
-                      span.right &nbsp09:00 AM - 08:00 PM
-                    .clearfix
-                    p.costs
-                      | 200 INR/hours
-                .vertical-line
-                hr.locHr
-                .loc2
-                  span.name Roberts & De Marsche
-                  br
-                  span.addr 399 East 72nd Street, New York, NY 10021
-                  .timings
-                    .weekday
-                      span.left Monday - Friday: 
-                      span.right 09:00 AM - 08:00 PM
-                    .weekend
-                      span.left Saturday - Sunday: 
-                      span.right &nbsp09:00 AM - 08:00 PM
-                    .clearfix
-                    p.costs
-                      | 200 INR/hours          
+                    span.addr= item.clinic[1].address
+                    .timings
+                      .weekday
+                        span.left Monday - Friday: 
+                        span.right 09:00 AM - 08:00 PM
+                      .weekend
+                        span.left Saturday - Sunday: 
+                        span.right &nbsp09:00 AM - 08:00 PM
+                      .clearfix
+                      p.costs= item.clinic[0].cost + ' INR/hours'
+              
     include includes/footer.jade
     

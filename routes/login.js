@@ -28,7 +28,7 @@ router.post('/', function(req, res) {
                     req.session.email=email;
                     req.session.user=user;
                     delete req.session.user.password;
-                    res.redirect('adduser'); 
+                    res.redirect('/users/search'); 
                 } 
                 else res.send('Invalid entry');           
              });

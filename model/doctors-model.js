@@ -16,12 +16,12 @@ var ClinicSchema = new Schema({
 
 var DoctorSchema = new Schema({
     name: { type: String, required: true },
+    title: { type: String},
     image: {type: String},
     post: {type: String},
     education:   [String],
     exp: { type: Number, trim: true },
-    clinic1: [ClinicSchema],
-    clinic2: [ClinicSchema]
+    clinic: [ClinicSchema]
 });
 
 

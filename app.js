@@ -5,6 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var MongoStore = require('connect-mongo')(session);
 
 // mongoose config
 require('./connection');
@@ -30,6 +31,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('express-session')({
+    store: new MongoStore({
+      url: 'mongodb://localhost/dental'
+    }),
     secret: 'QWERTY123456789',
     resave: true,
     saveUninitialized: true
