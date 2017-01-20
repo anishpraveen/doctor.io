@@ -81,7 +81,7 @@ router.get('/add-DR', function(req, res, next) {
   }
   // Doctor.findOne({'name': {'$regex': 'Barton'}})
   Doctor.find({'name': {'$regex': 'lli'}},function(err, dr){
-    console.log(dr)
+    // console.log(dr)
     res.send(dr);
   });
   // res.send(dr);

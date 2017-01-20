@@ -1,11 +1,13 @@
 doctype html
 html(lang='en')
   include includes/header.jade
+  
   body.body
     //- #{doctors}
     //- each item in doctors
     //-   li=item.title +' '+ item.name
-    //-   span= item.clinic[0].name
+    //-   span= item.clinic[0].name   
+    
     include includes/top-menu.jade
     .container
       .searchResult
@@ -23,10 +25,10 @@ html(lang='en')
         #divSortBy(action='search.html', method='get')
           | Sort by:
           select#ddlSortBy
-            option(value='volvo') Popularity
-            option(value='saab') Availability
-            option(value='mercedes') Cost
-            option(value='audi') Recomendations
+            option(value='Popularity') Popularity
+            option(value='Availability') Availability
+            option(value='Cost') Cost
+            option(value='Recomendations') Recomendations
         .filterIcons
           img#imgSearch(src='/images/icons/search.svg', alt='Search')
           img#imgSort(src='/images/icons/sort.svg', alt='Sort')
@@ -173,7 +175,7 @@ html(lang='en')
                 label(for='slab7')
                 span 2000 - 2500
               br
-        .panel-group  
+        #results.panel-group 
           each item in doctors        
             #doc1.panel
               .panel-body
@@ -222,5 +224,6 @@ html(lang='en')
                       .clearfix
                       p.costs= item.clinic[0].cost + ' INR/hours'
               
+    script(src='/js/search.js')
     include includes/footer.jade
     
