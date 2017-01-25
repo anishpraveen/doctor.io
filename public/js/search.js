@@ -49,17 +49,18 @@
         }
     };
 
-    xmlhttp.open("POST", "http://dental.io:3000/users/drlist", true);
+    xmlhttp.open("POST", "/users/drlist", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send("name="+search+"&&cost="+fee+"&&days="+days);
     // xmlhttp.send("cost="+fee);
   });
 
- function testFunction() {
+function testFunction() {
       var days = [];
     var dayCount = 0;
     var inputElements = document.getElementsByClassName('inputDay');
-    
+    var time = slider[0].noUiSlider.get();
+
     for(var i=0; inputElements[i]; ++i){
         if(inputElements[i].checked)
         {
@@ -100,19 +101,47 @@
         }
     };
 
-    xmlhttp.open("POST", "10.3.0.237:3000/users/drlist", true);
+    xmlhttp.open("POST", "/users/drlist", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send("name="+search+"&&cost="+fee+"&&days="+days);
-  }
-  var el = document.getElementsByClassName('ipCheckbox');
-//   document.getElementsByClassName('spanCheckbox').onclick = aaa;
+    xmlhttp.send("name="+search+"&&cost="+fee+"&&days="+days+"&&time="+time);
+}
 
-//  var myEl = document.getElementsByClassName('ipCheckbox');
-//  console.log(myEl.length);
-// myEl[0].addEventListener('click', function() {
-//     alert('Hello world again!!!');
-// }, false);
+var el = document.getElementsByClassName('ipCheckbox');
+
 for (var i = 0; i < el.length; i++) {
     el[i].onclick = testFunction;
     
 }
+
+
+var inputFormat = document.getElementById('input-Start');
+var slider = document.getElementsByClassName('sliders');
+
+noUiSlider.create(slider[0], {
+	start: [9, 17],
+	connect: true,
+	range: {
+		'min': 7,
+		'max': 22
+	},
+	behaviour: 'drag',
+});
+slider[0].noUiSlider.on('update', function(){
+    var value = slider[0].noUiSlider.get();
+    inputFormat.value = value[0];
+    testFunction();
+});
+
+
+
+// slider.addEventListener('change', function( values, handle ) {
+//     alert('hi='+handle);
+// 	inputFormat.value = values[handle];
+// });
+
+// inputFormat.addEventListener('change', function(){
+//     alert( slider.noUiSlider.get() );
+// 	sliderFormat.noUiSlider.set(this.value);
+// });
+
+

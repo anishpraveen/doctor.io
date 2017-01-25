@@ -1,7 +1,10 @@
 doctype html
 html(lang='en')
   include includes/header.jade
-  
+  link(href='https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/9.2.0/nouislider.min.css', rel='stylesheet')
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/9.2.0/nouislider.min.js")  
+  link(href='/css/slider.css', rel='stylesheet')
+
   body.body
     //- #{doctors}
     //- each item in doctors
@@ -90,14 +93,18 @@ html(lang='en')
           #divWeekday.sideMenu
             p Availability
             .slider
-              img#outerSlide(src='/images/icons/slider_bg2.svg', alt='')
-              img#innerSlide(src='/images/icons/slider_bg.svg', alt='')
-              img#start.activeSlider.pointer(src='/images/icons/start.svg', alt='')
-              img#activeRegion.activeSlider(src='/images/icons/active_area.svg', alt='')
-              img#end.activeSlider.pointer(src='/images/icons/end.svg', alt='')
-              div
-                p.startText 9 AM
-                p.endText 5 PM
+              .sliders
+              .result
+                input#input-Start(type='text')
+
+              //- img#outerSlide(src='/images/icons/slider_bg2.svg', alt='')
+              //- img#innerSlide(src='/images/icons/slider_bg.svg', alt='')
+              //- img#start.activeSlider.pointer(src='/images/icons/start.svg', alt='')
+              //- img#activeRegion.activeSlider(src='/images/icons/active_area.svg', alt='')
+              //- img#end.activeSlider.pointer(src='/images/icons/end.svg', alt='')
+              //- div
+              //-   p.startText 9 AM
+              //-   p.endText 5 PM
             hr.sideHr
             .checkboxGroup
               span.spanCheckbox

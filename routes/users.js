@@ -25,9 +25,10 @@ router.post('/drlist', function(req, res, next) {
   var name = req.body.name;
   var fee = req.body.cost.split(",");
   var days = req.body.days.split(",");
+  var time = req.body.time.split(",");
   console.log(req.body);
   console.log(fee.length);
-  console.log(days.length);
+  console.log( Math.ceil(time[0]));
   var costRange = [];
   for (var i = 0; i < fee.length; i++) {
     switch (fee[i]) {
@@ -56,17 +57,42 @@ router.post('/drlist', function(req, res, next) {
       default:
         costRange.push({"clinic.cost": {$gte : 0 }})
         break;
+    }    
+  }
+  var searchDays = [];
+  var daysAvailable = ['mon', 'tue', 'wed', 'thr', 'fri', 'sat', 'sun'];
+  for(i=0; i<days.length;i++){
+    switch (days[i]) {
+      case 'Monday':
+          searchDays.push({'day':daysAvailable[0]});
+        break;
+      case 'Tuesday':
+          searchDays.push({'day':daysAvailable[1]});
+        break;
+      case 'Wednesday':
+          searchDays.push({'day':daysAvailable[2]});
+        break;
+      case 'Thursday':
+          searchDays.push({'day':daysAvailable[3]});
+        break;
+      case 'Friday':
+          searchDays.push({'day':daysAvailable[4]});
+        break;
+      case 'Saturday':
+          searchDays.push({'day':daysAvailable[5]});
+        break;
+      case 'Sunday':
+          searchDays.push({'day':daysAvailable[6]});
+        break;
+      default:
+          searchDays.push({'day':{$in:daysAvailable}});
+        break;
     }
-    
   }
   var daySearch =[];
-  // daySearch.push({'day': 'mon'});
-  daySearch.push({'day': 'tue'});
-  // daySearch.push({'day': 'wed'});
-  daySearch.push({'start': {$gte : 7 , $lt : 9}});
-console.log(daySearch);
+console.log(searchDays);
   Doctor.find({'name': {$regex: name, $options: "i"},
-                'clinic.timing':{$elemMatch:{$and:daySearch}}, 
+                'clinic.timing':{$elemMatch:{$and:[{'start': {$gte : Math.ceil(time[0]) , $lt : Math.ceil(time[1])}},{$or:searchDays}]}}, 
                 $or:costRange} ,function(err, dr){
     if (typeof dr === 'undefined' || dr === null) {
         // variable is undefined or null
