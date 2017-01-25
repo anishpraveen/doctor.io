@@ -68,9 +68,59 @@ router.post('/drlist', function(req, res, next) {
     if(dr.length<1)
      res.send('&nbsp No results as per criteria');
     else{
-       dr[0].clinic[0].asd = 'aaaaa';
+      for(var count = 0; count<dr.length; count++){
+        for(var countClinic = 0; countClinic<2;countClinic++){
+          dr[count].clinic[countClinic].slot = [];
+          var k=0;
+          var slot = [];
+          var startDay, endDay, time, nextDay;
+          var startTime, endTime;
+          for(i=0;i<5;i++){
+            startDay = dr[count].clinic[countClinic].timing[i].day;
+            endDay = dr[count].clinic[countClinic].timing[i].day;
+            // Time manipulation
+            {
+                if(dr[count].clinic[countClinic].timing[i].start>12){
+                startTime = dr[0].clinic[countClinic].timing[i].start-12;
+                startTime = '0'+startTime+':00 PM';
+              }
+              else{
+                startTime = dr[count].clinic[countClinic].timing[i].start;
+                startTime = '0'+startTime+':00 AM';
+              }
+              if(dr[count].clinic[countClinic].timing[i].end>12){
+                endTime = dr[count].clinic[countClinic].timing[i].end-12;
+                endTime = '0'+endTime+':00 PM';
+              }
+              else{
+                endTime = dr[count].clinic[countClinic].timing[i].end;
+                endTime = '0'+endTime+':00 AM';
+              }
+              time = startTime+' - '+endTime;
+            }
+            var startDayArr = dr[count].clinic[countClinic].timing[i];
+            for(var j=i+1;j<5;j++){
+              nextDay = dr[count].clinic[countClinic].timing[j];
+              if(nextDay.start == startDayArr.start && nextDay.end == startDayArr.end){
+                endDay = dr[count].clinic[countClinic].timing[j].day;
+                i++;
+              }              
+              else{            
+                dr[count].clinic[countClinic].slot.push({start:startDay,end:endDay,time:time});
+                break;
+              }              
+            }
+            if(j==5){
+              // if(startDay==endDay)
+              //     endDay = '';
+              dr[count].clinic[countClinic].slot.push({start:startDay,end:endDay,time:time});           
+            }
+            startDay = dr[count].clinic[countClinic].timing[j].day;
+          }
+        }
+      }
       // delete dr.clinic[1].timing;
-      console.log(dr[0].clinic[0]);
+      console.log(dr[0].clinic[0].slot);
       res.render('doctors-list', { doctors:dr });
     }
       

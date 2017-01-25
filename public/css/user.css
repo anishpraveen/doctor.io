@@ -294,6 +294,9 @@ input[type=checkbox]:checked + label
     margin-top: 20px;
     height: 360px;
 }
+span.left{
+    text-transform: capitalize;
+}
 .sideMenuGroup{
     float: left;
     height: 1500px;

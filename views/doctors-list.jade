@@ -29,8 +29,10 @@ html(lang='en')
                     span.addr= item.clinic[0].address
                     .timings
                       .weekday
-                        span.left Monday - Friday: 
-                        span.right 09:00 AM - 08:00 PM
+                        each slot in item.clinic[0].slot        
+                          span.left= slot.start +'day - '+slot.end+'day:'
+                          span.right= slot.time
+                          .clearfix
                       .weekend
                         span.left Saturday - Sunday: 
                         span.right &nbsp09:00 AM - 08:00 PM
@@ -44,8 +46,10 @@ html(lang='en')
                     span.addr= item.clinic[1].address
                     .timings
                       .weekday
-                        span.left Monday - Friday: 
-                        span.right 09:00 AM - 08:00 PM
+                        each slot in item.clinic[1].slot        
+                          span.left= slot.start +'day - '+slot.end+'day:'
+                          span.right= slot.time
+                          .clearfix
                       .weekend
                         span.left Saturday - Sunday: 
                         span.right &nbsp09:00 AM - 08:00 PM
