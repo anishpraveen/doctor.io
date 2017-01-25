@@ -100,7 +100,7 @@
         }
     };
 
-    xmlhttp.open("POST", "http://dental.io:3000/users/drlist", true);
+    xmlhttp.open("POST", "10.3.0.237:3000/users/drlist", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send("name="+search+"&&cost="+fee+"&&days="+days);
   }

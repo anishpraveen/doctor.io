@@ -59,7 +59,15 @@ router.post('/drlist', function(req, res, next) {
     }
     
   }
-  Doctor.find({'name': {$regex: name, $options: "i"}, $or:costRange} ,function(err, dr){
+  var daySearch =[];
+  // daySearch.push({'day': 'mon'});
+  daySearch.push({'day': 'tue'});
+  // daySearch.push({'day': 'wed'});
+  daySearch.push({'start': {$gte : 7 , $lt : 9}});
+console.log(daySearch);
+  Doctor.find({'name': {$regex: name, $options: "i"},
+                'clinic.timing':{$elemMatch:{$and:daySearch}}, 
+                $or:costRange} ,function(err, dr){
     if (typeof dr === 'undefined' || dr === null) {
         // variable is undefined or null
         dr.length = 0;
@@ -75,8 +83,11 @@ router.post('/drlist', function(req, res, next) {
           var slot = [];
           var startDay, endDay, time, nextDay;
           var startTime, endTime;
-          for(i=0;i<5;i++){
+          for(i=0;i<6;i++){
             startDay = dr[count].clinic[countClinic].timing[i].day;
+            if(dr[count].clinic[countClinic].timing[i].start<0){
+              continue;
+            }
             endDay = dr[count].clinic[countClinic].timing[i].day;
             // Time manipulation
             {
@@ -96,8 +107,8 @@ router.post('/drlist', function(req, res, next) {
                 endTime = dr[count].clinic[countClinic].timing[i].end;
                 endTime = '0'+endTime+':00 AM';
               }
-              time = startTime+' - '+endTime;
             }
+            time = startTime+' - '+endTime;
             var startDayArr = dr[count].clinic[countClinic].timing[i];
             for(var j=i+1;j<5;j++){
               nextDay = dr[count].clinic[countClinic].timing[j];
