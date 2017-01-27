@@ -18,7 +18,7 @@ router.get('/search', function(req, res, next) {
     res.render('search', { title: 'Search', doctors:dr });
   });
 });
-
+var doctor_manipulation = require("../functions/doctor-manipulation.js");
 /* POST search page. */
 router.post('/drlist', function(req, res, next) {
   var name = '';
@@ -26,9 +26,12 @@ router.post('/drlist', function(req, res, next) {
   var fee = req.body.cost.split(",");
   var days = req.body.days.split(",");
   var time = req.body.time.split(",");
-  console.log(req.body);
-  console.log(fee.length);
-  console.log( Math.ceil(time[0]));
+  // console.log(name);
+  // console.log(fee.length);
+  var startTime = Math.ceil(time[0]);
+  var endTime = Math.ceil(time[1]);
+  // console.log("start"+ startTime);
+  // console.log( endTime);
   var costRange = [];
   for (var i = 0; i < fee.length; i++) {
     switch (fee[i]) {
@@ -92,7 +95,10 @@ router.post('/drlist', function(req, res, next) {
   var daySearch =[];
 console.log(searchDays);
   Doctor.find({'name': {$regex: name, $options: "i"},
-                'clinic.timing':{$elemMatch:{$and:[{'start': {$gte : Math.ceil(time[0]) , $lt : Math.ceil(time[1])}},{$or:searchDays}]}}, 
+                'clinic.timing':
+                {$elemMatch:
+                  {$and:[{'start': {$lte : startTime }},{'end': {$gte : endTime }},
+                  {$or:searchDays}]}}, 
                 $or:costRange} ,function(err, dr){
     if (typeof dr === 'undefined' || dr === null) {
         // variable is undefined or null
@@ -117,22 +123,10 @@ console.log(searchDays);
             endDay = dr[count].clinic[countClinic].timing[i].day;
             // Time manipulation
             {
-                if(dr[count].clinic[countClinic].timing[i].start>12){
-                startTime = dr[0].clinic[countClinic].timing[i].start-12;
-                startTime = '0'+startTime+':00 PM';
-              }
-              else{
-                startTime = dr[count].clinic[countClinic].timing[i].start;
-                startTime = '0'+startTime+':00 AM';
-              }
-              if(dr[count].clinic[countClinic].timing[i].end>12){
-                endTime = dr[count].clinic[countClinic].timing[i].end-12;
-                endTime = '0'+endTime+':00 PM';
-              }
-              else{
-                endTime = dr[count].clinic[countClinic].timing[i].end;
-                endTime = '0'+endTime+':00 AM';
-              }
+              startTime = dr[count].clinic[countClinic].timing[i].start;
+              startTime = doctor_manipulation.getTime(startTime);
+              endTime = dr[count].clinic[countClinic].timing[i].end;
+              endTime = doctor_manipulation.getTime(endTime);
             }
             time = startTime+' - '+endTime;
             var startDayArr = dr[count].clinic[countClinic].timing[i];
@@ -142,7 +136,9 @@ console.log(searchDays);
                 endDay = dr[count].clinic[countClinic].timing[j].day;
                 i++;
               }              
-              else{            
+              else{      
+                // if(startDay==endDay)
+                //   endDay = '';      
                 dr[count].clinic[countClinic].slot.push({start:startDay,end:endDay,time:time});
                 break;
               }              
@@ -156,8 +152,6 @@ console.log(searchDays);
           }
         }
       }
-      // delete dr.clinic[1].timing;
-      console.log(dr[0].clinic[0].slot);
       res.render('doctors-list', { doctors:dr });
     }
       

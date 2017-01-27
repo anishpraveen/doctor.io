@@ -4,7 +4,7 @@ var sess;
 router.use(function(req, res, next) {
     sess=req.session;	
     if(sess.email){
-        console.log('Valid session');
+        // console.log('Valid session');
         next();
     }        
     else
