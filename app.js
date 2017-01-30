@@ -42,7 +42,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/about', function (req, res) {
   res.send('about')
-})
+});
+app.get('/hello', function(req, res) {
+  res.send('world')
+});
+
+app.get('/upper/:word', function(req, res) {
+  res.send(req.params.word.toUpperCase())
+});
 
 app.use('/', index);
 app.use('/users', users);

@@ -20,7 +20,9 @@ router.get('/search', function(req, res, next) {
 });
 var doctor_manipulation = require("../functions/doctor-manipulation.js");
 /* POST search page. */
-router.post('/drlist', function(req, res, next) {
+router.post('/drlist', getList);
+
+function getList(req, res, next) {
   var name = '';
   var name = req.body.name;
   var fee = req.body.cost.split(",");
@@ -93,7 +95,7 @@ router.post('/drlist', function(req, res, next) {
     }
   }
   var daySearch =[];
-console.log(searchDays);
+  console.log(searchDays);
   Doctor.find({'name': {$regex: name, $options: "i"},
                 'clinic.timing':
                 {$elemMatch:
@@ -156,6 +158,6 @@ console.log(searchDays);
     }
       
   });
-});
+}
 
 module.exports = router;
