@@ -50,10 +50,7 @@ src.css = {
 
 src.js = {
     'files': [
-        'public/js/jquery-2.1.3.js',
-        'public/js/bootstrap.js',
-        'public/js/masonry.pkgd.js',
-        'public/js/app.js'
+        'public/js/search.js'
     ],
     'dest': 'public/css/minified',
     'name': 'all.min.js'

@@ -76,7 +76,7 @@ noUiSlider.create(slider[0], {
 		'min': 7,
 		'max': 22
 	},
-    margin: 2,
+    margin: 3,
 	behaviour: 'drag',
 });
 slider[0].noUiSlider.on('update', function(){

@@ -269,7 +269,7 @@ input[type=checkbox] + label
 {
     background: url('/images/icons/check_off.svg') no-repeat;
     height: 16px;
-    width: 16px;
+    /*width: 16px;*/
     display:inline-block;
     padding: 0 0 0 0px;
     cursor: pointer;
@@ -278,21 +278,32 @@ input[type=checkbox]:checked + label
 {
     background: url('/images/icons/check_on.svg') no-repeat;
     height: 16px;
-    width: 16px;
+    /*width: 16px;*/
     display:inline-block;
     padding: 0 0 0 0px;
 }
 .ipCheckbox  + label{
     margin-left: 20px;
 }
+.ipCheckbox  + label  span{
+    margin-top: 5px;
+    margin-left: 20px;
+}
 .spanCheckbox span{
     position: relative;
-    top: -2px;
+    top: 1px;
     left: 10px;
 }
 #divWeekday, #divFees{
     margin-top: 20px;
-    height: 360px;
+    /*height: 360px;*/
+    padding-bottom: 55px;
+}
+#divFees{
+    padding-bottom: 25px;
+}
+#divServices{
+    height: 292px;
 }
 span.left{
     text-transform: capitalize;
@@ -300,6 +311,10 @@ span.left{
 .sideMenuGroup{
     float: left;
     height: 1500px;
+}
+.checkboxGroup :first-child label{
+    position: relative;
+    margin-top: 5px;
 }
 #divWeekday .checkboxGroup,#divFees .checkboxGroup{
     height: 290px;
