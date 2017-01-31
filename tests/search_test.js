@@ -14,3 +14,12 @@ Scenario('Search Fee range', (I) => {
     I.see('200 INR/hours');
     I.dontSee('900 INR/hours');
 });
+
+Scenario('Search by Name', (I) => {
+    I.fillField('#ipSearch', 'j');
+    I.click('#btnSearch');
+    I.wait(1);
+    I.see('200 INR/hours');
+    I.see('Johannes');
+    I.dontSee('Michael');
+});
