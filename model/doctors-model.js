@@ -2,7 +2,7 @@ var mongoose = require('../connection');
 var Schema   = mongoose.Schema;
 
 var TimingSchema = new Schema({
-    day: {type: String, trim: true, enum: ['mon', 'tue', 'wed', 'thr', 'fri', 'sat', 'sun'] },
+    day: {type: String, trim: true, enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] },
     start: { type: Number, trim: true, min: 0, max: 22 },
     end: { type: Number, trim: true, min: 1, max: 23  } 
 })
@@ -14,6 +14,12 @@ var ClinicSchema = new Schema({
     cost:  { type: Number, trim: true }    
 })
 
+// var SlotSchema = new Schema({
+//     time: {type: String, trim: true},
+//     start: { type: String, trim: true},
+//     end: { type: String, trim: true } 
+// })
+
 var DoctorSchema = new Schema({
     name: { type: String, required: true },
     title: { type: String},
@@ -22,6 +28,7 @@ var DoctorSchema = new Schema({
     education:   [String],
     exp: { type: Number, trim: true },
     clinic: [ClinicSchema]
+    // slot: [SlotSchema]
 });
 
 

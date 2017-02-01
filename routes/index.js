@@ -22,7 +22,7 @@ router.get('/logout', function(req, res, next) {
 /* GET doctors list. */
 router.get('/add-DR', function(req, res, next) {
   var dr = new Doctor();
-  var days = ['mon', 'tue', 'wed', 'thr', 'fri', 'sat', 'sun'];
+  var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   var timings = [];
   var clinics = [];
   for (var i = 0; i < days.length; i++){
@@ -80,10 +80,10 @@ router.get('/add-DR', function(req, res, next) {
     // dr.save();
   }
   // Doctor.findOne({'name': {'$regex': 'Barton'}})
-  Doctor.find({'name': {'$regex': 'lli'}},function(err, dr){
+  // Doctor.find({'name': {'$regex': 'lli'}},function(err, dr){
     // console.log(dr)
     res.send(dr);
-  });
+  // });
   // res.send(dr);
 });
 

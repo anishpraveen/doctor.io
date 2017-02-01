@@ -173,54 +173,6 @@ html(lang='en')
                   span 2000 - 2500
               br
         #results.panel-group 
-          each item in doctors        
-            #doc1.panel
-              .panel-body
-                .docterDetails
-                  .doctor
-                    img(src='/'+item.image, alt='')
-                    span.name= item.title +' '+ item.name
-                    br
-                    span.post
-                      |#{item.post}
-                      br
-                      |#{item.education}
-                      br
-                      |#{item.exp}  Years EXP
-                .appoinment
-                  button.btn.btn-primary.pointer(type='submit') Make Appointment
-                .clearfix
-                hr
-                .locations
-                  .left.loc1
-                    span.name= item.clinic[0].name
-                    br
-                    span.addr= item.clinic[0].address
-                    .timings
-                      .weekday
-                        span.left Monday - Friday: 
-                        span.right 09:00 AM - 08:00 PM
-                      .weekend
-                        span.left Saturday - Sunday: 
-                        span.right &nbsp09:00 AM - 08:00 PM
-                      .clearfix
-                      p.costs= item.clinic[0].cost + ' INR/hours'
-                  .vertical-line
-                  hr.locHr
-                  .loc2
-                    span.name= item.clinic[1].name
-                    br
-                    span.addr= item.clinic[1].address
-                    .timings
-                      .weekday
-                        span.left Monday - Friday: 
-                        span.right 09:00 AM - 08:00 PM
-                      .weekend
-                        span.left Saturday - Sunday: 
-                        span.right &nbsp09:00 AM - 08:00 PM
-                      .clearfix
-                      p.costs= item.clinic[0].cost + ' INR/hours'
-              
     script(src='/js/search.js')
     include includes/footer.jade
     

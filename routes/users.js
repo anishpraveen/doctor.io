@@ -14,7 +14,7 @@ router.use(validSession);
 /* GET search page. */
 router.get('/search', function(req, res, next) {
   Doctor.find({'name': {$regex: '', $options: "i"}},function(err, dr){
-    // console.log(dr)
+    // console.log('list'+dr);
     res.render('search', { title: 'Search', doctors:dr });
   });
 });
@@ -65,7 +65,7 @@ function getList(req, res, next) {
     }    
   }
   var searchDays = [];
-  var daysAvailable = ['mon', 'tue', 'wed', 'thr', 'fri', 'sat', 'sun'];
+  var daysAvailable = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   for(i=0; i<days.length;i++){
     switch (days[i]) {
       case 'Monday':
@@ -95,7 +95,7 @@ function getList(req, res, next) {
     }
   }
   var daySearch =[];
-  console.log(searchDays);
+  // console.log(searchDays);
   Doctor.find({'name': {$regex: name, $options: "i"},
                 'clinic.timing':
                 {$elemMatch:
@@ -112,7 +112,7 @@ function getList(req, res, next) {
     else{
       for(var count = 0; count<dr.length; count++){
         for(var countClinic = 0; countClinic<2;countClinic++){
-          dr[count].clinic[countClinic].slot = [];
+          dr[count].clinic[countClinic].slot = new Array;
           var k=0;
           var slot = [];
           var startDay, endDay, time, nextDay;
@@ -139,22 +139,25 @@ function getList(req, res, next) {
                 i++;
               }              
               else{      
-                // if(startDay==endDay)
-                //   endDay = '';      
+                if(startDay==endDay)
+                  endDay = '';      
                 dr[count].clinic[countClinic].slot.push({start:startDay,end:endDay,time:time});
                 break;
               }              
             }
             if(j==5){
-              // if(startDay==endDay)
-              //     endDay = '';
+              if(startDay==endDay)
+                  endDay = '';
               dr[count].clinic[countClinic].slot.push({start:startDay,end:endDay,time:time});           
             }
             startDay = dr[count].clinic[countClinic].timing[j].day;
           }
         }
       }
-      res.render('doctors-list', { doctors:dr });
+      console.log(JSON.stringify(dr[0].clinic[0]));
+      // res.render('doctors-list', { doctors:dr });
+      // dr = JSON.stringify(dr);
+      res.send(JSON.stringify({ doctors:dr }));
     }
       
   });

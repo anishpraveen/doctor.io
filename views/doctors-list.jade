@@ -30,7 +30,11 @@ html(lang='en')
                     .timings
                       .weekday
                         each slot in item.clinic[0].slot        
-                          span.left= slot.start +'day - '+slot.end+'day:'
+                          span.left= slot.start 
+                            if slot.end == ''
+                              = ''
+                            else
+                              = ' - '+slot.end+':'
                           span.right= slot.time
                           .clearfix
                       .weekend
@@ -47,7 +51,7 @@ html(lang='en')
                     .timings
                       .weekday
                         each slot in item.clinic[1].slot        
-                          span.left= slot.start +'day - '+slot.end+'day:'
+                          span.left= slot.start +' - '+slot.end+':'
                           span.right= slot.time
                           .clearfix
                       .weekend

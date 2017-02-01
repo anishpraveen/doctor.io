@@ -363,6 +363,7 @@ span.left{
     line-height: 22px;
 }
 .doctor .name{
+    width: 155px;
     font-size: 18px;
     color: #626767;
 }
