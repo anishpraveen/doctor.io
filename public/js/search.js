@@ -110,90 +110,128 @@ function formatTime(time){
 function put_doctors(doctors){
     // console.log( JSON.parse(doctors));
     var arr ;
+    var results = document.getElementById('results');
     arr = JSON.parse(doctors);
+    // console.log(arr);
+    if(arr == -1){
+        results.innerHTML = ('&nbsp No results as per criteria');
+        return;
+    }
     var dr = arr.doctors;
     dr = createSlots(dr);
-    console.log(dr);
-    var results = document.getElementById('results');
+    
     results.innerHTML = ''; 
-    // for (var index = 0; index < dr.length; index++) {
-    //     var element = dr[index];
-    //     var br = document.createElement('br');
-    //     var hr = document.createElement('hr');
-    //     var panel = document.createElement('div');
-    //     var panel_body = document.createElement('div');
-    //     var docterDetails = document.createElement('div');
-    //     var doctor = document.createElement('div');
-    //     var doctorName = document.createElement('span');
-    //     var doctorPost = document.createElement('span');
-    //     var profileImg = document.createElement('img');
-    //     var appoinment = document.createElement('div');
-    //     var appoinmentBtn = document.createElement('button');
-    //     var clearfix = document.createElement('div');
-    //     var locations = document.createElement('div');
-    //     var loc1 = document.createElement('div');
-    //     var loc1Name = document.createElement('span');
-    //     var loc1Addr = document.createElement('span');
-    //     var timings = document.createElement('div');
-    //     var weekday1 = document.createElement('div');
-    //     var weekend1 = document.createElement('div');
-    //     var locations = document.createElement('div');
+    for (var index = 0; index < dr.length; index++) {
+        var element = dr[index];
+        var br = document.createElement('br');
+        var hr = document.createElement('hr');
+        var panel = document.createElement('div');
+        var panel_body = document.createElement('div');
+        var docterDetails = document.createElement('div');
+        var doctor = document.createElement('div');
+        var doctorName = document.createElement('span');
+        var doctorPost = document.createElement('span');
+        var profileImg = document.createElement('img');
+        var appoinment = document.createElement('div');
+        var appoinmentBtn = document.createElement('button');
+        var clearfix = document.createElement('div');
+        var locations = document.createElement('div');
+        var loc1 = document.createElement('div');
+        var loc1Name = document.createElement('span');
+        var loc1Addr = document.createElement('span');
+        var loc2 = document.createElement('div');
+        var loc2Name = document.createElement('span');
+        var loc2Addr = document.createElement('span');
+        var timings = document.createElement('div');
+        var slots = document.createElement('div');
+        var slots2 = document.createElement('div');
+        var weekend1 = document.createElement('div');
+        var locations = document.createElement('div');
+        var costs = document.createElement('span');
+        var costs2 = document.createElement('span');
+        var vertical_line = document.createElement('div');
         
-    //     // Setting attributes
-    //     panel.setAttribute('id', 'doc'+index);
-    //     panel.setAttribute('class', 'panel');
-    //     doctor.setAttribute('class', 'doctor');
-    //     doctorName.setAttribute('class', 'name');
-    //     doctorPost.setAttribute('class', 'post');
-    //     docterDetails.setAttribute('class', 'docterDetails');
-    //     panel_body.setAttribute('class', 'panel-body');
-    //     appoinment.setAttribute('class', 'appoinment');
-    //     appoinmentBtn.setAttribute('class', 'btn btn-primary pointer');
-    //     clearfix.setAttribute('class', 'clearfix');
-    //     loc1.setAttribute('class', 'left loc1');
-    //     loc1Name.setAttribute('class', 'name');
-    //     loc1Addr.setAttribute('class', 'addr');
-    //     weekday1.setAttribute('class', 'weekday');
-    //     weekend1.setAttribute('class', 'weekend');
-    //     locations.setAttribute('class', 'locations');
-    //     profileImg.setAttribute('src', '/'+element.image);
+        // Setting attributes
+        panel.setAttribute('id', 'doc'+index);
+        panel.setAttribute('class', 'panel');
+        doctor.setAttribute('class', 'doctor');
+        doctorName.setAttribute('class', 'name');
+        doctorPost.setAttribute('class', 'post');
+        docterDetails.setAttribute('class', 'docterDetails');
+        panel_body.setAttribute('class', 'panel-body');
+        appoinment.setAttribute('class', 'appoinment');
+        appoinmentBtn.setAttribute('class', 'btn btn-primary pointer');
+        clearfix.setAttribute('class', 'clearfix');
+        loc1.setAttribute('class', 'left loc1');
+        loc2.setAttribute('class', 'left loc2');
+        loc1Name.setAttribute('class', 'name');
+        loc1Addr.setAttribute('class', 'addr');
+        loc2Name.setAttribute('class', 'name');
+        loc2Addr.setAttribute('class', 'addr');
+        slots.setAttribute('class', 'weekday timings');
+        slots2.setAttribute('class', 'weekday timings');
+        weekend1.setAttribute('class', 'weekend timings');
+        locations.setAttribute('class', 'locations');
+        costs.setAttribute('class', 'costs');
+        costs2.setAttribute('class', 'costs');
+        vertical_line.setAttribute('class', 'vertical-line');
+        profileImg.setAttribute('src', '/'+element.image);
 
-    //     doctorName.innerText = element.name;
-    //     doctorPost.innerHTML = element.post+'<br>'+element.education+'<br>'+element.exp+'Years EXP';
-    //     appoinmentBtn.innerText = 'Make Appointment';
-    //     loc1Name.innerText = element.clinic[0].name;
-    //     loc1Addr.innerHTML = element.clinic[0].address;
-    //     console.log(element.clinic[0].slot);
-    //     // for (var i = 0; i < element.clinic[0].slot.length; i++) {
-    //     //     var slot = element.clinic[0].slot[i];
-    //     //     weekday1.innerHTML += '<span class="left">'+slot.start+'</span>';
-    //     //     weekday1.innerHTML += '<span class="right">'+slot.time+'</span>';
-    //     //     weekday1.appendChild(clearfix);
-    //     // }
-        
+        doctorName.innerText = element.name;
+        doctorPost.innerHTML = element.post+'<br>'+element.education+'<br>'+element.exp+'Years EXP';
+        appoinmentBtn.innerText = 'Make Appointment';
+        loc1Name.innerText = element.clinic[0].name;
+        loc2Name.innerText = element.clinic[1].name;
+        loc1Addr.innerHTML = element.clinic[0].address;
+        loc2Addr.innerHTML = element.clinic[1].address;
+        // console.log(element.clinic[0].slot);
+        for (var i = 0; i < element.clinic[0].slot.length; i++) {
+            var slot = element.clinic[0].slot[i];
+            slots.innerHTML += '<span class="left">'+slot.days+'&nbsp:</span>';
+            slots.innerHTML += '<span class="right">'+slot.time+'</span>';
+            slots.appendChild(clearfix);
+        }
+        for (var i = 0; i < element.clinic[1].slot.length; i++) {
+            var slot = element.clinic[1].slot[i];
+            slots2.innerHTML += '<span class="left">'+slot.days+'&nbsp:</span>';
+            slots2.innerHTML += '<span class="right">'+slot.time+'</span>';
+            slots2.appendChild(clearfix);
+        }
+        costs.innerHTML = element.clinic[0].cost + ' INR/hours<br><br>'
+        costs2.innerHTML = element.clinic[1].cost + ' INR/hours<br><br>'
 
-    //     doctor.appendChild(profileImg);
-    //     loc1.appendChild(loc1Name);
-    //     loc1.innerHTML += '<br>';
-    //     loc1.appendChild(loc1Addr);
-    //     loc1.appendChild(weekday1);
-    //     locations.appendChild(loc1);
-    //     // panel.appendChild(panel_body);
-    //     // panel.appendChild(panel_body);
-    //     doctor.appendChild(profileImg);
-    //     doctor.appendChild(doctorName);
-    //     doctor.appendChild(br);
-    //     doctor.appendChild(doctorPost);
-    //     docterDetails.appendChild(doctor);
-    //     appoinment.appendChild(appoinmentBtn);
-    //     panel_body.appendChild(appoinment);
-    //     panel_body.appendChild(docterDetails);
-    //     panel_body.appendChild(clearfix);
-    //     panel_body.appendChild(hr);
-    //     panel_body.appendChild(locations);
-    //     panel.appendChild(panel_body);
-    //     results.appendChild(panel);
-    // }
+        doctor.appendChild(profileImg);
+        loc1.appendChild(loc1Name);
+        loc1.innerHTML += '<br>';
+        loc1.appendChild(loc1Addr);
+        loc1.appendChild(slots);
+        loc1.appendChild(clearfix);
+        loc1.innerHTML += '<div class="clearfix"></div>';
+        loc1.appendChild(costs);
+        locations.appendChild(loc1);
+        locations.appendChild(vertical_line);
+        loc2.appendChild(loc2Name);
+        loc2.innerHTML += '<br>';
+        loc2.appendChild(loc2Addr);
+        loc2.appendChild(slots2);
+        loc2.appendChild(clearfix);
+        loc2.innerHTML += '<div class="clearfix"></div>';
+        loc2.appendChild(costs2);
+        locations.appendChild(loc2); 
+        doctor.appendChild(profileImg);
+        doctor.appendChild(doctorName);
+        doctor.appendChild(br);
+        doctor.appendChild(doctorPost);
+        docterDetails.appendChild(doctor);
+        appoinment.appendChild(appoinmentBtn);
+        panel_body.appendChild(appoinment);
+        panel_body.appendChild(docterDetails);
+        panel_body.appendChild(clearfix);
+        panel_body.appendChild(hr);
+        panel_body.appendChild(locations);
+        panel.appendChild(panel_body);
+        results.appendChild(panel);
+    }
 }
 
 function createSlots(dr){
@@ -207,7 +245,7 @@ function createSlots(dr){
           var slot = [];
           var startDay, endDay, time, nextDay;
           var startTime, endTime;
-          for(i=0;i<6;i++){
+          for(i=0;i<=6;i++){
             startDay = dr[count].clinic[countClinic].timing[i].day;
             if(dr[count].clinic[countClinic].timing[i].start<0){
               continue;
@@ -222,10 +260,17 @@ function createSlots(dr){
             }
             time = startTime+' - '+endTime;
             var startDayArr = dr[count].clinic[countClinic].timing[i];
-            for(var j=i+1;j<5;j++){
+            for(var j=i+1;j<=6;j++){
               nextDay = dr[count].clinic[countClinic].timing[j];
               if(nextDay.start == startDayArr.start && nextDay.end == startDayArr.end){
                 endDay = dr[count].clinic[countClinic].timing[j].day;
+                if(endDay == 'Friday'){
+                    endDay = ' - '+ endDay;
+                    // console.log(countClinic+'cli'+ i+'i, j'+j+' '+endDay)
+                    j++;i++;  
+                    dr[count].clinic[countClinic].slot.push({days:startDay+endDay,time:time});
+                    break;
+                }
                 i++;
               }              
               else{      
@@ -237,14 +282,26 @@ function createSlots(dr){
                 break;
               }              
             }
-            if(j==5){
+            if(j==7){
               if(startDay==endDay)
                   endDay = '';
               else
                   endDay = ' - '+ endDay     
               dr[count].clinic[countClinic].slot.push({days:startDay+endDay,time:time});           
             }
-            startDay = dr[count].clinic[countClinic].timing[j].day;
+            // console.log(i+'i, j'+j+' qqq '+endDay)
+            if(j<=6)
+                startDay = dr[count].clinic[countClinic].timing[j];
+            if(startDay.day == 'Friday'){
+                startTime = startDay.start;
+                startTime = getTime(startTime);
+                endTime = startDay.end;
+                endTime = getTime(endTime);
+                time = startTime+' - '+endTime;
+
+                dr[count].clinic[countClinic].slot.push({days:startDay.day,time:time});
+                j++;i++;
+            }
           }
         }
       }

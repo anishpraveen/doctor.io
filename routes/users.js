@@ -28,7 +28,7 @@ function getList(req, res, next) {
   var fee = req.body.cost.split(",");
   var days = req.body.days.split(",");
   var time = req.body.time.split(",");
-  // console.log(name);
+  console.log(req.body);
   // console.log(fee.length);
   var startTime = Math.ceil(time[0]);
   var endTime = Math.ceil(time[1]);
@@ -108,7 +108,7 @@ function getList(req, res, next) {
     }
     // console.log(dr.length);
     if(dr.length<1)
-     res.send('&nbsp No results as per criteria');
+     res.send(JSON.stringify('-1'));
     else{
       for(var count = 0; count<dr.length; count++){
         for(var countClinic = 0; countClinic<2;countClinic++){
@@ -154,7 +154,7 @@ function getList(req, res, next) {
           }
         }
       }
-      console.log(JSON.stringify(dr[0].clinic[0]));
+      // console.log(JSON.stringify(dr[0].clinic[0]));
       // res.render('doctors-list', { doctors:dr });
       // dr = JSON.stringify(dr);
       res.send(JSON.stringify({ doctors:dr }));
