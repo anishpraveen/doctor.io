@@ -112,6 +112,7 @@ function put_doctors(doctors){
     var arr ;
     arr = JSON.parse(doctors);
     var dr = arr.doctors;
+    dr = createSlots(dr);
     console.log(dr);
     var results = document.getElementById('results');
     results.innerHTML = ''; 
@@ -194,3 +195,78 @@ function put_doctors(doctors){
     //     results.appendChild(panel);
     // }
 }
+
+function createSlots(dr){
+    if(dr.length<1)
+     console.log('&nbsp No results as per criteria');
+    else{
+      for(var count = 0; count<dr.length; count++){
+        for(var countClinic = 0; countClinic<2;countClinic++){
+          dr[count].clinic[countClinic].slot = new Array;
+          var k=0;
+          var slot = [];
+          var startDay, endDay, time, nextDay;
+          var startTime, endTime;
+          for(i=0;i<6;i++){
+            startDay = dr[count].clinic[countClinic].timing[i].day;
+            if(dr[count].clinic[countClinic].timing[i].start<0){
+              continue;
+            }
+            endDay = dr[count].clinic[countClinic].timing[i].day;
+            // Time manipulation
+            {
+              startTime = dr[count].clinic[countClinic].timing[i].start;
+              startTime = getTime(startTime);
+              endTime = dr[count].clinic[countClinic].timing[i].end;
+              endTime = getTime(endTime);
+            }
+            time = startTime+' - '+endTime;
+            var startDayArr = dr[count].clinic[countClinic].timing[i];
+            for(var j=i+1;j<5;j++){
+              nextDay = dr[count].clinic[countClinic].timing[j];
+              if(nextDay.start == startDayArr.start && nextDay.end == startDayArr.end){
+                endDay = dr[count].clinic[countClinic].timing[j].day;
+                i++;
+              }              
+              else{      
+                if(startDay==endDay)
+                  endDay = ''; 
+                else
+                    endDay = ' - '+ endDay     
+                dr[count].clinic[countClinic].slot.push({days:startDay+endDay,time:time});
+                break;
+              }              
+            }
+            if(j==5){
+              if(startDay==endDay)
+                  endDay = '';
+              else
+                  endDay = ' - '+ endDay     
+              dr[count].clinic[countClinic].slot.push({days:startDay+endDay,time:time});           
+            }
+            startDay = dr[count].clinic[countClinic].timing[j].day;
+          }
+        }
+      }
+        return dr;
+    }
+}
+
+function getTime(time) {
+        if (time > 12) {
+            time = time - 12;
+            var length = Math.ceil(Math.log(time + 2) / Math.LN10);
+            if (length > 1)
+                time = time + ':00 PM';
+            else
+                time = '0' + time + ':00 PM';
+        }
+        else {
+            var length = Math.ceil(Math.log(time + 1) / Math.LN10);
+            if (length > 1)
+                time = time + ':00 AM';
+            else
+                time = '0' + time + ':00 AM';
+        }
+        return time;
+    }
