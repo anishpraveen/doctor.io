@@ -108,7 +108,7 @@ function getList(req, res, next) {
     }
     // console.log(dr.length);
     if(dr.length<1)
-     res.send(JSON.stringify('-1'));
+     res.json('-1');
     else{
       for(var count = 0; count<dr.length; count++){
         for(var countClinic = 0; countClinic<2;countClinic++){
@@ -157,7 +157,7 @@ function getList(req, res, next) {
       // console.log(JSON.stringify(dr[0].clinic[0]));
       // res.render('doctors-list', { doctors:dr });
       // dr = JSON.stringify(dr);
-      res.send(JSON.stringify({ doctors:dr }));
+      res.json(dr );
     }
       
   });

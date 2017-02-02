@@ -112,13 +112,13 @@ function put_doctors(doctors){
     var arr ;
     var results = document.getElementById('results');
     arr = JSON.parse(doctors);
-    // console.log(arr);
+    // console.log(arr.length);
     if(arr == -1){
         results.innerHTML = ('&nbsp No results as per criteria');
         return;
     }
     var dr = arr.doctors;
-    dr = createSlots(dr);
+    dr = createSlots(arr);
     
     results.innerHTML = ''; 
     for (var index = 0; index < dr.length; index++) {
@@ -237,7 +237,8 @@ function put_doctors(doctors){
 function createSlots(dr){
     if(dr.length<1)
      console.log('&nbsp No results as per criteria');
-    else{
+    else
+    {
       for(var count = 0; count<dr.length; count++){
         for(var countClinic = 0; countClinic<2;countClinic++){
           dr[count].clinic[countClinic].slot = new Array;
