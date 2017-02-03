@@ -1,58 +1,20 @@
-// controller = require('../controllers/welcome')
-//   , http_mocks = require('node-mocks-http')
-//   , should = require('should')
+var chai = require('chai');
+var chaiHttp = require('chai-http');
+var server = require('../app');
+var should = chai.should();
 
-// function buildResponse() {
-//   return http_mocks.createResponse({eventEmitter: require('events').EventEmitter})
-// }
+const expect    = require('chai').expect
+// Write assertions! 
 
-// describe('Welcome Controller Tests', function() {
+chai.use(chaiHttp);
 
-//   it('hello', function(done) {
-//     var response = buildResponse()
-//     var request  = http_mocks.createRequest({
-//       method: 'GET',
-//       url: '/hello',
-//     })
-
-//     response.on('end', function() {
-//       response._getData().should.equal('world');
-//       done()
-//     })
-
-//     controller.handle(request, response)
-//   })
-
-//   it('hello fail', function(done) {
-//     var response = buildResponse()
-//     var request  = http_mocks.createRequest({
-//       method: 'POST',
-//       url: '/hello',
-//     })
-
-//     response.on('end', function() {
-//       // POST method should not exist.
-//       // This part of the code should never execute.
-//       done(new Error("Received a response"))
-//     })
-
-//     controller.handle(request, response, function() {
-//       done()
-//     })
-//   })
-
-//   it('upper', function(done) {
-//     var response = buildResponse()
-//     var request  = http_mocks.createRequest({
-//       method: 'GET',
-//       url: '/upper/monkeys',
-//     })
-
-//     response.on('end', function() {
-//       response._getData().should.equal('MONKEYS');
-//       done()
-//     })
-
-//     controller.handle(request, response)
-//   })
-// })
+describe('Login', function () {
+    it('Available', function (done){
+        chai.request(server)
+            .get('/login')
+            .end(function (err, res){
+                res.should.have.status(200);
+                done();
+            })
+    });
+});

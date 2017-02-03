@@ -112,9 +112,11 @@ function put_doctors(doctors){
     var arr ;
     var results = document.getElementById('results');
     arr = JSON.parse(doctors);
-    // console.log(arr.length);
-    if(arr == -1){
-        results.innerHTML = ('&nbsp No results as per criteria');
+    var response = arr[0];
+    var msg = arr[1];
+    // console.log(chk);
+    if(response['response'] == -1){
+        results.innerHTML = msg['msg'];
         return;
     }
     var dr = arr.doctors;
