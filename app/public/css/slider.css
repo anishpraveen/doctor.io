@@ -1,0 +1,60 @@
+.slider{
+    width: 83%;
+    margin-left: 15px;
+}
+.sliders{
+    margin-top: 5px;
+    height: 15px;
+    /*width: 85%;*/
+    background-color: transparent;
+    border: none;
+}
+.sliders.noUi-target.noUi-ltr.noUi-horizontal{
+    background-image: url('/images/icons/slider_bg2.svg');
+    /*background: no-repeat!important;*/
+}
+.noUi-base{
+    height: 10px;
+    /*margin-top: 15px;*/
+    left: 3.5px;
+    top: 4px;
+    width: 97%;
+    /*background-color: greenyellow;*/
+    background-image: url('/images/icons/slider_bg.svg');
+    /*background: no-repeat;*/
+}
+.noUi-handle {
+     border: none; 
+     border-radius: 3px; 
+     background: no-repeat; 
+     cursor: default;
+     box-shadow: none; 
+}
+
+.noUi-handle {
+    border-radius: 5px;
+    color: #00bdee;
+    background-image: url('/images/icons/start.svg')!important;
+    background-size: 100% 100%!important;
+    background-repeat: no-repeat!important;
+    font-size: 10pt;
+    margin-top: -2px;
+}
+.noUi-handle:after, .noUi-handle:before {
+    content: none;
+}
+.noUi-handle-upper{
+    color: #00c9b9;
+    background-image: url('/images/icons/end.svg')!important;
+}
+.noUi-connect{
+     background: -webkit-linear-gradient(left, #44bbe5 , #3dc7b6); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, #44bbe5, #3dc7b6); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, #44bbe5, #3dc7b6); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, #44bbe5 , #3dc7b6); /* Standard syntax (must be last) */
+    height: 8px;
+    /*margin-top: 4.5px;*/
+}
+#input-Start{
+    color: red;
+}

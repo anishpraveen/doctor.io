@@ -1,0 +1,17 @@
+{
+  "name": "react-dental.io",
+  "description": "Dental.io",
+  "main": "index.js",
+  "authors": [
+    "Anish"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

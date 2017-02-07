@@ -1,0 +1,28 @@
+{
+  "name": "react-dental.io",
+  "version": "1.0.0",
+  "description": "Dental.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@code.qburst.com:anishp/doctor.io.git"
+  },
+  "author": "Anish",
+  "license": "ISC",
+  "dependencies": {
+    "browserify": "^14.0.0",
+    "express": "^4.14.1",
+    "guid": "0.0.12",
+    "gulp": "^3.9.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.7"
+  }
+}
