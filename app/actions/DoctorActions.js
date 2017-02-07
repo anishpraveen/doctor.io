@@ -1,7 +1,7 @@
 var dispatcher = require("../dispatcher");
 
 module.exports = {
-    addDoctor:function(school){
+    addDoctor:function(doctor){
         dispatcher.dispatch({
            doctor:doctor,
            type:"doctor:addDoctor" 

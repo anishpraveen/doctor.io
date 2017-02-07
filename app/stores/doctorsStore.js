@@ -1,37 +1,39 @@
 var dispatcher = require("../dispatcher");
+var doctorService = require("../services/doctorService");
 
 function DoctorStore() {
     var listeners = [];
-    var doctors = [{ name: "Dr. Michael Faradai", post: "Dental Implant Surgeon" },
-                    { name: "Dr. Caroline Barton", post: "Dental Assistant" },
-                    { name: "Dr. Melissa Franklin", post: "Restorative Dentistry" }];
-    function getDoctors() {
-        return doctors;
-    }
 
     function onChange(listener) {
+        getDoctors(listener);
         listeners.push(listener);
+    }
+    
+    function getDoctors(cb){
+        doctorService.getDoctors().then(function (res) {
+            cb(res);
+        });
     }
 
     function addDoctor(doctor) {
-        doctors.push(doctor)
-        triggerListeners();
+        doctorService.addDoctor(doctor).then(function (res) {
+            console.log(res);
+            triggerListeners();
+        });
     }
 
     function deleteDoctor(doctor) {
-        var _index;
-        doctors.map(function (s, index) {
-            if (s.name === doctor.name) {
-                _index = index;
-            }
+        doctorService.deleteDoctor(doctor).then(function (res) {
+            console.log(res);
+            triggerListeners();
         });
-        doctors.splice(_index, 1);
-        triggerListeners();
     }
 
     function triggerListeners() {
-        listeners.forEach(function (listener) {
-            listener(doctors);
+        getDoctors(function (res) {
+            listeners.forEach(function (listener) {
+                listener(res);
+            });
         });
     }
 
@@ -50,7 +52,6 @@ function DoctorStore() {
     });
 
     return {
-        getDoctors: getDoctors,
         onChange: onChange
     }
 }

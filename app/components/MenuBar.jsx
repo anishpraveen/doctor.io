@@ -1,6 +1,5 @@
 var React = require("react");
 var HeaderLinks = require("./HeaderLinks.jsx")
-var SchoolInfo = require("./SchoolInfo.jsx")
 module.exports = React.createClass({
     render:function(){
         return(

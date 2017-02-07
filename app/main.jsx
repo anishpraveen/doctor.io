@@ -7,11 +7,12 @@ var Footer = require("./components/Footer.jsx");
 
 
 var doctorsStore = require("./stores/doctorsStore");
-var _doctors = doctorsStore.getDoctors();
-doctorsStore.onChange(function(doctors){
+var _doctors = [];
+var getDoctorsCallback = function(doctors){
     _doctors = doctors;
     render();
-});
+};
+doctorsStore.onChange(getDoctorsCallback);
 
 
 // var _doctors = [{ name: "Dr. Michael Faradai", post: "Dental Implant Surgeon" },
@@ -21,15 +22,18 @@ function render() {
     ReactDOM.render(
     <div>
         <MenuBar doctors={_doctors} />
-        {
-            _doctors.map(function(s,index){
-                return(
-                    <DoctorsList info={s} key={"doctors"+index} />
-                )         
-            })
-        }
-        <SearchDoctor />
-        <div className="clearfix"></div>
+        <div className="container">
+            <div className="clearfix"></div>
+            <SearchDoctor />
+            {
+                _doctors.map(function(s,index){
+                    return(
+                        <DoctorsList info={s} key={"doctors"+index} />
+                    )         
+                })
+            }
+            <div className="clearfix"></div>
+        </div>
         <Footer />
     </div>
         , document.getElementById("container"));
