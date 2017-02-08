@@ -55,7 +55,7 @@ function testFunction() {
            }
         }
     };
-    xmlhttp.open("POST", "/users/drlist", true);
+    xmlhttp.open("POST", "/api/doctors", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send("name="+search+"&&cost="+fee+"&&days="+days+"&&time="+time);
 }

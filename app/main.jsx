@@ -3,6 +3,7 @@ var ReactDOM = require("react-dom");
 var DoctorsList = require("./components/DoctorsList.jsx");
 var MenuBar = require("./components/MenuBar.jsx");
 var SearchDoctor = require("./components/SearchDoctor.jsx");
+var Filters = require("./components/Filters.jsx");
 var Footer = require("./components/Footer.jsx");
 
 
@@ -25,13 +26,16 @@ function render() {
         <div className="container">
             <div className="clearfix"></div>
             <SearchDoctor />
-            {
+            <div className="clearfix"></div>
+            <Filters />
+            <div id="results" className="panel-group"> </div>
+            {/*<!--{
                 _doctors.map(function(s,index){
                     return(
                         <DoctorsList info={s} key={"doctors"+index} />
                     )         
                 })
-            }
+            }-->*/}
             <div className="clearfix"></div>
         </div>
         <Footer />
