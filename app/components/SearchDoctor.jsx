@@ -1,29 +1,17 @@
 var React = require("react");
 var actions = require("../actions/DoctorActions");
 
-module.exports = React.createClass({
-    getInitialState:function(){
-      return {
-          name:""
-      }  
-    },
-    searchDoctor:function(e){
-        e.preventDefault();
-        actions.searchDoctor(this.state);
-    },
-    handleInputChange:function(e){
-      e.preventDefault();
-      var name = e.target.name;
-      var state = this.state;
-      state[name] = e.target.value;
-      this.setState(state);
-    },
+module.exports = React.createClass({    
     render:function(){
         return(
             <div id="divSearch">
                 <form id="formSearch" >
                     <span>
-                        <input type="text" name="search" value="" id="ipSearch" className="form-input"  placeholder="Find Dentists/Clinic" />
+                        <input type="text" name="search" value="" id="ipSearch" className="form-input"  
+                                value={this.props.searchString}
+                                ref="searchStringInput"
+                                onChange={this.handleChange}  
+                                placeholder="Find Dentists/Clinic" />
                         <button className="btn  pointer" type="submit" id="btnSearch" >Search </button>
                     </span>
                 </form>
