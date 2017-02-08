@@ -1,6 +1,6 @@
 var $ = require("jquery");
 var promise = require("es6-promise");
-var resourceUrl = "http://localhost:3003/api/doctors";
+var resourceUrl = "/api/doctors";
 
 module.exports = {
     addDoctor: function (doctor) {

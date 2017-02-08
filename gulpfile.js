@@ -26,7 +26,8 @@ var watch = ['app/dist/css/*css',
              'app/main.jsx',
              'app/*html',
              'app/action/*.js',
-             'app/stores/*.js'];
+             'app/stores/*.js',
+             'server/*/*.js'];
 gulp.task('watch',['default'], function() {
     gulp.watch(watch, ['default']);
 })
