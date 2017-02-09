@@ -1,0 +1,646 @@
+html{
+    font-family: Roboto ;
+}
+.headerLinks a{
+    margin: 10px;
+    margin-right: 15px;
+    font-size: 12px;
+    color: #f5f2eb;
+    text-align: left;
+}
+.active{
+    background-color: #008b8b;
+    height: 28px;
+    width: 90px;
+    padding: 5px;
+    border-radius: 14px;
+}
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+    border: 1px solid red;
+}
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+.searchResult{
+    margin-top: 18px;
+    font-size: 24px;
+    font-weight: 500;
+    color: #626767;
+    text-align: left;
+    line-height: 24px;
+    text-align: left;
+}
+.resultCount{
+    float: right;
+    margin-top: 4px;
+    font-size: 14px;
+    color: #626767;
+    text-align: left;
+}
+hr{
+    background-color: #b5baba;
+    border: 1px solid #b5baba;
+}
+.divider{
+    margin-top: 18px;
+}
+.container{
+    width:83.36%; 
+    margin-left: 8.32%;
+}
+.clearfix:after {
+   content: " "; /* Older browser do not support empty content */
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}
+#divSearch{
+    margin-top: 20px;
+}
+#formSearch{
+    max-width: 800px;
+    width: 65%;
+    float: left;
+}
+input[type=text]{
+    transition: box-shadow 0.33s ease-in-out;
+}
+#ipSearch{
+    height: 40px;
+    width: 80.99%;
+    background-color: #f6f6f6;
+    border-radius: 20px 0px 0px 20px;
+    padding-left: 21px;
+    color: #626767;
+    font-size: 14px;
+    font-weight: 100;
+    text-align:left;
+    
+}
+input[type=text]:focus{
+    border: none;
+    box-shadow:  inset 0 1px 1px #fff, 0 0 8px #34a9a2;
+}
+#btnSearch{
+    float: right;
+    height: 43px;
+    width: 16.2%;    
+    margin-left: -4px;
+    font-size: 16px;
+    font-weight: 100;
+    color: #ffffff;
+    background-color: #626767;
+    border-radius: 0px 20px 20px 0px;
+    z-index: 99999;
+    position: relative;
+}
+#divSortBy{
+    float: right; 
+    margin-top: 3px;
+    color: #626767;
+}
+#ddlSortBy{
+    border: none;
+    outline: none;
+    background-color: #f0f1f2;
+    margin-left: 5px;
+    border-radius: 20px;
+    height: 40px;
+    width: 170px;
+    color: #626767;
+    font-size: 15px;
+    font-weight: 100;
+    text-indent: 21px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+#ddlSortBy {
+  background-image:
+    linear-gradient(45deg, transparent 50%, #626767 50%),
+    linear-gradient(135deg, #626767 50%, transparent 50%),
+    linear-gradient(to right, #f0f1f2, #f0f1f2);
+  background-position:
+    calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px),
+    100% 0;
+  background-size:
+    5px 5px,
+    5px 5px,
+    2.5em 2.5em;
+  background-repeat: no-repeat;
+}
+#ddlSortBy::-ms-expand {
+    display: none;
+}
+.filterIcons img{
+    display: none;
+}
+.sideMenu{
+    background-color: #f0f1f2;
+    color: #626767;
+    font-size: 14px;
+    font-weight: 500;
+    width: 240px;
+    height: 282px;
+    float: left;
+    position: relative;
+    z-index: -0;
+}
+.sideMenu p{
+    padding-top: 20px;
+}
+.sideMenu input.button{
+    border:0;
+    padding:0;
+    margin-top: -27px;
+    margin-right: 16px;
+    width:24px;
+    height:24px;
+    background:transparent url('/images/icons/lens.svg') center center  no-repeat;
+    float:right;
+    position: relative;
+    z-index: 9999;
+}
+#ipServices{
+    background-color: transparent;
+    background-image:url('/images/icons/lens.svg'); 
+    background-repeat: no-repeat; 
+    background-position: 195px 8px;
+}
+.checkboxGroup{
+    height: 184px;
+    width: 228px;
+    overflow-y: auto;
+}
+
+div::-webkit-scrollbar-track
+{
+	border-radius: 10px;
+	background-color: transparent;
+}
+
+div::-webkit-scrollbar
+{
+	width: 4px;
+}
+
+div::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	background-color: #626767;
+}
+div::-moz-scrollbar-track
+{
+	border-radius: 10px;
+	background-color: transparent;
+}
+
+div::-moz-scrollbar
+{
+	width: 4px;
+}
+
+div::-moz-scrollbar-thumb
+{
+	border-radius: 10px;
+	background-color: #626767;
+}
+
+.sideMenu p{
+    margin: 0;
+    margin-left: 20px;
+}
+#ipServices{
+    padding-left: 10px;
+    width: 210px;
+    height: 28px;
+    margin-top: 10px;
+    margin-left: 10px;
+    background-color: #ffffff;
+    border-radius: 14px;
+}
+.sideHr{
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+.checkboxGroup > span > label, .text{
+    margin-top: 0px;
+    margin-top: 20px;
+}
+.first{
+    
+    margin-top: 0px;
+
+}
+input[type=checkbox] {
+    display:none;
+}
+
+/*input[type=checkbox] + label +span{
+    background: url('/images/icons/check_off.svg') no-repeat;
+    height: 16px;
+    width: 16px;
+    display:inline-block;
+    padding: 0 0 0 0px;
+    cursor: pointer;
+}*/
+
+input[type=checkbox] + label 
+{
+    background: url('/images/icons/check_off.svg') no-repeat;
+    height: 16px;
+    /*width: 16px;*/
+    display:inline-block;
+    padding: 0 0 0 0px;
+    cursor: pointer;
+}
+input[type=checkbox]:checked + label
+{
+    background: url('/images/icons/check_on.svg') no-repeat;
+    height: 16px;
+    /*width: 16px;*/
+    display:inline-block;
+    padding: 0 0 0 0px;
+}
+.ipCheckbox  + label{
+    margin-left: 20px;
+}
+.ipCheckbox  + label  span{
+    margin-top: 5px;
+    margin-left: 20px;
+}
+.spanCheckbox span{
+    position: relative;
+    top: 1px;
+    left: 10px;
+}
+#divWeekday, #divFees{
+    margin-top: 20px;
+    /*height: 360px;*/
+    padding-bottom: 55px;
+}
+#divFees{
+    padding-bottom: 25px;
+}
+#divServices{
+    height: 292px;
+}
+span.left{
+    text-transform: capitalize;
+}
+.sideMenuGroup{
+    float: left;
+    height: 1500px;
+}
+.checkboxGroup :first-child label{
+    position: relative;
+    margin-top: 5px;
+}
+#divWeekday .checkboxGroup,#divFees .checkboxGroup{
+    height: 290px;
+}
+.panel{
+    margin-left: 20px;
+    margin-bottom: 20px;
+    float: left;
+    width: 94.8%;
+    border: 1px solid #b5baba;
+    border-radius: 2px;
+}
+.panel-group{
+    height: 1500px;
+    overflow-y: auto;
+}
+.contentContainer{
+    width: 102%;
+}
+.container{
+    margin-bottom: 40px;
+}
+.footer{
+    text-align: center;
+}
+.panel-body{
+    margin: 21px;
+}
+.docterDetails{
+    width: 367px;
+}
+.doctor{
+    text-align: left;
+}
+.doctor img{
+    float: left;
+}
+.doctor span{
+    margin-top: -2px;
+    float: left;
+    padding-left: 21px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #9ba0a0;
+    text-align: left;
+    line-height: 22px;
+}
+.doctor .name{
+    width: 155px;
+    font-size: 18px;
+    color: #626767;
+}
+.appoinment{
+    float: right;
+}
+.btn-primary{
+    height: 34px;
+    width: 180px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    text-shadow: 0px 1px 1px  rgba(0, 0, 0, 0.2);
+}
+.panel-body hr{
+    background-color: #f0f1f2;
+    border-color: #f0f1f2;
+}
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
+.locations{
+    margin-top: 14px;
+}
+
+.name{
+    font-size: 15px;
+    font-weight: 500;
+    color: #626767;
+    text-align: left;
+    line-height: 22px;
+}
+.addr{
+    font-size: 14px;
+    font-weight: 500;
+    color: #9ba0a0;
+}
+.timings{
+    font-size: 13px;
+    text-align: left;
+    line-height: 22px;
+    margin-top: 7px;
+
+}
+.timings .left{
+    color: #898f8f;    
+}
+.timings .right{
+    color: #626767;
+}
+
+.costs{
+    margin-top: 11px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #626767;
+}
+.loc2{
+    float: right;
+}
+.loc2 {
+    margin-bottom: 10px;
+}
+.vertical-line{
+    float: left;
+    margin-left: 8%;
+    height: 119px;
+    width: 1px;
+    background-color: #f0f1f2;
+}
+.locHr{
+    display: none;
+}
+.doctor .azure-text, .locations .azure-text{
+    color: #0098ff;
+}
+/*for 1160px screen and below*/
+@media screen and (max-width:1160px){
+    .headerLinks{
+        display: none;
+    }
+    .header_bg #hamberg{
+        margin-right: 50px;
+        display: inline;
+    }
+    #formSearch{
+        width: 70%;
+    }
+    #ipSearch{
+        width: 80%;
+    }
+}
+@media screen and (max-width:1049px){
+    .vertical-line{
+        display: none;
+    }
+    .loc2{
+        float: left;
+    }
+    .locHr{
+        clear: both;
+        display: block;
+    }
+    
+}
+@media screen and (max-width:870px){
+    .appoinment , .appoinment button{
+        width: 100%;
+    }
+}
+
+/*for 768px screen and below*/
+@media screen and (max-width:768px){
+    .container{
+        width: 87.36%; 
+        margin-left: 6.32%;
+    }
+    .filterIcons img{
+        padding-left: 2%;
+        display: inline;        
+    }
+    #divSortBy{
+        display: none;
+    }
+    #formSearch{
+        width: 80%;
+    }
+    #ipSearch{
+        float: left;
+        height: 40px;
+        width: 78%;
+    }
+    #btnSearch{
+        float: left;
+        width: 15%;
+    }
+    #imgSearch{
+        display: none;
+    }
+    .sideMenu{
+        display: none;
+    }
+    .panel{
+        margin-left: 0px;
+        width: 98%;
+    }
+    .vertical-line{
+        display: inline;
+        margin-left: 10%;
+    }
+    .loc2{
+        margin-left: 5%;
+    }
+    .panel-group{
+        width: 100%;
+        height: auto;
+    }
+    .panel-group::-webkit-scrollbar { 
+        display: none; 
+    }   
+    .locHr{
+        display: none;
+    }
+    .appoinment button{
+        width: 168px;
+    }
+    .appoinment{
+        width: initial;
+    } 
+}
+@media screen and (max-width:767px){
+    .loc1, .loc2{
+        clear: both;
+        width: auto;
+        margin-left: 0px;
+    }
+    .locHr{
+        clear: both;
+        display: block;
+    }
+    
+    .vertical-line{
+        display: none;
+    }
+    .costs{
+        clear: both;
+    }
+}
+@media screen and (max-width:610px){
+    #formSearch{
+        width: 100%;
+    }
+    #ipSearch{
+        width: 69%;
+    }
+    #btnSearch{
+        float: left;
+        width: 62px;
+    }
+}
+@media screen and (max-width:540px){
+    .appoinment , .appoinment button{
+        width: 100%;
+    }
+}
+/*for 320px screen and below*/
+@media screen and (max-width:320px){
+    .searchResult{
+        margin-left: 45px;
+    }
+    .resultCount{
+        margin-right: 91px;
+    }
+    .container{
+        width: 87.36%; 
+        margin-left: 6.32%;
+    }
+    .header_bg #hamberg{
+        margin-right: 15px;
+        display: inline;
+    }
+    .filterIcons img{
+        padding-left: 0px;
+        padding-right: 60px;
+    }
+    #imgSearch{
+        padding-left: 20px;
+        display: inline;
+    }
+    #imgFilter{
+        padding-right: 0px;
+    }
+    #formSearch{
+        display: none;
+    }
+    .timings{
+        font-size: 12px;
+    }
+    .panel-group{
+        width: 300px;
+        height: auto;
+    }
+    .panel{
+        width: 290px;
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+    .doctor span{
+        clear: both;
+    }
+    .doctor img{
+        margin-left: 25%;
+        margin-bottom: 16px;
+    }
+    .doctor .post{
+        margin-left: 10%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .doctor .name{
+        margin-left: 9%;
+    }
+    .appoinment{
+       float: left;
+       margin-left: 17%;
+       margin-bottom: 31px;
+    }
+    .appoinment button{
+        width: 168px;
+    }
+    #divSearch{
+        margin-bottom: 25px;
+    }
+    .loc1, .costs, .loc2{
+        text-align: center;
+    }
+}

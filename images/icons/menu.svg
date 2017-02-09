@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="26px" height="18px" viewBox="0 0 26 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>menu</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Login_Tablet" transform="translate(-692.000000, -31.000000)" fill="#F3F6FA">
+            <g id="header">
+                <path d="M692,48.3333333 L718,48.3333333 L718,45.4444444 L692,45.4444444 L692,48.3333333 Z M692,41.1111111 L718,41.1111111 L718,38.2222222 L692,38.2222222 L692,41.1111111 Z M692,33.8888889 L718,33.8888889 L718,31 L692,31 L692,33.8888889 Z" id="menu"></path>
+            </g>
+        </g>
+    </g>
+</svg>
