@@ -1,131 +1,122 @@
- //get a reference to the element
-  var myBtn = document.getElementById('btnSearch');
+//get a reference to the element
+var myBtn = document.getElementById('btnSearch');
 
-  //add event listener
-  myBtn.addEventListener('click', function(event) {
+//add event listener
+myBtn.addEventListener('click', function (event) {
     event.preventDefault();
     testFunction();
-  });
+});
 
 function testFunction() {
-      var days = [];
+    var days = [];
     var dayCount = 0;
     var inputElements = document.getElementsByClassName('inputDay');
     var time = slider[0].noUiSlider.get();
 
-    for(var i=0; inputElements[i]; ++i){
-        if(inputElements[i].checked)
-        {
+    for (var i = 0; inputElements[i]; ++i) {
+        if (inputElements[i].checked) {
             days[dayCount++] = inputElements[i].value;
-            
+
         }
     }
-    // console.log(days);
-
     var fee = [];
     var feeCount = 0;
     var inputElements = document.getElementsByClassName('inputFee');
-    
-    for(var i=0; inputElements[i]; ++i){
-        if(inputElements[i].checked)
-        {
+
+    for (var i = 0; inputElements[i]; ++i) {
+        if (inputElements[i].checked) {
             fee[feeCount++] = inputElements[i].value;
-            
         }
     }
-    // console.log(fee);
 
     var search = [document.getElementById('ipSearch').value];
 
     var xmlhttp = new XMLHttpRequest();
 
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
-           if (xmlhttp.status == 200) {
-            //    console.log(xmlhttp.responseText);
-               put_doctors(xmlhttp.responseText);
-            //    document.getElementById("results").innerHTML = xmlhttp.responseText;
-
-           }
-           else if (xmlhttp.status == 400) {
-              console.log('There was an error 400');
-           }
-           else {
-               console.log('something else other than 200 was returned');
-           }
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == XMLHttpRequest.DONE) {
+            if (xmlhttp.status == 200) {
+                put_doctors(xmlhttp.responseText);
+            }
+            else if (xmlhttp.status == 400) {
+                console.log('There was an error 400');
+            }
+            else {
+                console.log('something else other than 200 was returned');
+            }
         }
     };
-    xmlhttp.open("POST", "http://localhost:3005/api/doctors", true);
-    xmlhttp.setRequestHeader('Access-Control-Allow-Headers', '*');
-    xmlhttp.setRequestHeader('Access-Control-Allow-Methods', 'POST');
+    xmlhttp.open("POST", "http://10.3.0.237:3005/api/doctors", true);
+    // xmlhttp.setRequestHeader('Access-Control-Allow-Headers', 'http://localhost:3000/');
+    // xmlhttp.setRequestHeader('Access-Control-Allow-Origin', 'http://localhost:3000/search');
+    // xmlhttp.setRequestHeader('Access-Control-Allow-Methods', 'POST');
+    // xmlhttp.setRequestHeader('Access-Control-Allow-Methods', 'GET');
     // xmlhttp.withCredentials = true;
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send("name="+search+"&&cost="+fee+"&&days="+days+"&&time="+time);
+    xmlhttp.send("name=" + search + "&&cost=" + fee + "&&days=" + days + "&&time=" + time);
 }
 
 var el = document.getElementsByClassName('ipCheckbox');
 
 for (var i = 0; i < el.length; i++) {
     el[i].onclick = testFunction;
-    
+
 }
 
-
-// var inputFormat = document.getElementById('input-Start');
 var slider = document.getElementsByClassName('sliders');
 
 noUiSlider.create(slider[0], {
-	start: [9, 17],
-	connect: true,
-	range: {
-		'min': 7,
-		'max': 22
-	},
+    start: [9, 17],
+    connect: true,
+    range: {
+        'min': 7,
+        'max': 22
+    },
     margin: 3,
-	behaviour: 'drag',
+    behaviour: 'drag',
 });
-slider[0].noUiSlider.on('update', function(){
+slider[0].noUiSlider.on('update', function () {
     var value = slider[0].noUiSlider.get();
     // inputFormat.value = value[0];
     value[0] = formatTime(value[0]);
     value[1] = formatTime(value[1]);
-        
+
     var start = document.getElementsByClassName('noUi-handle-lower');
     var end = document.getElementsByClassName('noUi-handle-upper');
-    start[0].innerHTML = '<br><br>'+value[0];
-    end[0].innerHTML = '<br><br>'+value[1];
+    start[0].innerHTML = '<br><br>' + value[0];
+    end[0].innerHTML = '<br><br>' + value[1];
     testFunction();
 });
 
-function formatTime(time){
-    if(time>12){
-        time-=12;
+function formatTime(time) {
+    if (time > 12) {
+        time -= 12;
         time = Math.ceil(time);
-        time = time+'&nbspPM'
+        time = time + '&nbspPM'
     }
-    else{
+    else {
         time = Math.ceil(time);
-        time = time+'&nbspAM'
+        time = time + '&nbspAM'
     }
     return time;
 }
 
-function put_doctors(doctors){
+function put_doctors(doctors) {
     // console.log( JSON.parse(doctors));
-    var arr ;
+    var arr;
     var results = document.getElementById('results');
     arr = JSON.parse(doctors);
     var response = arr[0];
     var msg = arr[1];
     // console.log(chk);
-    if(response['response'] == -1){
+    if (response['response'] == -1) {
         results.innerHTML = msg['msg'];
         return;
     }
     var dr = arr.doctors;
     dr = createSlots(arr);
-    
-    results.innerHTML = ''; 
+
+    results.innerHTML = '';
     for (var index = 0; index < dr.length; index++) {
         var element = dr[index];
         var br = document.createElement('br');
@@ -155,9 +146,9 @@ function put_doctors(doctors){
         var costs = document.createElement('span');
         var costs2 = document.createElement('span');
         var vertical_line = document.createElement('div');
-        
+
         // Setting attributes
-        panel.setAttribute('id', 'doc'+index);
+        panel.setAttribute('id', 'doc' + index);
         panel.setAttribute('class', 'panel');
         doctor.setAttribute('class', 'doctor');
         doctorName.setAttribute('class', 'name');
@@ -180,10 +171,10 @@ function put_doctors(doctors){
         costs.setAttribute('class', 'costs');
         costs2.setAttribute('class', 'costs');
         vertical_line.setAttribute('class', 'vertical-line');
-        profileImg.setAttribute('src', '/'+element.image);
+        profileImg.setAttribute('src', '/' + element.image);
 
         doctorName.innerText = element.name;
-        doctorPost.innerHTML = element.post+'<br>'+element.education+'<br>'+element.exp+'Years EXP';
+        doctorPost.innerHTML = element.post + '<br>' + element.education + '<br>' + element.exp + 'Years EXP';
         appoinmentBtn.innerText = 'Make Appointment';
         loc1Name.innerText = element.clinic[0].name;
         loc2Name.innerText = element.clinic[1].name;
@@ -192,14 +183,14 @@ function put_doctors(doctors){
         // console.log(element.clinic[0].slot);
         for (var i = 0; i < element.clinic[0].slot.length; i++) {
             var slot = element.clinic[0].slot[i];
-            slots.innerHTML += '<span class="left">'+slot.days+'&nbsp:</span>';
-            slots.innerHTML += '<span class="right">'+slot.time+'</span>';
+            slots.innerHTML += '<span class="left">' + slot.days + '&nbsp:</span>';
+            slots.innerHTML += '<span class="right">' + slot.time + '</span>';
             slots.appendChild(clearfix);
         }
         for (var i = 0; i < element.clinic[1].slot.length; i++) {
             var slot = element.clinic[1].slot[i];
-            slots2.innerHTML += '<span class="left">'+slot.days+'&nbsp:</span>';
-            slots2.innerHTML += '<span class="right">'+slot.time+'</span>';
+            slots2.innerHTML += '<span class="left">' + slot.days + '&nbsp:</span>';
+            slots2.innerHTML += '<span class="right">' + slot.time + '</span>';
             slots2.appendChild(clearfix);
         }
         costs.innerHTML = element.clinic[0].cost + ' INR/hours<br><br>'
@@ -222,7 +213,7 @@ function put_doctors(doctors){
         loc2.appendChild(clearfix);
         loc2.innerHTML += '<div class="clearfix"></div>';
         loc2.appendChild(costs2);
-        locations.appendChild(loc2); 
+        locations.appendChild(loc2);
         doctor.appendChild(profileImg);
         doctor.appendChild(doctorName);
         doctor.appendChild(br);
@@ -239,97 +230,96 @@ function put_doctors(doctors){
     }
 }
 
-function createSlots(dr){
-    if(dr.length<1)
-     console.log('&nbsp No results as per criteria');
-    else
-    {
-      for(var count = 0; count<dr.length; count++){
-        for(var countClinic = 0; countClinic<2;countClinic++){
-          dr[count].clinic[countClinic].slot = new Array;
-          var k=0;
-          var slot = [];
-          var startDay, endDay, time, nextDay;
-          var startTime, endTime;
-          for(i=0;i<=6;i++){
-            startDay = dr[count].clinic[countClinic].timing[i].day;
-            if(dr[count].clinic[countClinic].timing[i].start<0){
-              continue;
-            }
-            endDay = dr[count].clinic[countClinic].timing[i].day;
-            // Time manipulation
-            {
-              startTime = dr[count].clinic[countClinic].timing[i].start;
-              startTime = getTime(startTime);
-              endTime = dr[count].clinic[countClinic].timing[i].end;
-              endTime = getTime(endTime);
-            }
-            time = startTime+' - '+endTime;
-            var startDayArr = dr[count].clinic[countClinic].timing[i];
-            for(var j=i+1;j<=6;j++){
-              nextDay = dr[count].clinic[countClinic].timing[j];
-              if(nextDay.start == startDayArr.start && nextDay.end == startDayArr.end){
-                endDay = dr[count].clinic[countClinic].timing[j].day;
-                if(endDay == 'Friday'){
-                    endDay = ' - '+ endDay;
-                    // console.log(countClinic+'cli'+ i+'i, j'+j+' '+endDay)
-                    j++;i++;  
-                    dr[count].clinic[countClinic].slot.push({days:startDay+endDay,time:time});
-                    break;
-                }
-                i++;
-              }              
-              else{      
-                if(startDay==endDay)
-                  endDay = ''; 
-                else
-                    endDay = ' - '+ endDay     
-                dr[count].clinic[countClinic].slot.push({days:startDay+endDay,time:time});
-                break;
-              }              
-            }
-            if(j==7){
-              if(startDay==endDay)
-                  endDay = '';
-              else
-                  endDay = ' - '+ endDay     
-              dr[count].clinic[countClinic].slot.push({days:startDay+endDay,time:time});           
-            }
-            // console.log(i+'i, j'+j+' qqq '+endDay)
-            if(j<=6)
-                startDay = dr[count].clinic[countClinic].timing[j];
-            if(startDay.day == 'Friday'){
-                startTime = startDay.start;
-                startTime = getTime(startTime);
-                endTime = startDay.end;
-                endTime = getTime(endTime);
-                time = startTime+' - '+endTime;
+function createSlots(dr) {
+    if (dr.length < 1)
+        console.log('&nbsp No results as per criteria');
+    else {
+        for (var count = 0; count < dr.length; count++) {
+            for (var countClinic = 0; countClinic < 2; countClinic++) {
+                dr[count].clinic[countClinic].slot = new Array;
+                var k = 0;
+                var slot = [];
+                var startDay, endDay, time, nextDay;
+                var startTime, endTime;
+                for (i = 0; i <= 6; i++) {
+                    startDay = dr[count].clinic[countClinic].timing[i].day;
+                    if (dr[count].clinic[countClinic].timing[i].start < 0) {
+                        continue;
+                    }
+                    endDay = dr[count].clinic[countClinic].timing[i].day;
+                    // Time manipulation
+                    {
+                        startTime = dr[count].clinic[countClinic].timing[i].start;
+                        startTime = getTime(startTime);
+                        endTime = dr[count].clinic[countClinic].timing[i].end;
+                        endTime = getTime(endTime);
+                    }
+                    time = startTime + ' - ' + endTime;
+                    var startDayArr = dr[count].clinic[countClinic].timing[i];
+                    for (var j = i + 1; j <= 6; j++) {
+                        nextDay = dr[count].clinic[countClinic].timing[j];
+                        if (nextDay.start == startDayArr.start && nextDay.end == startDayArr.end) {
+                            endDay = dr[count].clinic[countClinic].timing[j].day;
+                            if (endDay == 'Friday') {
+                                endDay = ' - ' + endDay;
+                                // console.log(countClinic+'cli'+ i+'i, j'+j+' '+endDay)
+                                j++; i++;
+                                dr[count].clinic[countClinic].slot.push({ days: startDay + endDay, time: time });
+                                break;
+                            }
+                            i++;
+                        }
+                        else {
+                            if (startDay == endDay)
+                                endDay = '';
+                            else
+                                endDay = ' - ' + endDay
+                            dr[count].clinic[countClinic].slot.push({ days: startDay + endDay, time: time });
+                            break;
+                        }
+                    }
+                    if (j == 7) {
+                        if (startDay == endDay)
+                            endDay = '';
+                        else
+                            endDay = ' - ' + endDay
+                        dr[count].clinic[countClinic].slot.push({ days: startDay + endDay, time: time });
+                    }
+                    // console.log(i+'i, j'+j+' qqq '+endDay)
+                    if (j <= 6)
+                        startDay = dr[count].clinic[countClinic].timing[j];
+                    if (startDay.day == 'Friday') {
+                        startTime = startDay.start;
+                        startTime = getTime(startTime);
+                        endTime = startDay.end;
+                        endTime = getTime(endTime);
+                        time = startTime + ' - ' + endTime;
 
-                dr[count].clinic[countClinic].slot.push({days:startDay.day,time:time});
-                j++;i++;
+                        dr[count].clinic[countClinic].slot.push({ days: startDay.day, time: time });
+                        j++; i++;
+                    }
+                }
             }
-          }
         }
-      }
         return dr;
     }
 }
 
 function getTime(time) {
-        if (time > 12) {
-            time = time - 12;
-            var length = Math.ceil(Math.log(time + 2) / Math.LN10);
-            if (length > 1)
-                time = time + ':00 PM';
-            else
-                time = '0' + time + ':00 PM';
-        }
-        else {
-            var length = Math.ceil(Math.log(time + 1) / Math.LN10);
-            if (length > 1)
-                time = time + ':00 AM';
-            else
-                time = '0' + time + ':00 AM';
-        }
-        return time;
+    if (time > 12) {
+        time = time - 12;
+        var length = Math.ceil(Math.log(time + 2) / Math.LN10);
+        if (length > 1)
+            time = time + ':00 PM';
+        else
+            time = '0' + time + ':00 PM';
     }
+    else {
+        var length = Math.ceil(Math.log(time + 1) / Math.LN10);
+        if (length > 1)
+            time = time + ':00 AM';
+        else
+            time = '0' + time + ':00 AM';
+    }
+    return time;
+}

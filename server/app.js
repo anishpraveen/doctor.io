@@ -7,9 +7,8 @@ const path = require('path');
 var mongoose = require("mongoose");
 var Doctor = require("./data/doctor");
 var bodyParser = require('body-parser');
-var router = require("express").Router();
-router.use(bodyParser.json())
-router.use(bodyParser.urlencoded({ extended: false }));
+var cors = require('cors')
+
 var doctor_manipulation = require("./functions/doctor-manipulation.js");
 
 
@@ -19,34 +18,48 @@ const app = express();
 app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
 
 
-// app.all('/', function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
-//   next();
-//  });
-
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors())
+// Add headers
+// app.use(function (req, res, next) {
+
+//     // Website you wish to allow to connect
+//     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000/search');
+
+//     // Request methods you wish to allow
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+//     // Request headers you wish to allow
+//     res.setHeader('Access-Control-Allow-Headers', '*');
+
+//     // Set to true if you need the website to include cookies in the requests sent
+//     // to the API (e.g. in case you use sessions)
+//     // res.setHeader('Access-Control-Allow-Credentials', true);
+
+//     // Pass to next layer of middleware
+//     next();
+// });
 
 app.get('/login', function (req, res) {
-  console.log(req.body)
-  res.send('Logcascin');
+    console.log(req.body)
+    res.send('Logcascin');
 });
 
-app.get('/api/doctors',getList);
-app.post('/api/doctors',getList);
+app.get('/api/doctors', getList);
+app.post('/api/doctors', getList);
 // Always return the main index.html, so react-router render the route in the client
 app.post('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
 });
 
 
 
 function getList(req, res, next) {
-  console.log(req.rawHeaders)
-    var name = 'j';
+    console.log(req.rawHeaders)
+    var name = '';
     var name = valueValidator(req.body.name);
     var fee = valueValidator(req.body.cost);
     var days = valueValidator(req.body.days);

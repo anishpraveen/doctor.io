@@ -5,12 +5,14 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "concurrently": "^3.2.0",
+    "cors": "^2.8.1",
     "mocha": "^3.0.2",
     "mz": "^2.4.0",
     "react-scripts": "0.2.1",
     "supertest-as-promised": "^4.0.0"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "body-parser": "^1.16.0",
     "classnames": "^2.2.5",
     "express": "^4.14.0",
@@ -18,7 +20,8 @@
     "morgan": "^1.7.0",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
-    "react-router": "^2.6.1"
+    "react-router": "^2.6.1",
+    "supertest-as-promised": "^4.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
