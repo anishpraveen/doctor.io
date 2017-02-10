@@ -5,9 +5,23 @@ import React, { Component } from 'react';
 import './style.css';
 import Footer from '../Footer'
 export default class Login extends Component {
-    static propTypes = {}
-    static defaultProps = {}
-    state = {}
+    constructor(props) {
+        super(props);
+        this.state = { credentials: { username: '', password: '' } }
+        this.onChange = this.onChange.bind(this);
+        this.onSave = this.onSave.bind(this);
+    }
+    onChange(event) {
+        const field = event.target.name;
+        const credentials = this.state.credentials;
+        credentials[field] = event.target.value;
+        return this.setState({ credentials: credentials });
+    }
+
+    onSave(event) {
+        event.preventDefault();
+        this.props.actions.logInUser(this.state.credentials);
+    }
 
     render() {
         // const { className, ...props } = this.props;
@@ -26,13 +40,13 @@ export default class Login extends Component {
                     <p className="subText">Changing the way people feel about dentistry</p>
                     <form action="search.html" method="get">
                         <input className="form-input" type="text" name="username"
-                            value={this.props.username}
+                            value={this.state.credentials.username}
                             ref="username"
-                            onChange={this.handleChange} placeholder="Username" /><br />
+                            onChange={this.onChange} placeholder="Username" /><br />
                         <input className="form-input" type="password" name="password"
-                            value={this.props.password}
+                            value={this.state.credentials.password}
+                            onChange={this.onChange}
                             ref="password"
-                            onChange={this.handleChange}
                             placeholder="Password" /><br />
                         <button className="btn btn-primary loginBtn pointer" type="submit"> Login </button>
                     </form>
@@ -46,7 +60,7 @@ export default class Login extends Component {
                     <br />
                     <button className="btn btn-guest loginBtn pointer" id="btnGuest"> GUEST </button>
                 </div>
-                <Footer/>
+                <Footer />
             </div>
         );
     }

@@ -8,14 +8,14 @@ var mongoose = require("mongoose");
 var Doctor = require("./data/doctor");
 var bodyParser = require('body-parser');
 var cors = require('cors')
-
+var User = require("../server/data/users");
 var doctor_manipulation = require("./functions/doctor-manipulation.js");
 
 
 const app = express();
 
 // Setup logger
-app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
+// app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
 
 
 // Serve static assets
@@ -23,30 +23,48 @@ app.use(express.static(path.resolve(__dirname, '..', 'build')));
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors())
-// Add headers
-// app.use(function (req, res, next) {
-
-//     // Website you wish to allow to connect
-//     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000/search');
-
-//     // Request methods you wish to allow
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-//     // Request headers you wish to allow
-//     res.setHeader('Access-Control-Allow-Headers', '*');
-
-//     // Set to true if you need the website to include cookies in the requests sent
-//     // to the API (e.g. in case you use sessions)
-//     // res.setHeader('Access-Control-Allow-Credentials', true);
-
-//     // Pass to next layer of middleware
-//     next();
-// });
 
 app.get('/login', function (req, res) {
     console.log(req.body)
     res.send('Logcascin');
 });
+
+
+/* POST form. */
+app.post('/login', function (req, res) {
+    User.findOne({ username: req.body.username }, function (err, user, password = req.body.password) {
+        if (err) throw err;
+        if (user === null || password === null) {
+            res.redirect('login');
+        }
+        else {
+            // test a matching password
+            email = user.email;
+            user.comparePassword(password, function (err, isMatch) {
+                if (err) throw err;
+                if (isMatch) {
+                    var jwt = require('jwt-simple');
+                    var payload = {email:email,user:user.username,userID:user._id};
+                    var secret = 'QAZ!@#123';
+
+                    // HS256 secrets are typically 128-bit random strings, for example hex-encoded:
+                    // var secret = Buffer.from('fe1a1915a379f3be5394b64d14794932', 'hex')
+
+                    // encode
+                    var token = jwt.encode(payload, secret);
+
+                    // decode
+                    var decoded = jwt.decode(token, secret);
+                    // console.log(decoded); //=> { foo: 'bar' }
+                    // res.send({ token: token, payload: payload });
+                    res.send({ token: token });
+                }
+                else res.send('Invalid entry');
+            });
+        }
+    });
+});
+
 
 app.get('/api/doctors', getList);
 app.post('/api/doctors', getList);
@@ -58,7 +76,7 @@ app.post('*', (req, res) => {
 
 
 function getList(req, res, next) {
-    console.log(req.rawHeaders)
+    // console.log(req.rawHeaders)
     var name = '';
     var name = valueValidator(req.body.name);
     var fee = valueValidator(req.body.cost);

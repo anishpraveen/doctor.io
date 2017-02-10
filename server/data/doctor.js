@@ -1,8 +1,3 @@
-// var mongoose = require("mongoose");
-// var schoolSchema = mongoose.Schema({
-//     name: String,
-//     tagline: String
-// });
 
 var mongoose = require("mongoose");
 var Schema   = mongoose.Schema;
