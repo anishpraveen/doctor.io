@@ -26,7 +26,7 @@ app.use(cors())
 
 app.get('/login', function (req, res) {
     console.log(req.body)
-    res.send('Logcascin');
+    res.send({'msg':'Invalid entry'});
 });
 
 
@@ -59,7 +59,7 @@ app.post('/login', function (req, res) {
                     // res.send({ token: token, payload: payload });
                     res.send({ token: token });
                 }
-                else res.send('Invalid entry');
+                else res.send({'msg':'Invalid entry'});
             });
         }
     });

@@ -171,6 +171,11 @@ html{
 .header_bg #hamberg{
     display: none;
 }
+.errors{
+    color: #ff0000;
+    font-size: 15px;
+    padding-bottom: 10px;
+}
 /*for 768px screen and below*/
 @media screen and (max-width:768px){
     .header_bg #logo{

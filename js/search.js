@@ -323,3 +323,13 @@ function getTime(time) {
     }
     return time;
 }
+
+//get a reference to the element
+var logout = document.getElementById('aLogout');
+
+//add event listener
+logout.addEventListener('click', function (event) {
+    event.preventDefault();
+    sessionStorage.removeItem('jwt');
+    window.location.replace('/login')
+});

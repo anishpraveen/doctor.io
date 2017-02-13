@@ -23,7 +23,7 @@ export default class MenuBar extends Component {
                         <a href="#">APPOINTMENTS</a>
                         <a href="#">COMMUNICATION</a>
                         <a href="#">PROFILE</a>
-                        <a href="#">Logout</a>
+                        <a href="#" id="aLogout">Logout</a>
                     </span>
                     <img id="hamberg" src="/images/icons/menu.svg" alt="Open Menu" className="pointer" />
 
