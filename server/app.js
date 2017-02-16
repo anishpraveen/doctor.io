@@ -2,7 +2,10 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
-
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
+var jwt = require('jwt-simple');
 
 var mongoose = require("mongoose");
 var Doctor = require("./data/doctor");
@@ -10,6 +13,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors')
 var User = require("../server/data/users");
 var doctor_manipulation = require("./functions/doctor-manipulation.js");
+var doctor_search = require("./functions/doctor-search.js");
 
 
 const app = express();
@@ -23,14 +27,27 @@ app.use(express.static(path.resolve(__dirname, '..', 'build')));
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors())
+app.use(cookieParser());
+
+app.use(session({
+    store: new MongoStore({
+        url: 'mongodb://localhost/dental'
+    }),
+    secret: 'QWERTY123456789',
+    resave: true,
+    saveUninitialized: true
+}));
+
+
+var JWTsecret = 'QAZ!@#123';
 
 app.get('/login', function (req, res) {
     console.log(req.body)
-    res.send({'msg':'Invalid entry'});
+    res.send({ 'msg': 'Invalid entry' });
 });
 
 
-/* POST form. */
+/* POST Login form. */
 app.post('/login', function (req, res) {
     User.findOne({ username: req.body.username }, function (err, user, password = req.body.password) {
         if (err) throw err;
@@ -43,23 +60,19 @@ app.post('/login', function (req, res) {
             user.comparePassword(password, function (err, isMatch) {
                 if (err) throw err;
                 if (isMatch) {
-                    var jwt = require('jwt-simple');
-                    var payload = {email:email,user:user.username,userID:user._id};
-                    var secret = 'QAZ!@#123';
+                    // var jwt = require('jwt-simple');
+                    var payload = { email: email, user: user.username, userID: user._id };
+
 
                     // HS256 secrets are typically 128-bit random strings, for example hex-encoded:
                     // var secret = Buffer.from('fe1a1915a379f3be5394b64d14794932', 'hex')
 
                     // encode
-                    var token = jwt.encode(payload, secret);
-
-                    // decode
-                    var decoded = jwt.decode(token, secret);
-                    // console.log(decoded); //=> { foo: 'bar' }
-                    // res.send({ token: token, payload: payload });
+                    var token = jwt.encode(payload, JWTsecret);
+                    req.session.token = token;
                     res.send({ token: token });
                 }
-                else res.send({'msg':'Invalid entry'});
+                else res.send({ 'msg': 'Invalid entry' });
             });
         }
     });
@@ -74,8 +87,40 @@ app.post('*', (req, res) => {
 });
 
 
-
 function getList(req, res, next) {
+    console.log('getlist\n')
+    doctor_search.search(req, res, next)
+    
+    // var userID
+    // try {
+    //     var token = req.body.jwt
+    //     var decoded = jwt.decode(token, JWTsecret);
+    //      userID = decoded.userID
+    // }
+    // catch (err) {
+    //     console.log(err);
+    //     res.send({ 'msg': 'Invalid entry' });
+    //     return;
+    // }
+    // User.findOne({ _id: userID }, function (err, user) {
+    //     if (err) throw err;
+    //     if (user === null) {
+    //         res.send({ 'msg': 'Invalid entry' });
+    //         console.log('\n\Invalid')
+    //     }
+    //     else {
+    //         var dr = doctor_search.search(req, res, next)
+    //         console.log('out')
+    //         console.log(dr)
+    //         // res.json(dr);
+    //     }
+    // });
+
+    console.log('\n\ncompleted')
+}
+
+
+function getList2(req, res, next) {
     // console.log(req.rawHeaders)
     var name = '';
     var name = valueValidator(req.body.name);

@@ -36,7 +36,13 @@ function testFunction() {
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == XMLHttpRequest.DONE) {
             if (xmlhttp.status == 200) {
+                var response = JSON.stringify(xmlhttp.responseText);
+                console.log((xmlhttp.responseText))
+                if (response['msg'] == 'Invalid entry') {
+                    window.location.replace('/login')
+                }
                 put_doctors(xmlhttp.responseText);
+                console.log((xmlhttp.responseText))
             }
             else if (xmlhttp.status == 400) {
                 console.log('There was an error 400');
@@ -52,8 +58,11 @@ function testFunction() {
     // xmlhttp.setRequestHeader('Access-Control-Allow-Methods', 'POST');
     // xmlhttp.setRequestHeader('Access-Control-Allow-Methods', 'GET');
     // xmlhttp.withCredentials = true;
+    // if ($window.sessionStorage.token) {
+    //   xmlhttp.setRequestHeader("Authorization", "Bearer " +  sessionStorage.jwt);
+    //   }
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send("name=" + search + "&&cost=" + fee + "&&days=" + days + "&&time=" + time);
+    xmlhttp.send("name=" + search + "&&cost=" + fee + "&&days=" + days + "&&time=" + time + "&&jwt=" + sessionStorage.jwt);
 }
 
 var el = document.getElementsByClassName('ipCheckbox');
