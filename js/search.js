@@ -37,12 +37,12 @@ function testFunction() {
         if (xmlhttp.readyState == XMLHttpRequest.DONE) {
             if (xmlhttp.status == 200) {
                 var response = JSON.stringify(xmlhttp.responseText);
-                console.log((xmlhttp.responseText))
+                // console.log((xmlhttp.responseText))
                 if (response['msg'] == 'Invalid entry') {
                     window.location.replace('/login')
                 }
                 put_doctors(xmlhttp.responseText);
-                console.log((xmlhttp.responseText))
+                // console.log((xmlhttp.responseText))
             }
             else if (xmlhttp.status == 400) {
                 console.log('There was an error 400');
@@ -183,7 +183,7 @@ function put_doctors(doctors) {
         profileImg.setAttribute('src', '/' + element.image);
 
         doctorName.innerText = element.name;
-        doctorPost.innerHTML = element.post + '<br>' + element.education + '<br>' + element.exp + 'Years EXP';
+        doctorPost.innerHTML = element.post + '<br>' + element.education + '<br>' + element.exp + '&nbspYears&nbspEXP';
         appoinmentBtn.innerText = 'Make Appointment';
         loc1Name.innerText = element.clinic[0].name;
         loc2Name.innerText = element.clinic[1].name;

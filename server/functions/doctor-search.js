@@ -2,8 +2,8 @@ module.exports = {
     insert: function (time) {
 
     },
-    search: function (req, res, next) {
-        console.log('connect')
+    search: function (res, filterQuery) {
+        console.log(filterQuery)
         var mysql = require('mysql')
         var connection = mysql.createConnection({
             host: 'localhost',
@@ -13,19 +13,58 @@ module.exports = {
         })
         // var connection = require('./db.js')
         // connection.connect()
-        connection.query('SELECT * FROM doctors', function (err, rows) {
+        var Query = "SELECT doctors.id,doctors.cName, doctors.cPost, doctors.iExperience, doctors.cImage, clinic.cAddress, clinic.iCost, " +
+            "GROUP_CONCAT(DISTINCT degree.cDegree SEPARATOR ', ' ) AS education,doctors.cImage, " +
+            "GROUP_CONCAT(DISTINCT clinic.cName SEPARATOR ', ' ) as clinic, " +
+            "timings.* " +
+            "FROM  doctors " +
+            "LEFT JOIN doctors_degree ON doctors.id = doctors_degree.iDrId " +
+            "LEFT JOIN degree on degree.id = doctors_degree.iDegreeId " +
+            "LEFT JOIN timings on timings.iDrId = doctors.id " +
+            "LEFT JOIN clinic on clinic.id = timings.iClinicId " +
+            filterQuery+
+            "GROUP BY doctors.id, clinic.cName";
+        connection.query(Query, function (err, rows) {
 
-            if (err)
+            if (err){
                 console.log("Error Selecting : %s ", err);
+            }
 
-            var dr = rows[0];
+            var dr = rows;
             var objs = [];
-            for (var i = 0; i < rows.length; i++) {
-                objs.push({ name: rows[i].cName, post:rows[i].cPost, experience:rows[i].iExperience });
+            var timings = []
+            var clinic1Timing = []
+            var clinic2Timing = []
+            for (var i = 0; i < rows.length-1; i++) {
+                for(var j=i; j<i+2;j++){
+                    timings.push({"day":"Monday",start:rows[j].iMonStart,end:rows[j].iMonEnd})
+                    timings.push({"day":"Tuesday",start:rows[j].iTueStart,end:rows[j].iTueEnd})
+                    timings.push({"day":"Wednesday",start:rows[j].iWedStart,end:rows[j].iWedEnd})
+                    timings.push({"day":"Thursday",start:rows[j].iThuStart,end:rows[j].iThuEnd})
+                    timings.push({"day":"Friday",start:rows[j].iFriStart,end:rows[j].iFriEnd})
+                    timings.push({"day":"Saturday",start:rows[j].iSatStart,end:rows[j].iSatEnd})
+                    timings.push({"day":"Sunday",start:rows[j].iSunStart,end:rows[j].iSunEnd})
+                    if(j==i)
+                        clinic1Timing = timings
+                    else
+                        clinic2Timing = timings
+                    timings = [];
+                }
+                objs.push({ name: rows[i].cName, post: rows[i].cPost, exp: rows[i].iExperience,
+                            image: rows[i].cImage, education: rows[i].education, 
+                            clinic:[
+                                { name:rows[i].clinic,address:rows[i].cAddress,timing:clinic1Timing, cost:rows[i].iCost},
+                                { name:rows[i+1].clinic,address:rows[i+1].cAddress,timing:clinic2Timing, cost:rows[i+1].iCost}
+                                ]
+                            });
+                i++;
             }
             // console.log('' + dr.cName);
-            // console.log((objs))
-            res.json(objs);
+            // console.log((dr))
+            if(objs)
+                res.json(objs);
+            else
+                res.json({'response': '-1','msg': '&nbsp No results as per criteria.'})
             // return (objs);
         });
     }

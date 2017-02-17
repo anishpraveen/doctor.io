@@ -89,7 +89,89 @@ app.post('*', (req, res) => {
 
 function getList(req, res, next) {
     console.log('getlist\n')
-    doctor_search.search(req, res, next)
+    var filterQuery, timeFilter, dayFilter
+    filterQuery = ' where '
+    var name = '';
+    var name = valueValidator(req.body.name);
+    var fee = valueValidator(req.body.cost);
+    var days = valueValidator(req.body.days);
+
+    var startTime, endTime;
+    if (typeof req.body.time === 'undefined' || req.body.time.length == 0) {
+        startTime = 9;
+        endTime = 19;
+    }
+    else {
+        var time = req.body.time.split(",");
+        startTime = Math.ceil(time[0]);
+        endTime = Math.ceil(time[1]);
+    }
+    timeFilter = ""
+    var costFilter = [];
+    for (var i = 0; i < fee.length; i++) {
+        switch (fee[i]) {
+            case 'slab1':
+                costFilter += " clinic.iCost BETWEEN  0 and 100 "     
+                break;
+            case 'slab2':
+                costFilter += " clinic.iCost BETWEEN  100 and 250 "   
+                break;
+            case 'slab3':
+                costFilter += " clinic.iCost BETWEEN  250 and 500 "  
+                break;
+            case 'slab4':
+                costFilter += " clinic.iCost BETWEEN  500 and 1000 "   
+                break;
+            case 'slab5':
+                costFilter += " clinic.iCost BETWEEN  1000 and 1500 "   
+                break;
+            case 'slab6':
+                costFilter += " clinic.iCost BETWEEN  1500 and 2000 "   
+                break;
+            case 'slab7':
+                costFilter += " clinic.iCost BETWEEN  2000 and 2500 "  
+                break;
+
+            default:
+                costFilter = " clinic.iCost >= 0 "  
+                break;
+        }
+        costFilter += " AND "
+    }
+
+    var searchDays = [];
+    var daysAvailable = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    for (i = 0; i < days.length; i++) {
+        switch (days[i]) {
+            case 'Monday':
+                searchDays.push({ 'day': daysAvailable[0] });
+                break;
+            case 'Tuesday':
+                searchDays.push({ 'day': daysAvailable[1] });
+                break;
+            case 'Wednesday':
+                searchDays.push({ 'day': daysAvailable[2] });
+                break;
+            case 'Thursday':
+                searchDays.push({ 'day': daysAvailable[3] });
+                break;
+            case 'Friday':
+                searchDays.push({ 'day': daysAvailable[4] });
+                break;
+            case 'Saturday':
+                searchDays.push({ 'day': daysAvailable[5] });
+                break;
+            case 'Sunday':
+                searchDays.push({ 'day': daysAvailable[6] });
+                break;
+            default:
+                searchDays.push({ 'day': { $in: daysAvailable } });
+                break;
+        }
+    }
+
+    filterQuery+= costFilter +'1=1 '
+    doctor_search.search(res, filterQuery)
     
     // var userID
     // try {
