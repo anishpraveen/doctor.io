@@ -111,15 +111,13 @@ function formatTime(time) {
 }
 
 function put_doctors(doctors) {
-    // console.log( JSON.parse(doctors));
     var arr;
     var results = document.getElementById('results');
     arr = JSON.parse(doctors);
     var response = arr[0];
     var msg = arr[1];
-    // console.log(chk);
-    if (response['response'] == -1) {
-        results.innerHTML = msg['msg'];
+    if (arr['response'] == -1) {
+        results.innerHTML = arr['msg'];
         return;
     }
     var dr = arr.doctors;

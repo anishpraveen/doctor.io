@@ -89,7 +89,7 @@ app.post('*', (req, res) => {
 
 function getList(req, res, next) {
     console.log('getlist\n')
-    var filterQuery, timeFilter, dayFilter
+    var filterQuery, timeFilter, dayFilter, nameFilter
     filterQuery = ' where '
     var name = '';
     var name = valueValidator(req.body.name);
@@ -106,97 +106,100 @@ function getList(req, res, next) {
         startTime = Math.ceil(time[0]);
         endTime = Math.ceil(time[1]);
     }
+    var daysAvailable = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     timeFilter = ""
+    if (days.length) {
+        for (i = 0; i < days.length; i++) {
+            switch (days[i]) {
+                case 'Monday':
+                    timeFilter += " timings.i" + daysAvailable[0] + "Start <= " + startTime + " and timings.i" + daysAvailable[0] + "End >=" + endTime + " "
+                    break;
+                case 'Tuesday':
+                    timeFilter += " timings.i" + daysAvailable[1] + "Start <= " + startTime + " and timings.i" + daysAvailable[1] + "End >=" + endTime + " "
+                    break;
+                case 'Wednesday':
+                    timeFilter += " timings.i" + daysAvailable[2] + "Start <= " + startTime + " and timings.i" + daysAvailable[2] + "End >=" + endTime + " "
+                    break;
+                case 'Thursday':
+                    timeFilter += " timings.i" + daysAvailable[3] + "Start <= " + startTime + " and timings.i" + daysAvailable[3] + "End >=" + endTime + " "
+                    break;
+                case 'Friday':
+                    timeFilter += " timings.i" + daysAvailable[4] + "Start <= " + startTime + " and timings.i" + daysAvailable[4] + "End >=" + endTime + " "
+                    break;
+                case 'Saturday':
+                    timeFilter += " timings.i" + daysAvailable[5] + "Start <= " + startTime + " and timings.i" + daysAvailable[5] + "End >=" + endTime + " "
+                    break;
+                case 'Sunday':
+                    timeFilter += " timings.i" + daysAvailable[6] + "Start <= " + startTime + " and timings.i" + daysAvailable[6] + "End >=" + endTime + " "
+                    break;
+                default:
+                    timeFilter += " timings.i" + daysAvailable[0] + "Start <= 10 and timings.i" + daysAvailable[0] + "End >= 15 "
+                    break;
+            }
+            if (i != days.length - 1)
+                timeFilter += " OR "
+        }
+    }
     var costFilter = [];
     for (var i = 0; i < fee.length; i++) {
         switch (fee[i]) {
             case 'slab1':
-                costFilter += " clinic.iCost BETWEEN  0 and 100 "     
+                costFilter += " clinic.iCost BETWEEN  0 and 100 "
                 break;
             case 'slab2':
-                costFilter += " clinic.iCost BETWEEN  100 and 250 "   
+                costFilter += " clinic.iCost BETWEEN  100 and 250 "
                 break;
             case 'slab3':
-                costFilter += " clinic.iCost BETWEEN  250 and 500 "  
+                costFilter += " clinic.iCost BETWEEN  250 and 500 "
                 break;
             case 'slab4':
-                costFilter += " clinic.iCost BETWEEN  500 and 1000 "   
+                costFilter += " clinic.iCost BETWEEN  500 and 1000 "
                 break;
             case 'slab5':
-                costFilter += " clinic.iCost BETWEEN  1000 and 1500 "   
+                costFilter += " clinic.iCost BETWEEN  1000 and 1500 "
                 break;
             case 'slab6':
-                costFilter += " clinic.iCost BETWEEN  1500 and 2000 "   
+                costFilter += " clinic.iCost BETWEEN  1500 and 2000 "
                 break;
             case 'slab7':
-                costFilter += " clinic.iCost BETWEEN  2000 and 2500 "  
+                costFilter += " clinic.iCost BETWEEN  2000 and 2500 "
                 break;
 
             default:
-                costFilter = " clinic.iCost >= 0 "  
+                costFilter = " clinic.iCost >= 0 "
                 break;
         }
-        costFilter += " AND "
+        if (i != fee.length - 1)
+            costFilter += " AND "
     }
 
     var searchDays = [];
-    var daysAvailable = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-    for (i = 0; i < days.length; i++) {
-        switch (days[i]) {
-            case 'Monday':
-                searchDays.push({ 'day': daysAvailable[0] });
-                break;
-            case 'Tuesday':
-                searchDays.push({ 'day': daysAvailable[1] });
-                break;
-            case 'Wednesday':
-                searchDays.push({ 'day': daysAvailable[2] });
-                break;
-            case 'Thursday':
-                searchDays.push({ 'day': daysAvailable[3] });
-                break;
-            case 'Friday':
-                searchDays.push({ 'day': daysAvailable[4] });
-                break;
-            case 'Saturday':
-                searchDays.push({ 'day': daysAvailable[5] });
-                break;
-            case 'Sunday':
-                searchDays.push({ 'day': daysAvailable[6] });
-                break;
-            default:
-                searchDays.push({ 'day': { $in: daysAvailable } });
-                break;
-        }
-    }
+    nameFilter = "doctors.cName LIKE '%" + name + "%' "
 
-    filterQuery+= costFilter +'1=1 '
-    doctor_search.search(res, filterQuery)
-    
-    // var userID
-    // try {
-    //     var token = req.body.jwt
-    //     var decoded = jwt.decode(token, JWTsecret);
-    //      userID = decoded.userID
-    // }
-    // catch (err) {
-    //     console.log(err);
-    //     res.send({ 'msg': 'Invalid entry' });
-    //     return;
-    // }
-    // User.findOne({ _id: userID }, function (err, user) {
-    //     if (err) throw err;
-    //     if (user === null) {
-    //         res.send({ 'msg': 'Invalid entry' });
-    //         console.log('\n\Invalid')
-    //     }
-    //     else {
-    //         var dr = doctor_search.search(req, res, next)
-    //         console.log('out')
-    //         console.log(dr)
-    //         // res.json(dr);
-    //     }
-    // });
+    filterQuery += "(" + timeFilter + ") AND " + costFilter + " AND " + nameFilter
+    // doctor_search.search(res, filterQuery)
+
+    var userID
+    try {
+        var token = req.body.jwt
+        var decoded = jwt.decode(token, JWTsecret);
+        userID = decoded.userID
+    }
+    catch (err) {
+        console.log(err);
+        res.send({ 'msg': 'Invalid entry' });
+        return;
+    }
+    User.findOne({ _id: userID }, function (err, user) {
+        if (err) throw err;
+        if (user === null) {
+            res.send({ 'msg': 'Invalid entry' });
+            console.log('\n\Invalid')
+        }
+        else {
+            doctor_search.search(res, filterQuery)
+        }
+    });
 
     console.log('\n\ncompleted')
 }
