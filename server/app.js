@@ -21,7 +21,6 @@ const app = express();
 // Setup logger
 // app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
 
-
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 var bodyParser = require('body-parser');
@@ -42,7 +41,6 @@ app.use(session({
 var JWTsecret = 'QAZ!@#123';
 
 app.get('/login', function (req, res) {
-    console.log(req.body)
     res.send({ 'msg': 'Invalid entry' });
 });
 
@@ -88,7 +86,7 @@ app.post('*', (req, res) => {
 
 
 function getList(req, res, next) {
-    console.log('getlist\n')
+    // console.log('getlist\n'+req.body.jwt)
     var filterQuery, timeFilter, dayFilter, nameFilter
     filterQuery = ' where '
     var name = '';
@@ -187,13 +185,14 @@ function getList(req, res, next) {
     }
     catch (err) {
         console.log(err);
-        res.send({ 'msg': 'Invalid entry' });
+        res.send({ 'response': '400','msg': 'Invalid entry' });
         return;
     }
+    // console.log('check user')
     User.findOne({ _id: userID }, function (err, user) {
         if (err) throw err;
         if (user === null) {
-            res.send({ 'msg': 'Invalid entry' });
+            res.send({ 'response': '-1','msg': 'Invalid entry' });
             console.log('\n\Invalid')
         }
         else {
@@ -201,7 +200,7 @@ function getList(req, res, next) {
         }
     });
 
-    console.log('\n\ncompleted')
+    // console.log('\n\ncompleted')
 }
 
 

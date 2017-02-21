@@ -3,16 +3,7 @@ module.exports = {
 
     },
     search: function (res, filterQuery) {
-        // console.log(filterQuery)
-        var mysql = require('mysql')
-        var connection = mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: 'root',
-            database: 'dental_io'
-        })
-        // var connection = require('./db.js')
-        // connection.connect()
+        var connection = require('./db.js')
         var selectIdQuery = "SELECT doctors.id " +
             "FROM   doctors  " +
             "LEFT JOIN doctors_degree  " +
@@ -28,12 +19,10 @@ module.exports = {
             "   clinic.cname ";
         connection.query(selectIdQuery, function (err, ids) {
             var id = []
-            // console.log(ids[0])
             if (typeof ids[0] === 'undefined' || ids.length == 0) {
                 res.json({ 'response': '-1', 'msg': '&nbsp No results as per criteria.' })
                 return;
             }
-            // console.log(ids.length)
             for (l = 0; l < ids.length; l++)
                 id.push(ids[l].id)
             var Query = "SELECT doctors.id,doctors.cName, doctors.cPost, doctors.iExperience, doctors.cImage, clinic.cAddress, clinic.iCost, " +
@@ -45,10 +34,8 @@ module.exports = {
                 "LEFT JOIN degree on degree.id = doctors_degree.iDegreeId " +
                 "LEFT JOIN timings on timings.iDrId = doctors.id " +
                 "LEFT JOIN clinic on clinic.id = timings.iClinicId " +
-                // filterQuery +
                 "where doctors.id in (" + id + ") " +
                 "GROUP BY doctors.id, clinic.cName";
-            // console.log(Query)
             connection.query(Query, function (err, rows) {
                 if (err) {
                     console.log("Error Selecting : %s ", err);
@@ -84,13 +71,10 @@ module.exports = {
                     });
                     i++;
                 }
-                // console.log('' + dr.cName);
-                // console.log((objs))
                 if (objs)
                     res.json(objs);
                 else
                     res.json({ 'response': '-1', 'msg': '&nbsp No results as per criteria.' })
-                // return (objs);
             });
         });
     }

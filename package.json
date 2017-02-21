@@ -4,12 +4,14 @@
   "private": true,
   "devDependencies": {
     "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
     "concurrently": "^3.2.0",
     "cors": "^2.8.1",
-    "mocha": "^3.0.2",
+    "mocha": "^3.2.0",
     "mz": "^2.4.0",
     "react-scripts": "0.2.1",
     "redux-devtools": "^3.3.2",
+    "supertest": "^3.0.0",
     "supertest-as-promised": "^4.0.0"
   },
   "dependencies": {
