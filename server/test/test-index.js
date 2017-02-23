@@ -2,12 +2,14 @@ var chai = require('chai');
 var chaiHttp = require('chai-http');
 var server = require('../app');
 var should = chai.should();
+var chaiAsPromised = require("chai-as-promised");
 
 const expect    = require('chai').expect
 
 // Write assertions! 
 
 chai.use(chaiHttp);
+chai.use(chaiAsPromised);
 
 
 describe('Search', function () {
@@ -17,6 +19,8 @@ describe('Search', function () {
         };
         chai.request(server)
             .get('/api/doctors')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send(body)
             .end(function (err, res) {
                 res.should.have.status(200);
                 done();
@@ -28,7 +32,7 @@ describe('Search', function () {
             name: 'j', days: 'Monday',time: '9,17',cost: 'slab2',jwt:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InJvb3RAYWRtaW4uY29tIiwidXNlciI6InJvb3QiLCJ1c2VySUQiOiI1ODgwNWIzNDk3MGY2MzJlNDAwZmQxNDAifQ.F_-kyggsWiVHhJF11B27Xko9Jgw92dxrJRk8X8oZ6ds'
         };
         chai.request(server)
-            .post('/api/doctors')
+            .get('/api/doctors')
             .set('content-type', 'application/x-www-form-urlencoded')
             .send(body)
             .end(function (err, res) {
@@ -46,7 +50,7 @@ describe('Search', function () {
             name: 'j', days: 'Monday',time: '9,17',cost: 'slab1',jwt:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InJvb3RAYWRtaW4uY29tIiwidXNlciI6InJvb3QiLCJ1c2VySUQiOiI1ODgwNWIzNDk3MGY2MzJlNDAwZmQxNDAifQ.F_-kyggsWiVHhJF11B27Xko9Jgw92dxrJRk8X8oZ6ds'
         };
         chai.request(server)
-            .post('/api/doctors')
+            .get('/api/doctors')
             .set('content-type', 'application/x-www-form-urlencoded')
             .send(body)
             .end(function (err, res) {
@@ -61,7 +65,7 @@ describe('Search', function () {
     });
     it('API Invalid Entry', function (done) {
         var body = {
-            name: 'j', days: 'Monday',time: '9,17',cost: 'slab1'
+            name: 'j', days: 'Monday',time: '9,17',cost: 'slab1'//,jwt:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InJvb3RAYWRtaW4uY29tIiwidXNlciI6InJvb3QiLCJ1c2VySUQiOiI1ODgwNWIzNDk3MGY2MzJlNDAwZmQxNDAifQ.F_-kyggsWiVHhJF11B27Xko9Jgw92dxrJRk8X8oZ6ds'
         };
         chai.request(server)
             .post('/api/doctors')

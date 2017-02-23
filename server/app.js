@@ -47,6 +47,7 @@ app.get('/login', function (req, res) {
 
 /* POST Login form. */
 app.post('/login', function (req, res) {
+    console.log(req.body)
     User.findOne({ username: req.body.username }, function (err, user, password = req.body.password) {
         if (err) throw err;
         if (user === null || password === null) {
@@ -76,8 +77,12 @@ app.post('/login', function (req, res) {
     });
 });
 
-
 app.get('/api/doctors', getList);
+/* Middleware */
+validSession = require("./middleware/validSession");
+app.use(validSession);
+
+// app.get('/api/doctors', getList);
 app.post('/api/doctors', getList);
 // Always return the main index.html, so react-router render the route in the client
 app.post('*', (req, res) => {
@@ -86,7 +91,7 @@ app.post('*', (req, res) => {
 
 
 function getList(req, res, next) {
-    // console.log('getlist\n'+req.body.jwt)
+    // console.log(req.body)
     var filterQuery, timeFilter, dayFilter, nameFilter
     filterQuery = ' where '
     var name = '';
@@ -168,39 +173,15 @@ function getList(req, res, next) {
                 break;
         }
         if (i != fee.length - 1)
-            costFilter += " AND "
+            costFilter += " OR "
     }
 
     var searchDays = [];
     nameFilter = "doctors.cName LIKE '%" + name + "%' "
 
     filterQuery += "(" + timeFilter + ") AND " + costFilter + " AND " + nameFilter
-    // doctor_search.search(res, filterQuery)
+    doctor_search.search(res, filterQuery)
 
-    var userID
-    try {
-        var token = req.body.jwt
-        var decoded = jwt.decode(token, JWTsecret);
-        userID = decoded.userID
-    }
-    catch (err) {
-        console.log(err);
-        res.send({ 'response': '400','msg': 'Invalid entry' });
-        return;
-    }
-    // console.log('check user')
-    User.findOne({ _id: userID }, function (err, user) {
-        if (err) throw err;
-        if (user === null) {
-            res.send({ 'response': '-1','msg': 'Invalid entry' });
-            console.log('\n\Invalid')
-        }
-        else {
-            doctor_search.search(res, filterQuery)
-        }
-    });
-
-    // console.log('\n\ncompleted')
 }
 
 

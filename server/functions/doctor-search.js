@@ -16,7 +16,7 @@ module.exports = {
             "ON clinic.id = timings.iclinicid " +
             filterQuery +
             "GROUP  BY doctors.id, " +
-            "   clinic.cname ";
+            "   clinic.cname LIMIT 0 , 10";
         connection.query(selectIdQuery, function (err, ids) {
             var id = []
             if (typeof ids[0] === 'undefined' || ids.length == 0) {
