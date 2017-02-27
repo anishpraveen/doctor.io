@@ -1,7 +1,4 @@
 module.exports = {
-    insert: function (time) {
-
-    },
     search: function (res, filterQuery) {
         var connection = require('./db.js')
         var selectIdQuery = "SELECT doctors.id " +

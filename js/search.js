@@ -53,14 +53,6 @@ function testFunction() {
         }
     };
     xmlhttp.open("POST", "http://10.3.0.237:3005/api/doctors", true);
-    // xmlhttp.setRequestHeader('Access-Control-Allow-Headers', 'http://localhost:3000/');
-    // xmlhttp.setRequestHeader('Access-Control-Allow-Origin', 'http://localhost:3000/search');
-    // xmlhttp.setRequestHeader('Access-Control-Allow-Methods', 'POST');
-    // xmlhttp.setRequestHeader('Access-Control-Allow-Methods', 'GET');
-    // xmlhttp.withCredentials = true;
-    // if ($window.sessionStorage.token) {
-    //   xmlhttp.setRequestHeader("Authorization", "Bearer " +  sessionStorage.jwt);
-    //   }
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send("name=" + search + "&&cost=" + fee + "&&days=" + days + "&&time=" + time + "&&jwt=" + sessionStorage.jwt);
 }
@@ -86,7 +78,6 @@ noUiSlider.create(slider[0], {
 });
 slider[0].noUiSlider.on('update', function () {
     var value = slider[0].noUiSlider.get();
-    // inputFormat.value = value[0];
     value[0] = formatTime(value[0]);
     value[1] = formatTime(value[1]);
 
@@ -269,7 +260,6 @@ function createSlots(dr) {
                             endDay = dr[count].clinic[countClinic].timing[j].day;
                             if (endDay == 'Friday') {
                                 endDay = ' - ' + endDay;
-                                // console.log(countClinic+'cli'+ i+'i, j'+j+' '+endDay)
                                 j++; i++;
                                 dr[count].clinic[countClinic].slot.push({ days: startDay + endDay, time: time });
                                 break;
@@ -292,7 +282,6 @@ function createSlots(dr) {
                             endDay = ' - ' + endDay
                         dr[count].clinic[countClinic].slot.push({ days: startDay + endDay, time: time });
                     }
-                    // console.log(i+'i, j'+j+' qqq '+endDay)
                     if (j <= 6)
                         startDay = dr[count].clinic[countClinic].timing[j];
                     if (startDay.day == 'Friday') {

@@ -17,21 +17,16 @@ function login(){
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == XMLHttpRequest.DONE) {
             if (xmlhttp.status == 200) {
-                // console.log(xmlhttp.responseText);
                 var token = JSON.parse(xmlhttp.responseText)
-                // console.log(token['token'])
                 // Store
                 if (typeof token['token'] !== 'undefined' ) {
                     sessionStorage.jwt = token['token'];
                     window.location.replace('/search')
                 }
                 else{
-                    // alert(token['msg'])
                     document.getElementById('error').innerText = "Invalid Credentials";
                     document.getElementById('ipUsername').style.color = "red";
-                    // document.getElementById('ipUsername').style.backgroundColor = "red";
                     document.getElementById('ipPassword').style.color = "red";
-                    // document.getElementById('ipPassword').style.backgroundColor = "red";
                 }
             }
             else if (xmlhttp.status == 400) {
