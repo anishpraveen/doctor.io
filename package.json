@@ -36,8 +36,8 @@
     "supertest-as-promised": "^4.0.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "start:server": "node server",
+    "start": "npm start",
+    "start:server": "nodemon server",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "test": "mocha test"
