@@ -52,7 +52,7 @@ function testFunction() {
             }
         }
     };
-    xmlhttp.open("POST", "http://10.3.0.237:3005/api/doctors", true);
+    xmlhttp.open("POST", "/api/doctors", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send("name=" + search + "&&cost=" + fee + "&&days=" + days + "&&time=" + time + "&&jwt=" + sessionStorage.jwt);
 }

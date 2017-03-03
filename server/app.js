@@ -2,35 +2,33 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
-var MongoStore = require('connect-mongo')(session);
-var jwt = require('jwt-simple');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const jwt = require('jwt-simple');
 
-var mongoose = require("mongoose");
-var Doctor = require("./data/doctor");
-var bodyParser = require('body-parser');
-var cors = require('cors')
-var User = require("../server/data/users");
-var doctor_manipulation = require("./functions/doctor-manipulation.js");
-var doctor_search = require("./functions/doctor-search.js");
+const mongoose = require("mongoose");
+const Doctor = require("./data/doctor");
+const bodyParser = require('body-parser');
+const User = require("../server/data/users");
+const doctor_manipulation = require("./functions/doctor-manipulation.js");
+const doctor_search = require("./functions/doctor-search.js");
 
 
 const app = express();
 
 // Setup logger
-// app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
+app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
 
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
-var bodyParser = require('body-parser');
+
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors())
 app.use(cookieParser());
 
 app.use(session({
     store: new MongoStore({
-        url: 'mongodb://localhost/dental'
+         url: 'mongodb://heroku_s949h9sb:qlac4fjj2d9rshc4b9hjqk9dlm@ds143449.mlab.com:43449/heroku_s949h9sb'
     }),
     secret: 'QWERTY123456789',
     resave: true,
@@ -38,10 +36,15 @@ app.use(session({
 }));
 
 
-var JWTsecret = 'QAZ!@#123';
+const JWTsecret = 'QAZ!@#123';
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.get('/search', function(req, res) {
+    res.sendFile(path.join(__dirname + '/build/index.html'));
+});
 
 app.get('/login', function (req, res) {
-    res.send({ 'msg': 'Invalid entry' });
+    res.sendFile(path.join(__dirname + '/build/index.html'));
 });
 
 
@@ -59,12 +62,7 @@ app.post('/login', function (req, res) {
             user.comparePassword(password, function (err, isMatch) {
                 if (err) throw err;
                 if (isMatch) {
-                    // var jwt = require('jwt-simple');
                     var payload = { email: email, user: user.username, userID: user._id };
-
-
-                    // HS256 secrets are typically 128-bit random strings, for example hex-encoded:
-                    // var secret = Buffer.from('fe1a1915a379f3be5394b64d14794932', 'hex')
 
                     // encode
                     var token = jwt.encode(payload, JWTsecret);
@@ -82,16 +80,14 @@ app.get('/api/doctors', getList);
 validSession = require("./middleware/validSession");
 app.use(validSession);
 
-// app.get('/api/doctors', getList);
 app.post('/api/doctors', getList);
 // Always return the main index.html, so react-router render the route in the client
 app.post('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
 });
 
-
+//Getting list from MySQL
 function getList(req, res, next) {
-    // console.log(req.body)
     var filterQuery, timeFilter, dayFilter, nameFilter
     filterQuery = ' where '
     var name = '';
@@ -184,15 +180,12 @@ function getList(req, res, next) {
 
 }
 
-
+//Getting list from mongoDB
 function getList2(req, res, next) {
-    // console.log(req.rawHeaders)
     var name = '';
     var name = valueValidator(req.body.name);
     var fee = valueValidator(req.body.cost);
     var days = valueValidator(req.body.days);
-    // var fee = 'slab2';
-    // var days = 'Monday';
     var startTime, endTime;
     if (typeof req.body.time === 'undefined' || req.body.time.length == 0) {
         startTime = 9;

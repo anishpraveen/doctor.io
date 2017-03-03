@@ -3,9 +3,6 @@ import React, { Component } from 'react';
 
 
 export default class MenuBar extends Component {
-    static propTypes = {}
-    static defaultProps = {}
-    state = {}
 
     render() {
         

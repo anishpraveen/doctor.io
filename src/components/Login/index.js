@@ -4,12 +4,13 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';  
 import * as sessionActions from '../../actions/sessionActions';
 
-import './style.css';
+// import './style.css';
 import Footer from '../Footer'
 export default class LogInPage extends Component {
     constructor(props) {
     super(props);
-    this.state = {credentials: {username: 'root', password: 'root12'}}
+    this.state = {credentials: {username: '', password: ''}}
+    // this.state = {credentials: {username: 'root', password: 'root12'}}
     this.onChange = this.onChange.bind(this);
     this.onSave = this.onSave.bind(this);
   }
@@ -17,7 +18,7 @@ export default class LogInPage extends Component {
   componentWillMount() {
         const script = document.createElement("script");
 
-        script.src = "/js/login.js";
+        script.src = "js/login.js";
         script.async = true;
 
         document.body.appendChild(script);
@@ -76,10 +77,10 @@ export default class LogInPage extends Component {
         );
     }
     
-}
+};
 function mapDispatchToProps(dispatch) {  
   return {
     actions: bindActionCreators(sessionActions, dispatch)
   };
-}
-export default connect(null, mapDispatchToProps)(LogInPage);
+};
+// export default connect(null, mapDispatchToProps)(LogInPage);

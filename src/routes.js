@@ -40,12 +40,3 @@ function requireAuth(nextState, replace) {
 }
 
 export default Routes;
-/*export default (
-    <Route  {...props} >
-      <Route path="/login" component={Login} />
-      <Route path="/search" component={Search} 
-      onEnter={requireAuth} />
-      <Route path="/about" component={About} />
-      <Route path="*" component={NotFound} />
-    </Route>
-);*/

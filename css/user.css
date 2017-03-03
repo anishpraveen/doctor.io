@@ -131,7 +131,6 @@ input[type=text]:focus{
     text-indent: 21px;
     -webkit-appearance: none;
     -moz-appearance: none;
-    appearance: none;
 }
 #ddlSortBy {
   background-image:
@@ -256,20 +255,11 @@ input[type=checkbox] {
     display:none;
 }
 
-/*input[type=checkbox] + label +span{
-    background: url('/images/icons/check_off.svg') no-repeat;
-    height: 16px;
-    width: 16px;
-    display:inline-block;
-    padding: 0 0 0 0px;
-    cursor: pointer;
-}*/
 
 input[type=checkbox] + label 
 {
     background: url('/images/icons/check_off.svg') no-repeat;
     height: 16px;
-    /*width: 16px;*/
     display:inline-block;
     padding: 0 0 0 0px;
     cursor: pointer;
@@ -278,7 +268,6 @@ input[type=checkbox]:checked + label
 {
     background: url('/images/icons/check_on.svg') no-repeat;
     height: 16px;
-    /*width: 16px;*/
     display:inline-block;
     padding: 0 0 0 0px;
 }
@@ -296,7 +285,6 @@ input[type=checkbox]:checked + label
 }
 #divWeekday, #divFees{
     margin-top: 20px;
-    /*height: 360px;*/
     padding-bottom: 55px;
 }
 #divFees{

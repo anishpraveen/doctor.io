@@ -37,7 +37,7 @@ function login(){
             }
         }
     };
-    xmlhttp.open("POST", "http://10.3.0.237:3005/login", true);
+    xmlhttp.open("POST", "login", true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send("username=" + username + "&&password=" + password);
 }

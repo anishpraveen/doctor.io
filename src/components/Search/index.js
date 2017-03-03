@@ -6,7 +6,6 @@ import SearchDoctor from '../SearchDoctor'
 import Filters from '../Filters'
 import Footer from '../Footer'
 
-import './style.css';
 export default class Search extends Component {
     componentWillMount() {
         const script = document.createElement("script");
