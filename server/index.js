@@ -1,6 +1,6 @@
 // server/index.js
 'use strict';
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const app = require('./app');
 
 const PORT = process.env.PORT || 3008;
