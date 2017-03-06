@@ -8,6 +8,7 @@ const MongoStore = require('connect-mongo')(session);
 const jwt = require('jwt-simple');
 const winston = require('winston');
 const dotenv = require('dotenv').config()
+const Sequelize = require('sequelize')
 
 const mongoose = require("mongoose");
 const Doctor = require("./data/doctor");
@@ -50,6 +51,24 @@ app.get('/login', function (req, res) {
     res.sendFile(path.join(__dirname + '/build/index.html'));
 });
 
+app.get('/sql', function (req, res) {
+    var sequelize = new Sequelize('mysql://by56cbaj5p899rwh:lccwekt3vy3ogrrr@d6ybckq58s9ru745.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/dz30plhe9sxsrrbw');
+    var Doctor = sequelize.define('doctors', {
+        name: {
+            type: Sequelize.STRING,
+            field: 'cName' // field name in database
+        }
+    },
+        {
+            freezeTableName: true // Model tableName will be the same as the model name
+        });
+    Doctor.findOne({
+        attributes: ['name']
+    }).then(function (user) {
+        res.send(user);
+    });
+
+});
 
 /* POST Login form. */
 app.post('/login', login_user.login);
@@ -67,7 +86,7 @@ app.post('*', (req, res) => {
 
 //Getting list from MySQL
 function getList(req, res, next) {
-    winston.level = process.env.LOG_LEVEL  
+    winston.level = process.env.LOG_LEVEL
     var logger = new (winston.Logger)({
         transports: [
             new (winston.transports.Console)(),
