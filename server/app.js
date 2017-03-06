@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const jwt = require('jwt-simple');
+const winston = require('winston');
+const dotenv = require('dotenv').config()
 
 const mongoose = require("mongoose");
 const Doctor = require("./data/doctor");
@@ -13,22 +15,23 @@ const bodyParser = require('body-parser');
 const User = require("../server/data/users");
 const doctor_manipulation = require("./functions/doctor-manipulation.js");
 const doctor_search = require("./functions/doctor-search.js");
+const login_user = require("./functions/login-user.js");
 
 
 const app = express();
 
 // Setup logger
-app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
+// app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
 
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
+// app.use(winston);
 app.use(session({
     store: new MongoStore({
-         url: 'mongodb://heroku_s949h9sb:qlac4fjj2d9rshc4b9hjqk9dlm@ds143449.mlab.com:43449/heroku_s949h9sb'
+        url: 'mongodb://heroku_s949h9sb:qlac4fjj2d9rshc4b9hjqk9dlm@ds143449.mlab.com:43449/heroku_s949h9sb'
     }),
     secret: 'QWERTY123456789',
     resave: true,
@@ -39,7 +42,7 @@ app.use(session({
 const JWTsecret = 'QAZ!@#123';
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.get('/search', function(req, res) {
+app.get('/search', function (req, res) {
     res.sendFile(path.join(__dirname + '/build/index.html'));
 });
 
@@ -49,31 +52,7 @@ app.get('/login', function (req, res) {
 
 
 /* POST Login form. */
-app.post('/login', function (req, res) {
-    console.log(req.body)
-    User.findOne({ username: req.body.username }, function (err, user, password = req.body.password) {
-        if (err) throw err;
-        if (user === null || password === null) {
-            res.redirect('login');
-        }
-        else {
-            // test a matching password
-            email = user.email;
-            user.comparePassword(password, function (err, isMatch) {
-                if (err) throw err;
-                if (isMatch) {
-                    var payload = { email: email, user: user.username, userID: user._id };
-
-                    // encode
-                    var token = jwt.encode(payload, JWTsecret);
-                    req.session.token = token;
-                    res.send({ token: token });
-                }
-                else res.send({ 'msg': 'Invalid entry' });
-            });
-        }
-    });
-});
+app.post('/login', login_user.login);
 
 app.get('/api/doctors', getList);
 /* Middleware */
@@ -88,6 +67,15 @@ app.post('*', (req, res) => {
 
 //Getting list from MySQL
 function getList(req, res, next) {
+    winston.level = process.env.LOG_LEVEL  
+    var logger = new (winston.Logger)({
+        transports: [
+            new (winston.transports.Console)(),
+            new (winston.transports.File)({ filename: 'logfile.log' })
+        ]
+    });
+    logger.log('info', 'Getting list from MySQL database');
+
     var filterQuery, timeFilter, dayFilter, nameFilter
     filterQuery = ' where '
     var name = '';

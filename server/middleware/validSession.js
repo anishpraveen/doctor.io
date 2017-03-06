@@ -1,48 +1,61 @@
-var express = require('express');
+const express = require('express');
 const path = require('path');
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
-var MongoStore = require('connect-mongo')(session);
-var jwt = require('jwt-simple');
-var JWTsecret = 'QAZ!@#123';
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+const jwt = require('jwt-simple');
+const winston = require('winston');
+const dotenv = require('dotenv').config()
 
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
-var router = express.Router();
+const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
-var sess;
-var User = require("../data/users");
+
+const User = require("../data/users");
 
 router.use(function (req, res, next) {
-    console.log('user checking');
+    winston.level = process.env.LOG_LEVEL
+    var logger = new (winston.Logger)({
+        transports: [
+            new (winston.transports.Console)(),
+            new (winston.transports.File)({ filename: 'logfile.log' })
+        ]
+    });
+    logger.log('info', 'Validating user');
     var userID
     var token = req.body.jwt;
     if (token) {
         try {
             var token = req.body.jwt;
-            var decoded = jwt.decode(token, JWTsecret);
+            var decoded = jwt.decode(token, process.env.JWT_SECRET_KEY);
             userID = decoded.userID;
-            console.log(userID)
+            logger.log('info', 'Valid user token');
         }
         catch (err) {
-            console.log(err);
+            logger.log('warn', 'Invalid user token');
+            logger.log('info', err);
             res.send({ 'response': '400', 'msg': 'Invalid entry' });
             return;
         }
         User.findOne({ _id: userID }, function (err, user) {
-            if (err) throw err;
+            if (err) {
+                throw err;
+                logger.log('error', 'Data base error');
+                logger.log('info', err);
+            }
             if (user === null) {
+                logger.log('error', 'Invalid user');
                 res.send({ 'response': '-1', 'msg': 'Invalid entry' });
-                console.log('\n\Invalid')
             }
             else {
-                console.log('\n\Valid')
+                logger.log('info', 'Valid user');
                 next();
             }
         });
     }
     else {
-        console.log('\n\No token passed')
+        logger.log('error', 'No token passed');
         res.send({ 'response': '-1', 'msg': 'Invalid entry' });
     }
 });

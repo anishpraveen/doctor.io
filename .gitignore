@@ -5,6 +5,7 @@ node_modules
 
 # production
 build
+logfile.log
 
 # misc
 .DS_Store
