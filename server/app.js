@@ -53,18 +53,217 @@ app.get('/login', function (req, res) {
 
 app.get('/sql', function (req, res) {
     var sequelize = new Sequelize('mysql://by56cbaj5p899rwh:lccwekt3vy3ogrrr@d6ybckq58s9ru745.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/dz30plhe9sxsrrbw');
-    var Doctor = sequelize.define('doctors', {
-        name: {
-            type: Sequelize.STRING,
-            field: 'cName' // field name in database
-        }
-    },
+    var Doctor = sequelize.define('doctors',
+        {
+            id: {
+                type: Sequelize.STRING,
+                field: 'id',
+                primaryKey: true
+            },
+            name: {
+                type: Sequelize.STRING,
+                field: 'cName' // field name in database
+            },
+            post: {
+                type: Sequelize.STRING,
+                field: 'cPost'
+            },
+            exp: {
+                type: Sequelize.STRING,
+                field: 'iExperience'
+            },
+            image: {
+                type: Sequelize.STRING,
+                field: 'cImage'
+            }
+        },
         {
             freezeTableName: true // Model tableName will be the same as the model name
-        });
-    Doctor.findOne({
-        attributes: ['name']
+        }
+    );
+    var DoctorsDegree = sequelize.define('doctors_degree',
+        {
+            id: {
+                type: Sequelize.STRING,
+                field: 'id',
+                primaryKey: true
+            },
+            iDrId: {
+                type: Sequelize.STRING,
+                field: 'iDrId' // field name in database
+            },
+            iDegreeId: {
+                type: Sequelize.STRING,
+                field: 'iDegreeId'
+            }
+        },
+        {
+            freezeTableName: true // Model tableName will be the same as the model name
+        }
+    );
+    var Degree = sequelize.define('degree',
+        {
+            id: {
+                type: Sequelize.STRING,
+                field: 'id',
+                primaryKey: true
+            },
+            cDegree: {
+                type: Sequelize.STRING,
+                field: 'cDegree' // field name in database
+            }
+        },
+        {
+            freezeTableName: true // Model tableName will be the same as the model name
+        }
+    );
+    var Clinic = sequelize.define('clinic',
+        {
+            id: {
+                type: Sequelize.STRING,
+                field: 'id',
+                primaryKey: true
+            },
+            name: {
+                type: Sequelize.STRING,
+                field: 'cName'
+            },
+            cost: {
+                type: Sequelize.STRING,
+                field: 'iCost'
+            },
+            address: {
+                type: Sequelize.STRING,
+                field: 'cAddress'
+            }
+        },
+        {
+            freezeTableName: true // Model tableName will be the same as the model name
+        }
+    );
+    var Timings = sequelize.define('timings',
+        {
+            id: {
+                type: Sequelize.STRING,
+                field: 'id',
+                primaryKey: true
+            },
+            iDrId: {
+                type: Sequelize.STRING,
+                field: 'iDrId'
+            },
+            iClinicId: {
+                type: Sequelize.STRING,
+                field: 'iClinicId'
+            },
+            iMonStart: {
+                type: Sequelize.STRING,
+                field: 'iMonStart'
+            },
+            iMonEnd: {
+                type: Sequelize.STRING,
+                field: 'iMonEnd'
+            },
+            iTueStart: {
+                type: Sequelize.STRING,
+                field: 'iTueStart'
+            },
+            iTueEnd: {
+                type: Sequelize.STRING,
+                field: 'iTueEnd'
+            },
+            iWedStart: {
+                type: Sequelize.STRING,
+                field: 'iWedStart'
+            },
+            iWedEnd: {
+                type: Sequelize.STRING,
+                field: 'iWedEnd'
+            },
+            iThuStart: {
+                type: Sequelize.STRING,
+                field: 'iThuStart'
+            },
+            iThuEnd: {
+                type: Sequelize.STRING,
+                field: 'iThuEnd'
+            },
+            iFriStart: {
+                type: Sequelize.STRING,
+                field: 'iFriStart'
+            },
+            iFriEnd: {
+                type: Sequelize.STRING,
+                field: 'iFriEnd'
+            },
+            iSatStart: {
+                type: Sequelize.STRING,
+                field: 'iSatStart'
+            },
+            iSatEnd: {
+                type: Sequelize.STRING,
+                field: 'iSatEnd'
+            },
+            iSunStart: {
+                type: Sequelize.STRING,
+                field: 'iSunStart'
+            },
+            iSunEnd: {
+                type: Sequelize.STRING,
+                field: 'iSunEnd'
+            }
+        },
+        {
+            freezeTableName: true
+        }
+    );
+    Doctor.hasMany(DoctorsDegree, { foreignKey: 'iDrId' })
+    DoctorsDegree.belongsTo(Doctor, { foreignKey: 'iDrId' })
+
+    Degree.hasMany(DoctorsDegree, { foreignKey: 'iDegreeId' })
+    DoctorsDegree.belongsTo(Degree, { foreignKey: 'iDegreeId' })
+
+    Clinic.hasMany(Timings, { foreignKey: 'iClinicId' })
+    Timings.belongsTo(Clinic, { foreignKey: 'iClinicId' })
+
+    Doctor.hasMany(Timings, { foreignKey: 'iDrId' })
+    Timings.belongsTo(Doctor, { foreignKey: 'iDrId' })
+
+    Doctor.findAll({
+        attributes: ['name', 'post', 'exp', 'image'],
+        where: { id: [1] },
+        include: [
+            {
+                model: DoctorsDegree,
+                attributes: ['iDrId'],
+                include: [
+                    {
+                        model: Degree,
+                        attributes: [
+                            // 'cDegree'
+                            [sequelize.fn('GROUP_CONCAT', Sequelize.literal("DISTINCT cDegree SEPARATOR ', '")), 'education']
+                        ]
+                    }
+                ]
+            },
+            {
+                model: Timings,
+                attributes: [
+                    'iMonStart', 'iMonEnd', 'iTueStart', 'iTueEnd', 'iWedStart', 'iWedEnd', 'iThuStart','iThuStart','iFriStart', 'iFriEnd', 'iSatStart', 'iSatEnd', 'iSunStart', 'iSunEnd'
+                ],
+                include: [
+                    {
+                        model: Clinic,
+                        attributes: [
+                            'name', 'address', 'cost'
+                        ]
+                    }
+                ]
+            }
+        ],
+        group: ['id']
     }).then(function (user) {
+        console.log(user)
         res.send(user);
     });
 
