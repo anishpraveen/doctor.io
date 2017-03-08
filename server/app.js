@@ -12,6 +12,7 @@ const Sequelize = require('sequelize')
 
 const mongoose = require("mongoose");
 const Doctor = require("./data/doctor");
+const Sequelize_Doctor = require("./data/sequelize-doc");
 const bodyParser = require('body-parser');
 const User = require("../server/data/users");
 const doctor_manipulation = require("./functions/doctor-manipulation.js");
@@ -51,8 +52,26 @@ app.get('/login', function (req, res) {
     res.sendFile(path.join(__dirname + '/build/index.html'));
 });
 
-app.get('/sql', function (req, res) {
-    var sequelize = new Sequelize('mysql://by56cbaj5p899rwh:lccwekt3vy3ogrrr@d6ybckq58s9ru745.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/dz30plhe9sxsrrbw');
+app.get('/sql', getListORM);
+
+/* POST Login form. */
+app.post('/login', login_user.login);
+
+app.get('/api/doctors', getList);
+/* Middleware */
+validSession = require("./middleware/validSession");
+app.use(validSession);
+
+app.post('/api/doctors', getList);
+// Always return the main index.html, so react-router render the route in the client
+app.post('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
+});
+
+
+//Getting list using ORM
+function getListORM(req, res, next) {
+    var sequelize = new Sequelize(process.env.DB_URI);
     var Doctor = sequelize.define('doctors',
         {
             id: {
@@ -229,9 +248,12 @@ app.get('/sql', function (req, res) {
     Doctor.hasMany(Timings, { foreignKey: 'iDrId' })
     Timings.belongsTo(Doctor, { foreignKey: 'iDrId' })
 
+    Doctor.belongsToMany(Clinic, { through: 'timings', foreignKey: 'iDrId' });
+    Clinic.belongsToMany(Doctor, { through: 'timings', foreignKey: 'iClinicId' });
+
     Doctor.findAll({
         attributes: ['name', 'post', 'exp', 'image'],
-        where: { id: [1] },
+        where: { id: [2] },
         include: [
             {
                 model: DoctorsDegree,
@@ -240,49 +262,37 @@ app.get('/sql', function (req, res) {
                     {
                         model: Degree,
                         attributes: [
-                            // 'cDegree'
                             [sequelize.fn('GROUP_CONCAT', Sequelize.literal("DISTINCT cDegree SEPARATOR ', '")), 'education']
                         ]
                     }
                 ]
             },
             {
-                model: Timings,
+
+                model: Clinic,
                 attributes: [
-                    'iMonStart', 'iMonEnd', 'iTueStart', 'iTueEnd', 'iWedStart', 'iWedEnd', 'iThuStart','iThuStart','iFriStart', 'iFriEnd', 'iSatStart', 'iSatEnd', 'iSunStart', 'iSunEnd'
-                ],
-                include: [
-                    {
-                        model: Clinic,
-                        attributes: [
-                            'name', 'address', 'cost'
-                        ]
-                    }
+                    'name', 'address', 'cost'
                 ]
+                // ,
+                // include: [
+                //     {
+                //         model: Timings,
+                //         attributes: [
+                //             'iMonStart', 'iMonEnd', 'iTueStart', 'iTueEnd', 'iWedStart', 'iWedEnd', 'iThuStart', 'iThuStart', 'iFriStart', 'iFriEnd', 'iSatStart', 'iSatEnd', 'iSunStart', 'iSunEnd'
+                //         ]
+                //     }
+                // ]
+
             }
         ],
-        group: ['id']
+        group: ['doctors.id', [Clinic, 'cName']]
     }).then(function (user) {
-        console.log(user)
-        res.send(user);
+        var jsonObj = JSON.parse(JSON.stringify(user))
+        var arr = Object.values(jsonObj);
+        console.log(arr[0]['doctors_degrees'][0]['degree']['education'])
+        res.json(user);
     });
-
-});
-
-/* POST Login form. */
-app.post('/login', login_user.login);
-
-app.get('/api/doctors', getList);
-/* Middleware */
-validSession = require("./middleware/validSession");
-app.use(validSession);
-
-app.post('/api/doctors', getList);
-// Always return the main index.html, so react-router render the route in the client
-app.post('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
-});
-
+}
 //Getting list from MySQL
 function getList(req, res, next) {
     winston.level = process.env.LOG_LEVEL
