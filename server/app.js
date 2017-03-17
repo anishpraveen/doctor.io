@@ -72,6 +72,7 @@ app.post('*', (req, res) => {
 //Getting list using ORM
 function getListORM(req, res, next) {
     var sequelize = new Sequelize(process.env.DB_URI);
+    // var Doctor = require('./data/sequelize-doc')
     var Doctor = sequelize.define('doctors',
         {
             id: {
@@ -243,17 +244,31 @@ function getListORM(req, res, next) {
     DoctorsDegree.belongsTo(Degree, { foreignKey: 'iDegreeId' })
 
     Clinic.hasMany(Timings, { foreignKey: 'iClinicId' })
-    Timings.belongsTo(Clinic, { foreignKey: 'iClinicId' })
+    // Timings.belongsTo(Clinic, { foreignKey: 'iClinicId' })
 
-    Doctor.hasMany(Timings, { foreignKey: 'iDrId' })
-    Timings.belongsTo(Doctor, { foreignKey: 'iDrId' })
+    // Doctor.hasMany(Timings, { foreignKey: 'iDrId' })
+    // Timings.belongsTo(Doctor, { foreignKey: 'iDrId' })
 
     Doctor.belongsToMany(Clinic, { through: 'timings', foreignKey: 'iDrId' });
     Clinic.belongsToMany(Doctor, { through: 'timings', foreignKey: 'iClinicId' });
 
+    var timeFilter = [], dayFilter = [], nameFilter = []
+    var costFilter = [];
+    var daysAvailable = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    // costFilter.push({cost: {gt: 1000,lte: 2500}})
+    // costFilter.push({cost: {gt: 1000,lte: 2500}})
+    // costFilter.push({cost: {gt: 1000,lte: 2500}})
+    nameFilter.push({ name: { $like: '%%' } })
+    costFilter.push({ cost: { gt: 0 } })
     Doctor.findAll({
         attributes: ['name', 'post', 'exp', 'image'],
-        where: { id: [2] },
+        where: {
+            $and: [
+                { $or: nameFilter },
+                sequelize.literal('i'+ daysAvailable[0] +'Start' + '<= 11'),
+                sequelize.literal('i'+ daysAvailable[0] +'End' + '>= 19')
+            ]
+        },
         include: [
             {
                 model: DoctorsDegree,
@@ -272,7 +287,8 @@ function getListORM(req, res, next) {
                 model: Clinic,
                 attributes: [
                     'name', 'address', 'cost'
-                ]
+                ],
+                where: { $or: costFilter }
                 // ,
                 // include: [
                 //     {
