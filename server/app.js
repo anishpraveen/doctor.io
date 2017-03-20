@@ -254,6 +254,14 @@ function getListORM(req, res, next) {
 
     var timeFilter = [], dayFilter = [], nameFilter = []
     var costFilter = [];
+    var startTime = ['0', '0', '0', '0', '0', '0', '0'], endTime = ['0', '0', '0', '0', '0', '0', '0'];
+    /* All doctors assumed to work in time 12 to 15 hrs  */
+    startTime.fill('12');
+    endTime.fill('15');
+    // startTime[1] = 11;
+    // endTime[1] = 19;
+    // startTime[0] = 11;
+    // endTime[0] = 19;
     var daysAvailable = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     // costFilter.push({cost: {gt: 1000,lte: 2500}})
     // costFilter.push({cost: {gt: 1000,lte: 2500}})
@@ -265,8 +273,24 @@ function getListORM(req, res, next) {
         where: {
             $and: [
                 { $or: nameFilter },
-                sequelize.literal('i'+ daysAvailable[0] +'Start' + '<= 11'),
-                sequelize.literal('i'+ daysAvailable[0] +'End' + '>= 19')
+                {
+                    $and: [
+                        sequelize.literal('i' + daysAvailable[0] + 'Start' + '<= ' + startTime[0]),
+                        sequelize.literal('i' + daysAvailable[0] + 'End' + '>= ' + endTime[0]),
+                        sequelize.literal('i' + daysAvailable[1] + 'Start' + '<= ' + startTime[1]),
+                        sequelize.literal('i' + daysAvailable[1] + 'End' + '>= ' + endTime[1]),
+                        sequelize.literal('i' + daysAvailable[2] + 'Start' + '<= ' + startTime[2]),
+                        sequelize.literal('i' + daysAvailable[2] + 'End' + '>= ' + endTime[2]),
+                        sequelize.literal('i' + daysAvailable[3] + 'Start' + '<= ' + startTime[3]),
+                        sequelize.literal('i' + daysAvailable[3] + 'End' + '>= ' + endTime[3]),
+                        sequelize.literal('i' + daysAvailable[4] + 'Start' + '<= ' + startTime[4]),
+                        sequelize.literal('i' + daysAvailable[4] + 'End' + '>= ' + endTime[4]),
+                        sequelize.literal('i' + daysAvailable[5] + 'Start' + '<= ' + startTime[5]),
+                        sequelize.literal('i' + daysAvailable[5] + 'End' + '>= ' + endTime[5]),
+                        sequelize.literal('i' + daysAvailable[6] + 'Start' + '<= ' + startTime[6]),
+                        sequelize.literal('i' + daysAvailable[6] + 'End' + '>= ' + endTime[6]),
+                    ]
+                }
             ]
         },
         include: [
@@ -303,10 +327,15 @@ function getListORM(req, res, next) {
         ],
         group: ['doctors.id', [Clinic, 'cName']]
     }).then(function (user) {
-        var jsonObj = JSON.parse(JSON.stringify(user))
-        var arr = Object.values(jsonObj);
-        console.log(arr[0]['doctors_degrees'][0]['degree']['education'])
-        res.json(user);
+        if (user != []) {
+            // var jsonObj = JSON.parse(JSON.stringify(user))
+            // var arr = Object.values(jsonObj);
+            // console.log(arr[0]['doctors_degrees'][0]['degree']['education'])
+            res.json(user);
+        }
+        else {
+            res.json('no rec')
+        }
     });
 }
 //Getting list from MySQL
