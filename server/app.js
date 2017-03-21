@@ -256,9 +256,12 @@ function getListORM(req, res, next) {
     var timeFilter = [], dayFilter = [], nameFilter = []
     var costFilter = [];
     var startTime = ['0', '0', '0', '0', '0', '0', '0'], endTime = ['0', '0', '0', '0', '0', '0', '0'];
-    /* All doctors assumed to work in time 12 to 15 hrs  */
-    startTime.fill('12');
-    endTime.fill('15');
+    /**
+     * Start time should be less than 23 hrs and
+     * End time should be greater than 0 hrs
+     */
+    startTime.fill('23');
+    endTime.fill('0');
     winston.level = process.env.LOG_LEVEL
     var logger = new (winston.Logger)({
         transports: [
@@ -391,22 +394,11 @@ function getListORM(req, res, next) {
                 ]
             },
             {
-
                 model: Clinic,
                 attributes: [
                     'name', 'address', 'cost'
                 ],
                 where: { $or: costFilter }
-                // ,
-                // include: [
-                //     {
-                //         model: Timings,
-                //         attributes: [
-                //             'iMonStart', 'iMonEnd', 'iTueStart', 'iTueEnd', 'iWedStart', 'iWedEnd', 'iThuStart', 'iThuStart', 'iFriStart', 'iFriEnd', 'iSatStart', 'iSatEnd', 'iSunStart', 'iSunEnd'
-                //         ]
-                //     }
-                // ]
-
             }
         ],
         group: ['doctors.id', [Clinic, 'cName']]
@@ -431,7 +423,6 @@ function getListORM(req, res, next) {
                     ]
                 },
                 {
-
                     model: Clinic,
                     attributes: [
                         'name', 'address', 'cost'
@@ -442,9 +433,6 @@ function getListORM(req, res, next) {
         }).then(function (rows) {
 
             if (rows != []) {
-                // var jsonObj = JSON.parse(JSON.stringify(user))
-                // var arr = Object.values(jsonObj);
-                // console.log(arr[0]['doctors_degrees'][0]['degree']['education'])
                 var objs = [];
                 var dr = rows;
                 var timings = []
@@ -458,16 +446,8 @@ function getListORM(req, res, next) {
                     var clinicsRaw = rows[i]['clinics']
                     var jsonObj = JSON.parse(JSON.stringify(clinicsRaw))
                     var clinics = Object.values(jsonObj);
-                    var clinic = []
-                    var clinic1 = []
-                    var clinic2 = []
                     var timings = []
-                    var NoClinic2 = true
-                    var NumberOfClinic = 1
-                    if (typeof clinics[1] !== 'undefined') {
-                        NoClinic2 = false
-                        NumberOfClinic = 2
-                    }
+                    var NumberOfClinic = 2;
                     for (var j = 0; j < NumberOfClinic; j++) {
                         timings.push({ "day": "Monday", start: clinics[j].timings.iMonStart, end: clinics[j].timings.iMonEnd })
                         timings.push({ "day": "Tuesday", start: clinics[j].timings.iTueStart, end: clinics[j].timings.iTueEnd })
@@ -482,17 +462,10 @@ function getListORM(req, res, next) {
                             clinic2Timing = timings
                         timings = [];
                     }
-                    clinic1.push({ name: clinics[0].name, address: clinics[0].address, timing: clinic1Timing, cost: clinics[0].cost })
-                    clinic.push(clinic1)
-                    if (!NoClinic2) {
-                        clinic2.push({ name: clinics[1].name, address: clinics[1].address, timing: clinic2Timing, cost: clinics[1].cost })
-                        clinic.push(clinic2)
-                    }
                     objs.push({
                         name: rows[i]['name'], post: rows[i]['post'], exp: rows[i]['exp'],
                         image: rows[i]['image'], education: education,
                         clinic: [
-                            // {clinic1,clinic2}
                             { name: clinics[0].name, address: clinics[0].address, timing: clinic1Timing, cost: clinics[0].cost },
                             { name: clinics[1].name, address: clinics[1].address, timing: clinic2Timing, cost: clinics[1].cost }
                         ]
