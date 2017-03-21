@@ -53,6 +53,7 @@ app.get('/login', function (req, res) {
 });
 
 app.get('/sql', getListORM);
+app.post('/sql', getListORM);
 
 /* POST Login form. */
 app.post('/login', login_user.login);
@@ -62,7 +63,7 @@ app.get('/api/doctors', getList);
 validSession = require("./middleware/validSession");
 app.use(validSession);
 
-app.post('/api/doctors', getList);
+app.post('/api/doctors', getListORM);
 // Always return the main index.html, so react-router render the route in the client
 app.post('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
@@ -258,18 +259,101 @@ function getListORM(req, res, next) {
     /* All doctors assumed to work in time 12 to 15 hrs  */
     startTime.fill('12');
     endTime.fill('15');
-    // startTime[1] = 11;
-    // endTime[1] = 19;
-    // startTime[0] = 11;
-    // endTime[0] = 19;
+    winston.level = process.env.LOG_LEVEL
+    var logger = new (winston.Logger)({
+        transports: [
+            new (winston.transports.Console)(),
+            new (winston.transports.File)({ filename: 'logfile.log' })
+        ]
+    });
+    logger.log('info', 'Getting list from MySQL database using sequelize');
+
+    var name = '';
+    var name = valueValidator(req.body.name);
+    var fee = valueValidator(req.body.cost);
+    var days = valueValidator(req.body.days);
+
+    var startTimeSearch, endTimeSearch;
+    if (typeof req.body.time === 'undefined' || req.body.time.length == 0) {
+        startTimeSearch = 9;
+        endTimeSearch = 19;
+    }
+    else {
+        var time = req.body.time.split(",");
+        startTimeSearch = Math.ceil(time[0]);
+        endTimeSearch = Math.ceil(time[1]);
+    }
+    if (days.length) {
+        for (i = 0; i < days.length; i++) {
+            switch (days[i]) {
+                case 'Monday':
+                    startTime[0] = startTimeSearch;
+                    endTime[0] = endTimeSearch;
+                    break;
+                case 'Tuesday':
+                    startTime[1] = startTimeSearch;
+                    endTime[1] = endTimeSearch;
+                    break;
+                case 'Wednesday':
+                    startTime[2] = startTimeSearch;
+                    endTime[2] = endTimeSearch;
+                    break;
+                case 'Thursday':
+                    startTime[3] = startTimeSearch;
+                    endTime[3] = endTimeSearch;
+                    break;
+                case 'Friday':
+                    startTime[4] = startTimeSearch;
+                    endTime[4] = endTimeSearch;
+                    break;
+                case 'Saturday':
+                    startTime[5] = startTimeSearch;
+                    endTime[5] = endTimeSearch;
+                    break;
+                case 'Sunday':
+                    startTime[6] = startTimeSearch;
+                    endTime[6] = endTimeSearch;
+                    break;
+                default:
+                    break;
+            }
+            if (i != days.length - 1)
+                timeFilter += " OR "
+        }
+    }
     var daysAvailable = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-    // costFilter.push({cost: {gt: 1000,lte: 2500}})
-    // costFilter.push({cost: {gt: 1000,lte: 2500}})
-    // costFilter.push({cost: {gt: 1000,lte: 2500}})
-    nameFilter.push({ name: { $like: '%%' } })
-    costFilter.push({ cost: { gt: 0 } })
+    nameFilter.push({ name: { $like: '%' + name + '%' } })
+    var costFilter = [];
+    for (var i = 0; i < fee.length; i++) {
+        switch (fee[i]) {
+            case 'slab1':
+                costFilter.push({ cost: { gte: 0, $lte: 100 } })
+                break;
+            case 'slab2':
+                costFilter.push({ cost: { gt: 100, $lte: 250 } })
+                break;
+            case 'slab3':
+                costFilter.push({ cost: { gt: 250, $lte: 500 } })
+                break;
+            case 'slab4':
+                costFilter.push({ cost: { gt: 500, $lt: 1000 } })
+                break;
+            case 'slab5':
+                costFilter.push({ cost: { gte: 1000, $lt: 1500 } })
+                break;
+            case 'slab6':
+                costFilter.push({ cost: { gte: 1500, $lt: 2000 } })
+                break;
+            case 'slab7':
+                costFilter.push({ cost: { gte: 2000, $lt: 2500 } })
+                break;
+            default:
+                costFilter.push({ cost: { gt: 0 } })
+                break;
+        }
+    }
     Doctor.findAll({
-        attributes: ['name', 'post', 'exp', 'image'],
+        attributes: ['id', 'name', 'post', 'exp', 'image'],
         where: {
             $and: [
                 { $or: nameFilter },
@@ -326,16 +410,103 @@ function getListORM(req, res, next) {
             }
         ],
         group: ['doctors.id', [Clinic, 'cName']]
-    }).then(function (user) {
-        if (user != []) {
-            // var jsonObj = JSON.parse(JSON.stringify(user))
-            // var arr = Object.values(jsonObj);
-            // console.log(arr[0]['doctors_degrees'][0]['degree']['education'])
-            res.json(user);
-        }
-        else {
-            res.json('no rec')
-        }
+    }).then(function (ids) {
+        var id = []
+        for (var i = 0; i < ids.length; i++)
+            id.push(ids[i]['id'])
+        Doctor.findAll({
+            attributes: ['id', 'name', 'post', 'exp', 'image'],
+            where: { id: id },
+            include: [
+                {
+                    model: DoctorsDegree,
+                    attributes: ['iDrId'],
+                    include: [
+                        {
+                            model: Degree,
+                            attributes: [
+                                [sequelize.fn('GROUP_CONCAT', Sequelize.literal("DISTINCT cDegree SEPARATOR ', '")), 'education']
+                            ]
+                        }
+                    ]
+                },
+                {
+
+                    model: Clinic,
+                    attributes: [
+                        'name', 'address', 'cost'
+                    ]
+                }
+            ],
+            group: ['doctors.id', [Clinic, 'cName']]
+        }).then(function (rows) {
+
+            if (rows != []) {
+                // var jsonObj = JSON.parse(JSON.stringify(user))
+                // var arr = Object.values(jsonObj);
+                // console.log(arr[0]['doctors_degrees'][0]['degree']['education'])
+                var objs = [];
+                var dr = rows;
+                var timings = []
+                var clinic1Timing = []
+                var clinic2Timing = []
+                for (var i = 0; i < rows.length; i++) {
+                    var educationRaw = rows[i]['doctors_degrees'][0]['degree']
+                    var jsonObj = JSON.parse(JSON.stringify(educationRaw))
+                    var education = (jsonObj['education']);
+
+                    var clinicsRaw = rows[i]['clinics']
+                    var jsonObj = JSON.parse(JSON.stringify(clinicsRaw))
+                    var clinics = Object.values(jsonObj);
+                    var clinic = []
+                    var clinic1 = []
+                    var clinic2 = []
+                    var timings = []
+                    var NoClinic2 = true
+                    var NumberOfClinic = 1
+                    if (typeof clinics[1] !== 'undefined') {
+                        NoClinic2 = false
+                        NumberOfClinic = 2
+                    }
+                    for (var j = 0; j < NumberOfClinic; j++) {
+                        timings.push({ "day": "Monday", start: clinics[j].timings.iMonStart, end: clinics[j].timings.iMonEnd })
+                        timings.push({ "day": "Tuesday", start: clinics[j].timings.iTueStart, end: clinics[j].timings.iTueEnd })
+                        timings.push({ "day": "Wednesday", start: clinics[j].timings.iWedStart, end: clinics[j].timings.iWedEnd })
+                        timings.push({ "day": "Thursday", start: clinics[j].timings.iThuStart, end: clinics[j].timings.iThuEnd })
+                        timings.push({ "day": "Friday", start: clinics[j].timings.iFriStart, end: clinics[j].timings.iFriEnd })
+                        timings.push({ "day": "Saturday", start: clinics[j].timings.iSatStart, end: clinics[j].timings.iSatEnd })
+                        timings.push({ "day": "Sunday", start: clinics[j].timings.iSunStart, end: clinics[j].timings.iSunEnd })
+                        if (j == 0)
+                            clinic1Timing = timings
+                        else
+                            clinic2Timing = timings
+                        timings = [];
+                    }
+                    clinic1.push({ name: clinics[0].name, address: clinics[0].address, timing: clinic1Timing, cost: clinics[0].cost })
+                    clinic.push(clinic1)
+                    if (!NoClinic2) {
+                        clinic2.push({ name: clinics[1].name, address: clinics[1].address, timing: clinic2Timing, cost: clinics[1].cost })
+                        clinic.push(clinic2)
+                    }
+                    objs.push({
+                        name: rows[i]['name'], post: rows[i]['post'], exp: rows[i]['exp'],
+                        image: rows[i]['image'], education: education,
+                        clinic: [
+                            // {clinic1,clinic2}
+                            { name: clinics[0].name, address: clinics[0].address, timing: clinic1Timing, cost: clinics[0].cost },
+                            { name: clinics[1].name, address: clinics[1].address, timing: clinic2Timing, cost: clinics[1].cost }
+                        ]
+                    });
+                }
+                if (objs)
+                    res.json(objs);
+                else
+                    res.json({ 'response': '-1', 'msg': '&nbsp No results as per criteria.' })
+            }
+            else {
+                res.json({ 'response': '-1', 'msg': '&nbsp No results as per criteria.' })
+            }
+        });
     });
 }
 //Getting list from MySQL
